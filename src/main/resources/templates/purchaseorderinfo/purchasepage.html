@@ -26,7 +26,7 @@
         </div>
         <div class="col-sm-8">
             <div class="title-action">
-                <button class="btn btn-primary " type="button"><i class="fa fa-plus"></i>&nbsp;新增</button>
+                <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#myModal5"><i class="fa fa-plus"></i>&nbsp;新增</button>
                 <button class="btn btn-warning " type="button"><i class="fa fa-warning"></i> <span class="bold">删除</span></button>
             </div>
         </div>
@@ -74,6 +74,25 @@
 
     <!-- 自定义js -->
     <script src="js/baseinfo/supplierpage.js"></script>
+
+    <div class="modal inmodal fade" id="myModal5" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <small class="font-bold">业务开单</small>
+                </div>
+                <div class="modal-body">
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

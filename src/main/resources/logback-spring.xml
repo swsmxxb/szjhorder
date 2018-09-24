@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--Spring Boot官方推荐优先使用带有-spring的文件名作为你的日志配置-->
+<configuration>
+    <!--日志级别:error warn info debug trace-->
+    <!--控制台日志输出-->
+    <appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout"> <!--展现形式-->
+            <pattern>
+                %d{HH:mm:ss.SSS} %contextName [%thread] %-5level %logger{36} - %msg%n
+            </pattern>
+        </layout>
+    </appender>
+
+    <!--日志文件输出 info-->
+    <appender name="fileInfoLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level><!--deny neutral accept，如果是neutral那么就会忽视这个过滤器，跑到下一个filter。-->
+            <onMatch>DENY</onMatch><!--命中为error则禁止-->
+            <onMismatch>ACCEPT</onMismatch><!--没命中为error则接受-->
+        </filter>
+        <encoder>
+            <pattern>
+                %msg%n
+            </pattern>
+        </encoder>
+        <!--滚动策略，按照时间滚动，每天一个日志文件。-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--路径-->
+            <fileNamePattern>log/info.%d.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <!--日志文件输出 info-->
+    <appender name="fileErrorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter"> <!--过滤器：根据级别过滤输出日志-->
+            <level>ERROR</level> <!--上面neutral跑下来了-->
+        </filter>
+        <encoder>
+            <pattern>
+                %msg%n
+            </pattern>
+        </encoder>
+        <!--滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--路径-->
+            <fileNamePattern>log/error.%d.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <!--配置项目所有地方都适用 root-->
+    <root level="info"> <!--输出级别为info-->
+        <appender-ref ref="consoleLog" />
+        <appender-ref ref="fileInfoLog" />
+        <appender-ref ref="fileErrorLog" />
+    </root>
+
+    <!--sql控制台输出-->
+    <logger name="com.szjc.OrderManag.dao" level="debug" additivity="false">
+        <appender-ref ref="consoleLog"/>
+    </logger>
+
+
+
+</configuration>
+
+<!--引入xml文件-->
+<!--@Configuration-->
+<!--@ImportResource(locations={"classpath:application-bean.xml"})-->
+<!--public class ConfigClass {-->
+
+<!--}-->
