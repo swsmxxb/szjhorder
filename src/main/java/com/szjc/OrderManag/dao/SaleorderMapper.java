@@ -27,4 +27,7 @@ public interface SaleorderMapper {
     int updateByPrimaryKeySelective(Saleorder record);
 
     int updateByPrimaryKey(Saleorder record);
+
+    List<Saleorder> searchpurchase(String keyid);
+
 }

@@ -335,4 +335,19 @@
       creatuser = #{creatuser,jdbcType=NVARCHAR}
     where ID = #{id,jdbcType=NVARCHAR}
   </update>
+
+  <select id="selectsale" parameterType="com.szjc.OrderManag.bean.SaleorderExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from saleorder
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
 </mapper>
