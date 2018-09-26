@@ -117,6 +117,14 @@
 						</goals>
 					</execution>
 				</executions>
+				<configuration>
+					<!--允许移动生成的文件 -->
+					<verbose>true</verbose>
+					<!-- 是否覆盖 -->
+					<overwrite>true</overwrite>
+					<!-- 自动生成的配置 -->
+					<configurationFile>src/main/resources/generatorConfig.xml</configurationFile>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

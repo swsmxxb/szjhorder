@@ -2,13 +2,20 @@ package com.szjc.OrderManag.service.impl.baseinfo;
 
 import com.szjc.OrderManag.bean.Saleorder;
 import com.szjc.OrderManag.bean.SaleorderExample;
+import com.szjc.OrderManag.dao.SaleorderMapper;
 import com.szjc.OrderManag.service.baseinfo.SaleorderService;
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@MapperScan(basePackages = "com.szjc.OrderManag.dao")
 public class SaleorderServiceImpl  implements SaleorderService<Saleorder, SaleorderExample> {
+
+    @Autowired
+    private SaleorderMapper saleorderMapper;
 
     @Override
     public long countByExample(SaleorderExample example) {
@@ -66,7 +73,8 @@ public class SaleorderServiceImpl  implements SaleorderService<Saleorder, Saleor
     }
 
     @Override
-    public List<Saleorder> searchpurchase(String keyid) {
-        return null;
+    public List<Saleorder> searchpurchase(String quickSearch) {
+        List<Saleorder> SaleorderList = saleorderMapper.searchpurchase(quickSearch);
+        return SaleorderList;
     }
 }

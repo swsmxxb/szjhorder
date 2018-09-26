@@ -4,7 +4,6 @@ import com.szjc.OrderManag.bean.Saleorder;
 import com.szjc.OrderManag.bean.SaleorderExample;
 import com.szjc.OrderManag.common.Result;
 import com.szjc.OrderManag.service.baseinfo.SaleorderService;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,9 +30,9 @@ public class PurchaseController {
         String quickSearch = (String) map.get("quickSearch");
 //        String objectName = (String) map.get("objectName");
 //        String state = (String) map.get("state");
-         List<Saleorder> list = saleorderService.searchpurchase(quickSearch);
+        List list = saleorderService.searchpurchase(quickSearch);
 
-        return Result.successResult("1");
+        return Result.successResult(list);
 
     }
 }

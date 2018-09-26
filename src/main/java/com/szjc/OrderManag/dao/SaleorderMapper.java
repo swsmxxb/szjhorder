@@ -5,7 +5,7 @@ import com.szjc.OrderManag.bean.SaleorderExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface SaleorderMapper {
+public interface    SaleorderMapper {
     long countByExample(SaleorderExample example);
 
     int deleteByExample(SaleorderExample example);
@@ -28,6 +28,5 @@ public interface SaleorderMapper {
 
     int updateByPrimaryKey(Saleorder record);
 
-    List<Saleorder> searchpurchase(String keyid);
-
+    List<Saleorder> searchpurchase(@Param("quickSearch") String quickSearch);
 }
