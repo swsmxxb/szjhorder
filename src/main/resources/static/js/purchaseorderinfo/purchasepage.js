@@ -10,10 +10,11 @@ function purchaselist(){
         type:"POST",
         url:'/searchpurchase',
         contentType: 'application/json',
-        data:JSON.stringify({quickSearch : "123"}),
+        data:JSON.stringify({quickSearch : ""}),
         success:function(data){
-            var dataJson = eval('(' + data + ')');
-            var datalist = dataJson.keys;
+         //  var dataJson = eval('(' + data.data + ')');
+            console.log(data.data);
+            var datalist = data.data;
             $('#purchaseinfo').bootstrapTable('destroy').bootstrapTable({    //'destroy' 是必须要加的==作用是加载服务器//    //数据，初始化表格的内容Destroy the bootstrap table.
                 data:datalist,     //datalist  即为需要的数据
                 dataType:'json',

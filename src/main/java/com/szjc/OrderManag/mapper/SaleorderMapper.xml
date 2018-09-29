@@ -340,7 +340,7 @@
     select
     <include refid="Base_Column_List" />
     from saleorder
-    <if test="quickSearch != null">
+    <if test="quickSearch != null and quickSearch !=''">
       where ID = #{quickSearch,jdbcType=NVARCHAR}
     </if>
   </select>
