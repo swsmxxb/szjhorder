@@ -3,7 +3,20 @@ $(document).ready(function () {
    // purchasequery();
     purchaselist();
 });
+$("#addsendtime").datetimepicker({  // 日期框
+    format: "yyyy-mm-dd",
+    autoclose: true,
+    todayBtn: true,
+    language: "zh-CN",
+    pickerPosition: "bottom-left",
+    startView :2,
+    minView :2
+});
 
+// 删除按钮
+function  delinfo() {
+    ZENG.msgbox.show("删除", 1,2000);
+}
 
 function purchaselist(){
     $.ajax({
@@ -39,10 +52,12 @@ function purchaselist(){
                         halign: 'center',
                         align: 'center',
                         visible: true,
-                        sortable: true
+                        formatter: function statusFormatter(value, row, index){
+                            return index+1;
+                        }
                     }, {
-                        field: 'name',
-                        title: '编码',
+                        field: 'orderno',
+                        title: '订单号',
                         halign: 'center',
                         align: 'center',
                         visible: true,
@@ -71,8 +86,32 @@ function purchaselist(){
         }
 
     })
-
 }
+
+// 新增
+function saveorderlist(){
+    var addorderno=$("#addorderno").val();
+    var adddrwno=$("#adddrwno").val();
+    var addspeci=$("#addspeci").val();
+    var addcolor=$("#addcolor").val();
+    var addnum=$("#addnum").val();
+    var addsendtime=$("#addsendtime").val();
+      console.log(addsendtime);
+    $.ajax({
+        type:"POST",
+        url:'/addpurchase',
+        contentType: 'application/json',
+        data:JSON.stringify({orderno :addorderno,drwno:adddrwno,speci:addspeci,color:addcolor,num:addnum,sendtime:addsendtime}),
+        success:function(data){
+            ZENG.msgbox.show("保存成功！", 4,2000);
+            console.log(data);
+        },error:function(data){
+            ZENG.msgbox.show("服务器异常！", 5,2000);
+        }
+
+    })
+
+ }
 
 
 function purchasequery() {  //工艺参数查询
@@ -83,18 +122,20 @@ function purchasequery() {  //工艺参数查询
             field: 'select',
             checkbox: true,
             align: 'center',
-            valign: 'middle',
-            sortable: true
+            valign: 'middle'
+
         }, {
             field: 'id',
             title: 'NO.',
             halign: 'center',
             align: 'center',
             visible: true,
-            sortable: true
+            formatter: function statusFormatter(value, row, index){
+                return index+1;
+            }
         }, {
-            field: 'name',
-            title: '编码',
+            field: 'orderno',
+            title: '订单号',
             halign: 'center',
             align: 'center',
             visible: true,

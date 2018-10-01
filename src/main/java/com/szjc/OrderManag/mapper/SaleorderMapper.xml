@@ -112,12 +112,12 @@
     insert into saleorder (ID, orderno, drwno, 
       speci, color, num, 
       price, supplierid, sendaddr, 
-      sendtime, specialremark, creattaime, 
+      sendtime, specialremark,
       creatuser)
     values (#{id,jdbcType=NVARCHAR}, #{orderno,jdbcType=NVARCHAR}, #{drwno,jdbcType=NVARCHAR}, 
       #{speci,jdbcType=NVARCHAR}, #{color,jdbcType=NVARCHAR}, #{num,jdbcType=NVARCHAR}, 
       #{price,jdbcType=NVARCHAR}, #{supplierid,jdbcType=NVARCHAR}, #{sendaddr,jdbcType=NVARCHAR}, 
-      #{sendtime,jdbcType=TIMESTAMP}, #{specialremark,jdbcType=NVARCHAR}, #{creattaime,jdbcType=TIMESTAMP}, 
+      #{sendtime,jdbcType=TIMESTAMP}, #{specialremark,jdbcType=NVARCHAR},
       #{creatuser,jdbcType=NVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.szjc.OrderManag.bean.Saleorder">

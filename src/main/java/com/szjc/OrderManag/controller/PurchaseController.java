@@ -9,8 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @Controller
 public class PurchaseController {
@@ -35,4 +37,22 @@ public class PurchaseController {
         return Result.successResult(list);
 
     }
+
+    @RequestMapping(value = "/addpurchase", method = RequestMethod.POST)
+    @ResponseBody
+    public Result  addpurchase(@RequestBody Saleorder staff) {
+     //   System.out.println(staff);
+//        Saleorder staff = new Saleorder();
+        String uuid = UUID.randomUUID().toString().replace("-", "").toLowerCase();
+        staff.setId(uuid);
+//        staff.setOrderno((String) map.get("orderno"));
+//        staff.setDrwno((String) map.get("drwno"));
+//        staff.setSendtime(new Date());
+        staff.setCreatuser("admin");
+        int list = saleorderService.insert(staff);
+
+        return Result.successResult(list);
+
+    }
+
 }

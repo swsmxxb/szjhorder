@@ -31,4 +31,6 @@ public interface SaleorderService<Saleorder, SaleorderExample> {
     int updateByPrimaryKey(com.szjc.OrderManag.bean.Saleorder record);
 
     List<com.szjc.OrderManag.bean.Saleorder> searchpurchase(String keyid);
+
+
 }
