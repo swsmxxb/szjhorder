@@ -15,8 +15,43 @@ $("#addsendtime").datetimepicker({  // 日期框
 
 // 删除按钮
 function  delinfo() {
-    ZENG.msgbox.show("删除", 1,2000);
+    ZENG.msgbox.show("删除", 1,1500);
 }
+
+function editinfo(getid) {
+    ZENG.msgbox.show(getid, 1,1500);
+}
+
+function printinfo(getid) {
+    // ZENG.msgbox.show("打印"+getid, 1,1500);
+    $.ajax({
+        type:"POST",
+        url:'/searchpurchase',
+        contentType: 'application/json',
+        async: false,
+        data:JSON.stringify({quickSearch : getid}),
+        success:function(data){
+          //  console.log(data.data[0].orderno);
+            $('#porder').text(data.data[0].orderno);
+            $('#psendtime').text(data.data[0].sendtime);
+            $('#pinventoryname').text(data.data[0].inventoryname);
+            $('#pnum').text(data.data[0].num);
+            $('#pspeci').text(data.data[0].speci);
+            $('#pcolor').text(data.data[0].color);
+            $('#pdrwno').attr("src", '/img/orderlogo.png');
+            $('#pcreattaime').text(data.data[0].creattaime);
+            $("#printdatastati").attr("style","display:block;");
+            $("#printdatastati").printArea();
+            $("#printdatastati").attr("style","display:none;");
+        },
+        error:function(data){
+            Modal.confirm({title:'提示',msg:"刷新数据失败!"});
+        }
+
+    });
+
+}
+
 
 // 查询
 function purchaselist(){
@@ -28,7 +63,7 @@ function purchaselist(){
         data:JSON.stringify({quickSearch : ""}),
         success:function(data){
          //  var dataJson = eval('(' + data.data + ')');
-            console.log(data.data);
+          //  console.log(data.data);
             var datalist = data.data;
             $('#purchaseinfo').bootstrapTable('destroy').bootstrapTable('resetView').bootstrapTable({    //'destroy' 是必须要加的==作用是加载服务器//    //数据，初始化表格的内容Destroy the bootstrap table.
                 data:datalist,     //datalist  即为需要的数据
@@ -48,8 +83,7 @@ function purchaselist(){
                         field: 'select',
                         checkbox: true,
                         align: 'center',
-                        valign: 'middle',
-                        sortable: true
+                        valign: 'middle'
                     }, {
                         field: 'id',
                         title: 'NO.',
@@ -82,6 +116,13 @@ function purchaselist(){
                         sortable: true
                         // formatter: statusFormatter
                     }, {
+                        field: 'num',
+                        title: '数量',
+                        halign: 'center',
+                        align: 'center',
+                        visible: true,
+                        sortable: true
+                    }, {
                         field: 'color',
                         title: '颜色',
                         halign: 'center',
@@ -95,7 +136,16 @@ function purchaselist(){
                         align: 'center',
                         visible: true,
                         sortable: true
-                    }]
+                    },{
+                        field: 'opation',
+                        title: '操作',
+                        halign: 'center',
+                        align: 'center',
+                        visible: true,
+                        formatter: function statusFormatter(value, row, index){
+                            return "<a href=\"javascript:editinfo('"+row.id+"')\">编辑</a> | <a href=\"javascript:printinfo('"+row.id+"')\">打印</a>";
+                        }
+                    },]
 
             });
 
@@ -103,7 +153,7 @@ function purchaselist(){
             Modal.confirm({title:'提示',msg:"刷新数据失败!"});
         }
 
-    })
+    });
 }
 
 // 新增
@@ -121,6 +171,7 @@ function saveorderlist(){
         contentType: 'application/json',
         data:JSON.stringify({orderno :addorderno,drwno:adddrwno,speci:addspeci,color:addcolor,num:addnum,sendtime:addsendtime}),
         success:function(data){
+            $('#orderedit').modal('hide')
             ZENG.msgbox.show("保存成功！", 4,1500);
             purchaselist();
             // console.log(data);

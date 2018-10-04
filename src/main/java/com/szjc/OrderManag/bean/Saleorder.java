@@ -1,5 +1,7 @@
 package com.szjc.OrderManag.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Saleorder {
@@ -21,10 +23,12 @@ public class Saleorder {
 
     private String sendaddr;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date sendtime;
 
     private String specialremark;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date creattaime;
 
     private String creatuser;

@@ -16,4 +16,9 @@ public class IndexController {
     public String tables(Model model) {
         return "table_bootstrap";
     }
+
+    @GetMapping("/pringtpage")
+    public String pringtpage(Model model) {
+        return "printtempl/printpage";
+    }
 }
