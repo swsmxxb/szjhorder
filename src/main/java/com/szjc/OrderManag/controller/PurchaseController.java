@@ -18,13 +18,13 @@ import java.util.UUID;
 public class PurchaseController {
     @Autowired
     private SaleorderService<Saleorder, SaleorderExample> saleorderService;
-    // 开单
+    // 开单页面
     @GetMapping("/purchasepage")
     public String puchasepage(Model model) {
         return "purchaseorderinfo/purchasepage";
     }
 
-
+    // 开单页面查询
     @RequestMapping(value = "/searchpurchase", method = RequestMethod.POST)
     @ResponseBody
     public Result  searchBdWarehouse(@RequestBody Map<String,Object> map) {
@@ -38,6 +38,7 @@ public class PurchaseController {
 
     }
 
+    // 新增数据
     @RequestMapping(value = "/addpurchase", method = RequestMethod.POST)
     @ResponseBody
     public Result  addpurchase(@RequestBody Saleorder staff) {

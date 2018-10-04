@@ -29,6 +29,8 @@ public class Saleorder {
 
     private String creatuser;
 
+    private String inventoryname;  // inventoryinfo表
+
     public String getId() {
         return id;
     }
@@ -131,5 +133,13 @@ public class Saleorder {
 
     public void setCreatuser(String creatuser) {
         this.creatuser = creatuser == null ? null : creatuser.trim();
+    }
+
+    public String getInventoryname() {
+        return inventoryname;
+    }
+
+    public void setInventoryname(String inventoryname) {
+        this.inventoryname = inventoryname == null ? null : inventoryname.trim();
     }
 }

@@ -15,6 +15,7 @@
     <result column="specialremark" jdbcType="NVARCHAR" property="specialremark" />
     <result column="creattaime" jdbcType="TIMESTAMP" property="creattaime" />
     <result column="creatuser" jdbcType="NVARCHAR" property="creatuser" />
+    <result column="inventoryname" jdbcType="NVARCHAR" property="inventoryname" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -338,10 +339,24 @@
 
   <select id="searchpurchase"  parameterType="com.szjc.OrderManag.bean.Saleorder" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />
-    from saleorder
+    sa.ID
+    ,sa.orderno
+    ,sa.speci
+    ,sa.color
+    ,sa.num
+    ,sa.price
+    ,sa.supplierid
+    ,sa.sendaddr
+    ,sa.sendtime
+    ,sa.specialremark
+    ,sa.creattaime
+    ,sa.creatuser,
+    ini.inventoryname,
+    ini.inventorycode drwno
+    FROM saleorder sa
+    left join inventoryinfo ini on sa.drwno= ini.id
     <if test="quickSearch != null and quickSearch !=''">
-      where ID = #{quickSearch,jdbcType=NVARCHAR}
+      where sa.ID = #{quickSearch,jdbcType=NVARCHAR}
     </if>
   </select>
 </mapper>

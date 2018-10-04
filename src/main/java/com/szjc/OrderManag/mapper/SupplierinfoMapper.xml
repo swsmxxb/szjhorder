@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.szjc.OrderManag.dao.SupplierinfoMapper">
+  <resultMap id="BaseResultMap" type="com.szjc.OrderManag.bean.Supplierinfo">
+    <id column="ID" jdbcType="NVARCHAR" property="id" />
+    <result column="suppliercode" jdbcType="NVARCHAR" property="suppliercode" />
+    <result column="suppliername" jdbcType="NVARCHAR" property="suppliername" />
+    <result column="suppliershotname" jdbcType="NVARCHAR" property="suppliershotname" />
+    <result column="contenter" jdbcType="NVARCHAR" property="contenter" />
+    <result column="tels" jdbcType="NVARCHAR" property="tels" />
+    <result column="faxs" jdbcType="NVARCHAR" property="faxs" />
+    <result column="email" jdbcType="NVARCHAR" property="email" />
+    <result column="address" jdbcType="NVARCHAR" property="address" />
+    <result column="creattime" jdbcType="TIMESTAMP" property="creattime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, suppliercode, suppliername, suppliershotname, contenter, tels, faxs, email, address, 
+    creattime
+  </sql>
+  <select id="selectByExample" parameterType="com.szjc.OrderManag.bean.SupplierinfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from supplierinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from supplierinfo
+    where ID = #{id,jdbcType=NVARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from supplierinfo
+    where ID = #{id,jdbcType=NVARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.szjc.OrderManag.bean.SupplierinfoExample">
+    delete from supplierinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.szjc.OrderManag.bean.Supplierinfo">
+    insert into supplierinfo (ID, suppliercode, suppliername, 
+      suppliershotname, contenter, tels, 
+      faxs, email, address, 
+      creattime)
+    values (#{id,jdbcType=NVARCHAR}, #{suppliercode,jdbcType=NVARCHAR}, #{suppliername,jdbcType=NVARCHAR}, 
+      #{suppliershotname,jdbcType=NVARCHAR}, #{contenter,jdbcType=NVARCHAR}, #{tels,jdbcType=NVARCHAR}, 
+      #{faxs,jdbcType=NVARCHAR}, #{email,jdbcType=NVARCHAR}, #{address,jdbcType=NVARCHAR}, 
+      #{creattime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.szjc.OrderManag.bean.Supplierinfo">
+    insert into supplierinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="suppliercode != null">
+        suppliercode,
+      </if>
+      <if test="suppliername != null">
+        suppliername,
+      </if>
+      <if test="suppliershotname != null">
+        suppliershotname,
+      </if>
+      <if test="contenter != null">
+        contenter,
+      </if>
+      <if test="tels != null">
+        tels,
+      </if>
+      <if test="faxs != null">
+        faxs,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="creattime != null">
+        creattime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=NVARCHAR},
+      </if>
+      <if test="suppliercode != null">
+        #{suppliercode,jdbcType=NVARCHAR},
+      </if>
+      <if test="suppliername != null">
+        #{suppliername,jdbcType=NVARCHAR},
+      </if>
+      <if test="suppliershotname != null">
+        #{suppliershotname,jdbcType=NVARCHAR},
+      </if>
+      <if test="contenter != null">
+        #{contenter,jdbcType=NVARCHAR},
+      </if>
+      <if test="tels != null">
+        #{tels,jdbcType=NVARCHAR},
+      </if>
+      <if test="faxs != null">
+        #{faxs,jdbcType=NVARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=NVARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=NVARCHAR},
+      </if>
+      <if test="creattime != null">
+        #{creattime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.szjc.OrderManag.bean.SupplierinfoExample" resultType="java.lang.Long">
+    select count(*) from supplierinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update supplierinfo
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.suppliercode != null">
+        suppliercode = #{record.suppliercode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.suppliername != null">
+        suppliername = #{record.suppliername,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.suppliershotname != null">
+        suppliershotname = #{record.suppliershotname,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.contenter != null">
+        contenter = #{record.contenter,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.tels != null">
+        tels = #{record.tels,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.faxs != null">
+        faxs = #{record.faxs,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.creattime != null">
+        creattime = #{record.creattime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update supplierinfo
+    set ID = #{record.id,jdbcType=NVARCHAR},
+      suppliercode = #{record.suppliercode,jdbcType=NVARCHAR},
+      suppliername = #{record.suppliername,jdbcType=NVARCHAR},
+      suppliershotname = #{record.suppliershotname,jdbcType=NVARCHAR},
+      contenter = #{record.contenter,jdbcType=NVARCHAR},
+      tels = #{record.tels,jdbcType=NVARCHAR},
+      faxs = #{record.faxs,jdbcType=NVARCHAR},
+      email = #{record.email,jdbcType=NVARCHAR},
+      address = #{record.address,jdbcType=NVARCHAR},
+      creattime = #{record.creattime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.szjc.OrderManag.bean.Supplierinfo">
+    update supplierinfo
+    <set>
+      <if test="suppliercode != null">
+        suppliercode = #{suppliercode,jdbcType=NVARCHAR},
+      </if>
+      <if test="suppliername != null">
+        suppliername = #{suppliername,jdbcType=NVARCHAR},
+      </if>
+      <if test="suppliershotname != null">
+        suppliershotname = #{suppliershotname,jdbcType=NVARCHAR},
+      </if>
+      <if test="contenter != null">
+        contenter = #{contenter,jdbcType=NVARCHAR},
+      </if>
+      <if test="tels != null">
+        tels = #{tels,jdbcType=NVARCHAR},
+      </if>
+      <if test="faxs != null">
+        faxs = #{faxs,jdbcType=NVARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=NVARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=NVARCHAR},
+      </if>
+      <if test="creattime != null">
+        creattime = #{creattime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=NVARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.szjc.OrderManag.bean.Supplierinfo">
+    update supplierinfo
+    set suppliercode = #{suppliercode,jdbcType=NVARCHAR},
+      suppliername = #{suppliername,jdbcType=NVARCHAR},
+      suppliershotname = #{suppliershotname,jdbcType=NVARCHAR},
+      contenter = #{contenter,jdbcType=NVARCHAR},
+      tels = #{tels,jdbcType=NVARCHAR},
+      faxs = #{faxs,jdbcType=NVARCHAR},
+      email = #{email,jdbcType=NVARCHAR},
+      address = #{address,jdbcType=NVARCHAR},
+      creattime = #{creattime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=NVARCHAR}
+  </update>
+</mapper>
