@@ -15,6 +15,7 @@
     <result column="specialremark" jdbcType="NVARCHAR" property="specialremark" />
     <result column="creattaime" jdbcType="TIMESTAMP" property="creattaime" />
     <result column="creatuser" jdbcType="NVARCHAR" property="creatuser" />
+    <result column="status" jdbcType="NVARCHAR" property="status" />
     <result column="inventoryname" jdbcType="NVARCHAR" property="inventoryname" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -77,7 +78,7 @@
   </sql>
   <sql id="Base_Column_List">
     ID, orderno, drwno, speci, color, num, price, supplierid, sendaddr, sendtime, specialremark, 
-    creattaime, creatuser
+    creattaime, creatuser, status
   </sql>
   <select id="selectByExample" parameterType="com.szjc.OrderManag.bean.SaleorderExample" resultMap="BaseResultMap">
     select
@@ -350,7 +351,8 @@
     ,sa.sendtime
     ,sa.specialremark
     ,sa.creattaime
-    ,sa.creatuser,
+    ,sa.creatuser
+    ,sa.status,
     ini.inventoryname,
     ini.inventorycode drwno
     FROM saleorder sa

@@ -13,6 +13,8 @@ public class Inventoryinfo {
 
     private Date creattime;
 
+    private String creatuser;
+
     public String getId() {
         return id;
     }
@@ -51,5 +53,13 @@ public class Inventoryinfo {
 
     public void setCreattime(Date creattime) {
         this.creattime = creattime;
+    }
+
+    public String getCreatuser() {
+        return creatuser;
+    }
+
+    public void setCreatuser(String creatuser) {
+        this.creatuser = creatuser == null ? null : creatuser.trim();
     }
 }

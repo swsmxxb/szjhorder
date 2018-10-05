@@ -7,6 +7,7 @@
     <result column="inventoryname" jdbcType="NVARCHAR" property="inventoryname" />
     <result column="speci" jdbcType="NVARCHAR" property="speci" />
     <result column="creattime" jdbcType="TIMESTAMP" property="creattime" />
+    <result column="creatuser" jdbcType="NVARCHAR" property="creatuser" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -67,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ID, inventorycode, inventoryname, speci, creattime
+    ID, inventorycode, inventoryname, speci, creattime, creatuser
   </sql>
   <select id="selectByExample" parameterType="com.szjc.OrderManag.bean.InventoryinfoExample" resultMap="BaseResultMap">
     select
@@ -101,9 +102,9 @@
   </delete>
   <insert id="insert" parameterType="com.szjc.OrderManag.bean.Inventoryinfo">
     insert into inventoryinfo (ID, inventorycode, inventoryname, 
-      speci, creattime)
+      speci, creatuser)
     values (#{id,jdbcType=NVARCHAR}, #{inventorycode,jdbcType=NVARCHAR}, #{inventoryname,jdbcType=NVARCHAR}, 
-      #{speci,jdbcType=NVARCHAR}, #{creattime,jdbcType=TIMESTAMP})
+      #{speci,jdbcType=NVARCHAR}, #{creatuser,jdbcType=NVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.szjc.OrderManag.bean.Inventoryinfo">
     insert into inventoryinfo
@@ -121,7 +122,10 @@
         speci,
       </if>
       <if test="creattime != null">
-        creattime,
+      creattime,
+    </if>
+      <if test="creatuser != null">
+        creatuser,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -140,6 +144,10 @@
       <if test="creattime != null">
         #{creattime,jdbcType=TIMESTAMP},
       </if>
+      <if test="creatuser != null">
+        #{creatuser,jdbcType=NVARCHAR},
+      </if>
+
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.szjc.OrderManag.bean.InventoryinfoExample" resultType="java.lang.Long">
@@ -166,6 +174,9 @@
       <if test="record.creattime != null">
         creattime = #{record.creattime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.creatuser != null">
+        speci = #{record.creatuser,jdbcType=NVARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -177,7 +188,8 @@
       inventorycode = #{record.inventorycode,jdbcType=NVARCHAR},
       inventoryname = #{record.inventoryname,jdbcType=NVARCHAR},
       speci = #{record.speci,jdbcType=NVARCHAR},
-      creattime = #{record.creattime,jdbcType=TIMESTAMP}
+      creattime = #{record.creattime,jdbcType=TIMESTAMP},
+    creatuser = #{record.creatuser,jdbcType=NVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -197,6 +209,9 @@
       <if test="creattime != null">
         creattime = #{creattime,jdbcType=TIMESTAMP},
       </if>
+      <if test="creatuser != null">
+        speci = #{creatuser,jdbcType=NVARCHAR},
+      </if>
     </set>
     where ID = #{id,jdbcType=NVARCHAR}
   </update>
@@ -205,7 +220,15 @@
     set inventorycode = #{inventorycode,jdbcType=NVARCHAR},
       inventoryname = #{inventoryname,jdbcType=NVARCHAR},
       speci = #{speci,jdbcType=NVARCHAR},
-      creattime = #{creattime,jdbcType=TIMESTAMP}
+      creattime = #{creattime,jdbcType=TIMESTAMP},
+      creatuser = #{creatuser,jdbcType=NVARCHAR},
     where ID = #{id,jdbcType=NVARCHAR}
   </update>
+
+  <select id="searchInventory" parameterType="com.szjc.OrderManag.bean.Inventoryinfo" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from inventoryinfo
+    where inventorycode like  '%${quickSearch}%'
+  </select>
 </mapper>

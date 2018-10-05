@@ -45,7 +45,7 @@ function printinfo(getid) {
             $("#printdatastati").attr("style","display:none;");
         },
         error:function(data){
-            Modal.confirm({title:'提示',msg:"刷新数据失败!"});
+            ZENG.msgbox.show("服务器异常！", 5,1500);
         }
 
     });
@@ -150,7 +150,7 @@ function purchaselist(){
             });
 
         },error:function(data){
-            Modal.confirm({title:'提示',msg:"刷新数据失败!"});
+            ZENG.msgbox.show("服务器异常！", 5,1500);
         }
 
     });
@@ -176,7 +176,7 @@ function saveorderlist(){
             purchaselist();
             // console.log(data);
         },error:function(data){
-            ZENG.msgbox.show("服务器异常！", 5,2000);
+            ZENG.msgbox.show("服务器异常！", 5,1500);
         }
 
     })
@@ -208,6 +208,35 @@ function BindWorkShop(selector,entry) {
     })
           }
 
+//绑定选中值 pet/pps
+function BindProductClassSelected(selector,values)
+{
+    $.ajax({
+        url: _ctx+"/workshopManagement/queryListByParameterType.do",
+        type: "POST",
+        async: false,
+        dataType: "JSON",
+        data : {parametertype:"producttype"},
+        ContentType: "application/json",
+        success: function (data) {
+            var operationName = $(selector);
+            operationName.empty();
+            operationName.append("<option value=''>请选择</option>");
+            for (var i = 0; i < data.length; i++) {
+                if(values== data[i].parametername){
+                    operationName.append("<option value='" + data[i].parameterid + "' selected='selected'>" + data[i].parametername+ "</option>");
+                }else{
+                    operationName.append("<option value='" + data[i].parameterid + "' >" +data[i].parametername+ "</option>");
+                }
+
+            }
+            $(selector).selectpicker('refresh');
+        },
+        error: function (event, XMLHttpRequest, ajaxOptions, thrownError) {
+            alert(event);
+        }
+    })
+}
 
 // function purchasequery() {  //工艺参数查询
 //

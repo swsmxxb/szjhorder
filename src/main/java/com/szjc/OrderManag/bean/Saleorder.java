@@ -33,6 +33,8 @@ public class Saleorder {
 
     private String creatuser;
 
+    private String status;
+
     private String inventoryname;  // inventoryinfo表
 
     public String getId() {
@@ -145,5 +147,13 @@ public class Saleorder {
 
     public void setInventoryname(String inventoryname) {
         this.inventoryname = inventoryname == null ? null : inventoryname.trim();
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status == null ? null : status.trim();
     }
 }

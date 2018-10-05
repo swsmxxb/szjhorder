@@ -19,6 +19,9 @@
     <link href="css/style.css?v=4.1.0" rel="stylesheet">
     <link href="js/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
     <link href="js/plugins/messagebox/msgbox.css" rel="stylesheet">
+    <link href="js/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet">
+
+
 
 </head>
 
@@ -76,38 +79,48 @@
                             <label class="col-sm-3 control-label">订单号：</label>
 
                             <div class="col-sm-8">
-                                <input type="text" placeholder="订单号" class="form-control" id="addorderno">
+                                <input type="text" placeholder="订单号" class="form-control" id="addorderno" >
                                 <!--<span class="help-block m-b-none">请输入您注册时所填的E-mail</span>-->
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">图纸号：</label>
                             <div class="col-sm-8">
-                                <input type="text" placeholder="图纸号" class="form-control" id="adddrwno">
+
+                                <select class="form-control" data-live-search="true">
+                                    <option>四川(sichuan)</option>
+                                    <option>江西(jiangxi)</option>
+                                    <option>湖北(hubei)</option>
+                                    <option>上海(shanghai)</option>
+                                    <option>北京(beijing)</option>
+                                    <option>河北(hebei)</option>
+                                </select>
+
+                                <!--<input type="text" placeholder="图纸号" class="form-control" >-->
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">规格：</label>
                             <div class="col-sm-8">
-                                <input type="text" placeholder="规格" class="form-control" id="addspeci">
+                                <input type="text" placeholder="规格" class="form-control" id="addspeci" >
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">颜色：</label>
                             <div class="col-sm-8">
-                                <input type="text" placeholder="颜色" class="form-control" id="addcolor">
+                                <input type="text" placeholder="颜色" class="form-control" id="addcolor" >
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">采购数量：</label>
                             <div class="col-sm-8">
-                                <input type="number" placeholder="采购数量" class="form-control" id="addnum">
+                                <input type="number" placeholder="采购数量" class="form-control" id="addnum" >
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">交货日期：</label>
                             <div class="col-sm-8">
-                                <input type="text" placeholder="交货日期" class="form-control" id="addsendtime">
+                                <input type="text" placeholder="交货日期" class="form-control" id="addsendtime" >
                             </div>
                         </div>
                     </form>
@@ -274,6 +287,11 @@
 
 <script src="js/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
 <script src="js/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.zh-CN.js"></script>
+
+<script src="js/plugins/bootstrap-select/js/bootstrap-select.min.js"></script>
+<script src="js/plugins/bootstrap-select/js/i18n/defaults-zh_CN.js"></script>
+
+
 <!--<script src="js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>-->
 <script src="js/plugins/messagebox/msgbox.js"></script>
 <script src="js/plugins/printarea/jquery.printarea.js"></script>

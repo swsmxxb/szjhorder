@@ -1,11 +1,12 @@
-package com.szjc.OrderManag.dao;
+package com.szjc.OrderManag.service.baseinfo;
 
 import com.szjc.OrderManag.bean.Inventoryinfo;
 import com.szjc.OrderManag.bean.InventoryinfoExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface InventoryinfoMapper {
+import java.util.List;
+
+public interface InventoryinfoService<Inventoryinfo, InventoryinfoExample> {
     long countByExample(InventoryinfoExample example);
 
     int deleteByExample(InventoryinfoExample example);
@@ -29,4 +30,5 @@ public interface InventoryinfoMapper {
     int updateByPrimaryKey(Inventoryinfo record);
 
     List<Inventoryinfo> searchInventory(@Param("quickSearch") String quickSearch);
+
 }
