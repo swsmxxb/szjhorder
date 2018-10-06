@@ -1,6 +1,7 @@
 package com.szjc.OrderManag.controller;
 
 import com.szjc.OrderManag.bean.Inventoryinfo;
+import com.szjc.OrderManag.service.baseinfo.SupplierinfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,9 @@ public class BaseinfoController {
 
     @Autowired
     private InventoryinfoService inventoryinfoService;
+
+    @Autowired
+    private SupplierinfoService supplierinfoService;
 
     // 物料管理
     @GetMapping("/inventor")
@@ -37,7 +41,7 @@ public class BaseinfoController {
     }
 
 
-
+     // 查询物料数据
     @RequestMapping(value = "/searchInventory", method = RequestMethod.POST)
     @ResponseBody
     public Result searchInventory(@RequestBody Map<String,Object> map) {
@@ -46,7 +50,7 @@ public class BaseinfoController {
         return Result.successResult(list);
     }
 
-    // 新增数据
+    // 新增物料数据
     @RequestMapping(value = "/addinventoryinfo", method = RequestMethod.POST)
     @ResponseBody
     public Result  addinventoryinfo(@RequestBody Inventoryinfo staff) {
@@ -62,6 +66,15 @@ public class BaseinfoController {
 
         return Result.successResult(list);
 
+    }
+
+    // 查询物料数据
+    @RequestMapping(value = "/searchSupplier", method = RequestMethod.POST)
+    @ResponseBody
+    public Result searchSupplier(@RequestBody Map<String,Object> map) {
+        String quickSearch = (String) map.get("quickSearch");
+        List list = supplierinfoService.searchSupplier(quickSearch);
+        return Result.successResult(list);
     }
 
 }

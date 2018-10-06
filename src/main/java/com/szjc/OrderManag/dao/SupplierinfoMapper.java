@@ -27,4 +27,6 @@ public interface SupplierinfoMapper {
     int updateByPrimaryKeySelective(Supplierinfo record);
 
     int updateByPrimaryKey(Supplierinfo record);
+
+    List<Supplierinfo> searchSupplier(@Param("quickSearch") String quickSearch);
 }

@@ -14,6 +14,12 @@ $("#addsendtime").datetimepicker({  // 日期框
     minView :2
 });
 
+function dosearch(){
+    var getkeyword=$('#orderkeyword').val();
+    console.log(getkeyword);
+    purchaselist(getkeyword);
+}
+
 // 删除按钮
 function  delinfo() {
     ZENG.msgbox.show("删除", 1,1500);
@@ -55,13 +61,13 @@ function printinfo(getid) {
 
 
 // 查询
-function purchaselist(){
+function purchaselist(getparam){
     $.ajax({
         type:"POST",
         url:'/searchpurchase',
         contentType: 'application/json',
         async: false,
-        data:JSON.stringify({quickSearch : ""}),
+        data:JSON.stringify({quickSearch : getparam}),
         success:function(data){
          //  var dataJson = eval('(' + data.data + ')');
           //  console.log(data.data);

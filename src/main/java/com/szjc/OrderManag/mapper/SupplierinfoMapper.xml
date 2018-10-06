@@ -320,4 +320,11 @@
       creatuser = #{creatuser,jdbcType=NVARCHAR}
     where ID = #{id,jdbcType=NVARCHAR}
   </update>
+
+  <select id="searchSupplier" parameterType="com.szjc.OrderManag.bean.Supplierinfo" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from supplierinfo
+    where suppliercode LIKE '%${quickSearch}%' or suppliername LIKE '%${quickSearch}%' or suppliershotname LIKE '%${quickSearch}%' or contenter LIKE '%${quickSearch}%'
+  </select>
 </mapper>

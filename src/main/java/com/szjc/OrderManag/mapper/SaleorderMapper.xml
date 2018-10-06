@@ -358,7 +358,7 @@
     FROM saleorder sa
     left join inventoryinfo ini on sa.drwno= ini.id
     <if test="quickSearch != null and quickSearch !=''">
-      where sa.ID = #{quickSearch,jdbcType=NVARCHAR}
+      where sa.ID like '%${quickSearch}%' or sa.orderno like '%${quickSearch}%' or sa.speci like '%${quickSearch}%'
     </if>
   </select>
 </mapper>
