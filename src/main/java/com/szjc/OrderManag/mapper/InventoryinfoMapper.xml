@@ -229,6 +229,6 @@
     select
     <include refid="Base_Column_List" />
     from inventoryinfo
-    where inventorycode like  '%${quickSearch}%'
+    where inventorycode like  '%${quickSearch}%'  or id  like  '%${quickSearch}%'
   </select>
 </mapper>

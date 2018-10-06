@@ -11,7 +11,9 @@
     <result column="faxs" jdbcType="NVARCHAR" property="faxs" />
     <result column="email" jdbcType="NVARCHAR" property="email" />
     <result column="address" jdbcType="NVARCHAR" property="address" />
+    <result column="types" jdbcType="NVARCHAR" property="types" />
     <result column="creattime" jdbcType="TIMESTAMP" property="creattime" />
+    <result column="creatuser" jdbcType="NVARCHAR" property="creatuser" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -73,7 +75,7 @@
   </sql>
   <sql id="Base_Column_List">
     ID, suppliercode, suppliername, suppliershotname, contenter, tels, faxs, email, address, 
-    creattime
+    types, creattime, creatuser
   </sql>
   <select id="selectByExample" parameterType="com.szjc.OrderManag.bean.SupplierinfoExample" resultMap="BaseResultMap">
     select
@@ -109,11 +111,13 @@
     insert into supplierinfo (ID, suppliercode, suppliername, 
       suppliershotname, contenter, tels, 
       faxs, email, address, 
-      creattime)
+      types, creattime, creatuser
+      )
     values (#{id,jdbcType=NVARCHAR}, #{suppliercode,jdbcType=NVARCHAR}, #{suppliername,jdbcType=NVARCHAR}, 
       #{suppliershotname,jdbcType=NVARCHAR}, #{contenter,jdbcType=NVARCHAR}, #{tels,jdbcType=NVARCHAR}, 
       #{faxs,jdbcType=NVARCHAR}, #{email,jdbcType=NVARCHAR}, #{address,jdbcType=NVARCHAR}, 
-      #{creattime,jdbcType=TIMESTAMP})
+      #{types,jdbcType=NVARCHAR}, #{creattime,jdbcType=TIMESTAMP}, #{creatuser,jdbcType=NVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.szjc.OrderManag.bean.Supplierinfo">
     insert into supplierinfo
@@ -145,8 +149,14 @@
       <if test="address != null">
         address,
       </if>
+      <if test="types != null">
+        types,
+      </if>
       <if test="creattime != null">
         creattime,
+      </if>
+      <if test="creatuser != null">
+        creatuser,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -177,8 +187,14 @@
       <if test="address != null">
         #{address,jdbcType=NVARCHAR},
       </if>
+      <if test="types != null">
+        #{types,jdbcType=NVARCHAR},
+      </if>
       <if test="creattime != null">
         #{creattime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatuser != null">
+        #{creatuser,jdbcType=NVARCHAR},
       </if>
     </trim>
   </insert>
@@ -218,8 +234,14 @@
       <if test="record.address != null">
         address = #{record.address,jdbcType=NVARCHAR},
       </if>
+      <if test="record.types != null">
+        types = #{record.types,jdbcType=NVARCHAR},
+      </if>
       <if test="record.creattime != null">
         creattime = #{record.creattime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creatuser != null">
+        creatuser = #{record.creatuser,jdbcType=NVARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -237,7 +259,9 @@
       faxs = #{record.faxs,jdbcType=NVARCHAR},
       email = #{record.email,jdbcType=NVARCHAR},
       address = #{record.address,jdbcType=NVARCHAR},
-      creattime = #{record.creattime,jdbcType=TIMESTAMP}
+      types = #{record.types,jdbcType=NVARCHAR},
+      creattime = #{record.creattime,jdbcType=TIMESTAMP},
+      creatuser = #{record.creatuser,jdbcType=NVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -269,8 +293,14 @@
       <if test="address != null">
         address = #{address,jdbcType=NVARCHAR},
       </if>
+      <if test="types != null">
+        types = #{types,jdbcType=NVARCHAR},
+      </if>
       <if test="creattime != null">
         creattime = #{creattime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatuser != null">
+        creatuser = #{creatuser,jdbcType=NVARCHAR},
       </if>
     </set>
     where ID = #{id,jdbcType=NVARCHAR}
@@ -285,7 +315,9 @@
       faxs = #{faxs,jdbcType=NVARCHAR},
       email = #{email,jdbcType=NVARCHAR},
       address = #{address,jdbcType=NVARCHAR},
-      creattime = #{creattime,jdbcType=TIMESTAMP}
+      types = #{types,jdbcType=NVARCHAR},
+      creattime = #{creattime,jdbcType=TIMESTAMP},
+      creatuser = #{creatuser,jdbcType=NVARCHAR}
     where ID = #{id,jdbcType=NVARCHAR}
   </update>
 </mapper>

@@ -21,7 +21,11 @@ public class Supplierinfo {
 
     private String address;
 
+    private String types;
+
     private Date creattime;
+
+    private String creatuser;
 
     public String getId() {
         return id;
@@ -95,11 +99,27 @@ public class Supplierinfo {
         this.address = address == null ? null : address.trim();
     }
 
+    public String getTypes() {
+        return types;
+    }
+
+    public void setTypes(String types) {
+        this.types = types == null ? null : types.trim();
+    }
+
     public Date getCreattime() {
         return creattime;
     }
 
     public void setCreattime(Date creattime) {
         this.creattime = creattime;
+    }
+
+    public String getCreatuser() {
+        return creatuser;
+    }
+
+    public void setCreatuser(String creatuser) {
+        this.creatuser = creatuser == null ? null : creatuser.trim();
     }
 }

@@ -735,6 +735,76 @@ public class SupplierinfoExample {
             return (Criteria) this;
         }
 
+        public Criteria andTypesIsNull() {
+            addCriterion("types is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypesIsNotNull() {
+            addCriterion("types is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypesEqualTo(String value) {
+            addCriterion("types =", value, "types");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypesNotEqualTo(String value) {
+            addCriterion("types <>", value, "types");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypesGreaterThan(String value) {
+            addCriterion("types >", value, "types");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypesGreaterThanOrEqualTo(String value) {
+            addCriterion("types >=", value, "types");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypesLessThan(String value) {
+            addCriterion("types <", value, "types");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypesLessThanOrEqualTo(String value) {
+            addCriterion("types <=", value, "types");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypesLike(String value) {
+            addCriterion("types like", value, "types");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypesNotLike(String value) {
+            addCriterion("types not like", value, "types");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypesIn(List<String> values) {
+            addCriterion("types in", values, "types");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypesNotIn(List<String> values) {
+            addCriterion("types not in", values, "types");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypesBetween(String value1, String value2) {
+            addCriterion("types between", value1, value2, "types");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypesNotBetween(String value1, String value2) {
+            addCriterion("types not between", value1, value2, "types");
+            return (Criteria) this;
+        }
+
         public Criteria andCreattimeIsNull() {
             addCriterion("creattime is null");
             return (Criteria) this;
@@ -792,6 +862,76 @@ public class SupplierinfoExample {
 
         public Criteria andCreattimeNotBetween(Date value1, Date value2) {
             addCriterion("creattime not between", value1, value2, "creattime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatuserIsNull() {
+            addCriterion("creatuser is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatuserIsNotNull() {
+            addCriterion("creatuser is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatuserEqualTo(String value) {
+            addCriterion("creatuser =", value, "creatuser");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatuserNotEqualTo(String value) {
+            addCriterion("creatuser <>", value, "creatuser");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatuserGreaterThan(String value) {
+            addCriterion("creatuser >", value, "creatuser");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatuserGreaterThanOrEqualTo(String value) {
+            addCriterion("creatuser >=", value, "creatuser");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatuserLessThan(String value) {
+            addCriterion("creatuser <", value, "creatuser");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatuserLessThanOrEqualTo(String value) {
+            addCriterion("creatuser <=", value, "creatuser");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatuserLike(String value) {
+            addCriterion("creatuser like", value, "creatuser");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatuserNotLike(String value) {
+            addCriterion("creatuser not like", value, "creatuser");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatuserIn(List<String> values) {
+            addCriterion("creatuser in", values, "creatuser");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatuserNotIn(List<String> values) {
+            addCriterion("creatuser not in", values, "creatuser");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatuserBetween(String value1, String value2) {
+            addCriterion("creatuser between", value1, value2, "creatuser");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatuserNotBetween(String value1, String value2) {
+            addCriterion("creatuser not between", value1, value2, "creatuser");
             return (Criteria) this;
         }
     }

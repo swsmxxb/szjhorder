@@ -32,8 +32,8 @@
         </div>
         <div class="col-sm-8">
             <div class="title-action">
-                <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#orderedit"><i class="fa fa-plus"></i>&nbsp;新增</button>
-                <button class="btn btn-warning " type="button" onClick="delinfo()"><i class="fa fa-warning"></i> <span class="bold">删除</span></button>
+                <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#orderadd"><i class="fa fa-plus"></i>&nbsp;新增</button>
+                <!--<button class="btn btn-warning " type="button" onClick="delinfo()"><i class="fa fa-warning"></i> <span class="bold">删除</span></button>-->
             </div>
         </div>
     </div>
@@ -66,7 +66,7 @@
         </div>
     </div>
 
-    <div class="modal inmodal fade" id="orderedit" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal inmodal fade" id="orderadd" tabindex="-1" role="dialog"  aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -87,16 +87,20 @@
                             <label class="col-sm-3 control-label">图纸号：</label>
                             <div class="col-sm-8">
 
-                                <select class="form-control" data-live-search="true">
-                                    <option>四川(sichuan)</option>
-                                    <option>江西(jiangxi)</option>
-                                    <option>湖北(hubei)</option>
-                                    <option>上海(shanghai)</option>
-                                    <option>北京(beijing)</option>
-                                    <option>河北(hebei)</option>
+                                <select class="selectpicker form-control" data-live-search="true" id="adddrwno">
                                 </select>
 
                                 <!--<input type="text" placeholder="图纸号" class="form-control" >-->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">类型：</label>
+                            <div class="col-sm-8">
+                                <select class="selectpicker form-control" data-live-search="true" id="addtypes">
+                                    <option value="">-请选择-</option>
+                                    <option value="1">类型1</option>
+                                    <option value="1">类型2</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -134,7 +138,7 @@
         </div>
     </div>
 
-    <div id="printdatastati" style="margin:0px 0px 0px 0px;">
+    <div id="printdatastati" style="margin:0px 0px 0px 0px;display: none">
         <style>
             .bkall {
                 border: 1px solid #000000;
@@ -216,10 +220,10 @@
                         <td width="200" height="35" align="center" class="bkx">颜色</td>
                     </tr>
                     <tr >
-                        <td width="200" height="35" class="bky" ><span id="pinventoryname"></span></td>
-                        <td width="200" height="35" class="bky"><span id="pnum"></span></td>
-                        <td width="200" height="35" class="bky"><span id="pspeci"></span></td>
-                        <td width="200" height="35"><span id="pcolor"></span></td>
+                        <td width="200" height="35" align="center" class="bky" ><span id="pinventoryname"></span></td>
+                        <td width="200" height="35" align="center" class="bky"><span id="pnum"></span></td>
+                        <td width="200" height="35" align="center" class="bky"><span id="pspeci"></span></td>
+                        <td width="200" height="35" align="center"><span id="pcolor"></span></td>
                     </tr>
                 </table></td>
             </tr>

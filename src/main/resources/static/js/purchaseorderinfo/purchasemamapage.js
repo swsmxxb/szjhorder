@@ -19,8 +19,14 @@ function  delinfo() {
     ZENG.msgbox.show("删除", 1,1500);
 }
 
-function editinfo(getid) {
-    ZENG.msgbox.show(getid, 1,1500);
+function editinfo(getid,getorderno,getdrwno,getnum) {
+    $('#orderedit').modal('show');
+    $("#editid").val(getid);
+    $("#editorderno").val(getorderno);
+    $("#editdrwno").val(getdrwno);
+    $("#editnum").val(getnum);
+
+
 }
 
 function printinfo(getid) {
@@ -144,7 +150,7 @@ function purchaselist(){
                         align: 'center',
                         visible: true,
                         formatter: function statusFormatter(value, row, index){
-                            return "<a href=\"javascript:editinfo('"+row.id+"')\">编辑</a> | <a href=\"javascript:printinfo('"+row.id+"')\">打印</a>";
+                            return "<a href=\"javascript:editinfo('"+row.id+"','"+row.orderno+"','"+row.drwno+"','"+row.num+"')\">编辑</a> | <a href=\"javascript:printinfo('"+row.id+"')\">打印</a>";
                         }
                     },]
 
@@ -157,7 +163,7 @@ function purchaselist(){
     });
 }
 
-// 新增
+// 编辑
 function saveorderlist(){
     var addorderno=$("#addorderno").val();
     var adddrwno=$("#adddrwno").val();
@@ -168,11 +174,11 @@ function saveorderlist(){
       console.log(addsendtime);
     $.ajax({
         type:"POST",
-        url:'/addpurchase',
+        url:'/editpurchase',
         contentType: 'application/json',
         data:JSON.stringify({orderno :addorderno,drwno:adddrwno,speci:addspeci,color:addcolor,num:addnum,sendtime:addsendtime}),
         success:function(data){
-            $('#orderadd').modal('hide');
+            $('#orderedit').modal('hide');
             ZENG.msgbox.show("保存成功！", 4,1500);
             purchaselist();
             // console.log(data);

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title> - </title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="js/plugins/bootstraptablenew/bootstrap-table.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="js/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="js/plugins/messagebox/msgbox.css" rel="stylesheet">
+    <link href="js/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet">
+
+
+
+</head>
+
+<body class="gray-bg">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-sm-4">
+            <h2>采购管理</h2>
+        </div>
+        <div class="col-sm-8">
+            <div class="title-action">
+            </div>
+        </div>
+    </div>
+
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                  <div class="ibox-content">
+
+
+                 </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+
+                <div class="ibox-content">
+                <table id="purchaseinfo" data-height="400">
+                    <!--<thead>-->
+                    <!--<tr>-->
+                        <!--<th data-field="state" data-checkbox="true"></th>-->
+                        <!--<th data-field="id">ID</th>-->
+                        <!--<th data-field="name">名称</th>-->
+                        <!--<th data-field="price">价格</th>-->
+                    <!--</tr>-->
+                    <!--</thead>-->
+                </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal inmodal fade" id="orderedit" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <small class="font-bold">采购管理</small>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="form-control" id="editid" readonly>
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">订单号：</label>
+                            <div class="col-sm-8">
+                                <input type="text" placeholder="订单号" class="form-control" id="editorderno" readonly>
+                                <!--<span class="help-block m-b-none">请输入您注册时所填的E-mail</span>-->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">图纸号：</label>
+                            <div class="col-sm-8">
+                                <input type="text" placeholder="图纸号" class="form-control" id="editdrwno" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">采购数量：</label>
+                            <div class="col-sm-8">
+                                <input type="number" placeholder="采购数量" class="form-control" id="editnum" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">单价：</label>
+                            <div class="col-sm-8">
+                                <input type="number" placeholder="单价" class="form-control" id="editprice" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">供应商：</label>
+                            <div class="col-sm-8">
+                                <select class="selectpicker form-control" data-live-search="true" id="editsupplierid">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">送货地址：</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" id="editsendaddr">
+                                    <option value="">-请选择-</option>
+                                    <option value="新厂">新厂</option>
+                                    <option value="老厂">老厂</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">特殊要求：</label>
+                            <div class="col-sm-8">
+                                <input type="text" placeholder="特殊要求" class="form-control" id="editspecialremark" >
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" onClick="saveorderlist()">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="printdatastati" style="margin:0px 0px 0px 0px;display: none">
+        <style>
+            .bkall {
+                border: 1px solid #000000;
+            }
+            .tbtitle {
+                font-size: 36px;
+
+            }
+            .tbstitle {
+                font-size: 18px;
+                font-weight: bold;
+            }
+            .bkx {
+                border-bottom-width: 1px;
+                border-bottom-style: solid;
+                border-bottom-color: #000000;
+            }
+            .redfont {
+                color: #FF0000;
+            }
+            .bkyx {
+                border-right-width: 1px;
+                border-bottom-width: 1px;
+                border-right-style: solid;
+                border-bottom-style: solid;
+                border-top-color: #FFFFFF;
+                border-right-color: #000000;
+                border-bottom-color: #000000;
+                border-left-color: #FFFFFF;
+            }
+            .bky {
+                border-right-width: 1px;
+                border-right-style: solid;
+                border-right-color: #000000;
+            }
+            .bkzyx {
+                border-right-width: 1px;
+                border-bottom-width: 1px;
+                border-left-width: 1px;
+                border-right-style: solid;
+                border-bottom-style: solid;
+                border-left-style: solid;
+                border-right-color: #000000;
+                border-bottom-color: #000000;
+                border-left-color: #000000;
+            }
+            #printdatastati table span {
+                margin-left:5px;
+            }
+        </style>
+        <table width="800" border="0" align="center" cellpadding="0" cellspacing="0">
+            <tr>
+                <td class="tbtitle" align="center">苏州佳诚商用设备有限公司</td>
+            </tr>
+            <tr>
+                <td align="center"><img src="img/orderlogo.png" width="200" height="50" alt="" /></td>
+            </tr>
+            <tr>
+                <td height="35" align="center" class="tbstitle">采购单</td>
+            </tr>
+            <tr>
+                <td><table width="800" cellpadding="0" cellspacing="0" class="bkall">
+                    <tr>
+                        <td width="200" height="31" align="center" class="bkyx">送货地址：</td>
+                        <td width="200" height="31" class="bkyx" ><span id="padress"></span></td>
+                        <td width="200" height="31" align="center" class="bkyx" >联系人：</td>
+                        <td width="200" height="31" class="bkx" ><span id="pcontenter"></span></td>
+                    </tr>
+                    <tr>
+                        <td width="200" height="35" align="center" class="bkyx">订单号：</td>
+                        <td width="200" height="35" class="bkyx"><span id="porder"></span></td>
+                        <td width="200" height="35" align="center" class="bkyx">交货日期：</td>
+                        <td width="200" height="35" class="bkx"><span id="psendtime"></span></td>
+                    </tr>
+                    <tr >
+                        <td width="200" height="35" align="center" class="bkyx" >品名</td>
+                        <td width="200" height="35" align="center" class="bkyx">数量</td>
+                        <td width="200" height="35" align="center" class="bkyx">规格</td>
+                        <td width="200" height="35" align="center" class="bkx">颜色</td>
+                    </tr>
+                    <tr >
+                        <td width="200" height="35" align="center" class="bky" ><span id="pinventoryname"></span></td>
+                        <td width="200" height="35" align="center" class="bky"><span id="pnum"></span></td>
+                        <td width="200" height="35" align="center" class="bky"><span id="pspeci"></span></td>
+                        <td width="200" height="35" align="center"><span id="pcolor"></span></td>
+                    </tr>
+                </table></td>
+            </tr>
+            <tr>
+                <td height="30">生产及检验要求：</td>
+            </tr>
+            <tr>
+                <td height="35"><table width="800" height="50" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td class="bkall">&nbsp;</td>
+                    </tr>
+                </table></td>
+            </tr>
+            <tr>
+                <td height="30">图纸：</td>
+            </tr>
+            <tr>
+                <td height="298"><table width="800" border="0" cellpadding="0" cellspacing="0" class="bkall">
+                    <tr>
+                        <td height="448"><img src="" width="800"alt="" id="pdrwno"></td>
+                    </tr>
+                </table></td>
+            </tr>
+            <tr>
+                <td><table width="800" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td height="70" class="bkzyx">&nbsp;</td>
+                    </tr>
+                </table></td>
+            </tr>
+            <tr>
+                <td><table width="800" height="30" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td width="200">&nbsp;</td>
+                        <td width="200">&nbsp;</td>
+                        <td width="200" align="right">制单日期：</td>
+                        <td width="200" align="center"><span id="pcreattaime"></span></td>
+                    </tr>
+                </table></td>
+            </tr>
+            <tr>
+                <td height="30">验收情况：</td>
+            </tr>
+            <tr>
+                <td><table width="800" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td height="100" class="bkall">&nbsp;</td>
+                    </tr>
+                </table></td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+<!-- 全局js -->
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+
+<script src="js/content.js"></script>
+
+<!-- Bootstrap table -->
+<script src="js/plugins/bootstraptablenew/bootstrap-table.js"></script>
+<script src="js/plugins/bootstraptablenew/bootstrap-table-zh-CN.js"></script>
+
+<script src="js/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+<script src="js/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.zh-CN.js"></script>
+
+<script src="js/plugins/bootstrap-select/js/bootstrap-select.min.js"></script>
+<script src="js/plugins/bootstrap-select/js/i18n/defaults-zh_CN.js"></script>
+
+
+<!--<script src="js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>-->
+<script src="js/plugins/messagebox/msgbox.js"></script>
+<script src="js/plugins/printarea/jquery.printarea.js"></script>
+
+<!-- 自定义js -->
+<script src="js/purchaseorderinfo/purchasemamapage.js"></script>
+
+</html>

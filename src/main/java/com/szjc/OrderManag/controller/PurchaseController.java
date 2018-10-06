@@ -56,4 +56,11 @@ public class PurchaseController {
 
     }
 
+
+    // 采购管理页面
+    @GetMapping("/purchasemanapage")
+    public String purchasemanapage(Model model) {
+        return "purchaseorderinfo/purchasemanapage";
+    }
+
 }
