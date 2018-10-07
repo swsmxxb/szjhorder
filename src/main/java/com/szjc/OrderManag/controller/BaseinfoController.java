@@ -34,12 +34,6 @@ public class BaseinfoController {
         return "baseinfo/supplierpage";
     }
 
-    // 供应商类型
-    @GetMapping("/suppliertype")
-    public String suppliertype(Model model) {
-        return "baseinfo/suppliertypepage";
-    }
-
 
      // 查询物料数据
     @RequestMapping(value = "/searchInventory", method = RequestMethod.POST)
