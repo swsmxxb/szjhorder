@@ -14,7 +14,7 @@ public class IndexController {
 
     @GetMapping("/")
     public String defaultpage (Model model) {
-        return "index";
+        return "login";
     }
 
     @GetMapping("/tables")
@@ -25,5 +25,10 @@ public class IndexController {
     @GetMapping("/pringtpage")
     public String pringtpage(Model model) {
         return "printtempl/printpage";
+    }
+
+    @GetMapping("/login")
+    public String loginpage(Model model) {
+        return "login";
     }
 }

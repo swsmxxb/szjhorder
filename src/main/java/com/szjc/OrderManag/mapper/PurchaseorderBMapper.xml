@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.szjc.OrderManag.dao.PurchaseorderBMapper">
+  <resultMap id="BaseResultMap" type="com.szjc.OrderManag.bean.PurchaseorderB">
+    <id column="BID" jdbcType="NVARCHAR" property="bid" />
+    <result column="HID" jdbcType="NVARCHAR" property="hid" />
+    <result column="inventoryid" jdbcType="NCHAR" property="inventoryid" />
+    <result column="num" jdbcType="DECIMAL" property="num" />
+    <result column="speci" jdbcType="NVARCHAR" property="speci" />
+    <result column="color" jdbcType="NVARCHAR" property="color" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="specialremark" jdbcType="NVARCHAR" property="specialremark" />
+    <result column="sendaddr" jdbcType="NVARCHAR" property="sendaddr" />
+    <result column="addrcontenter" jdbcType="NVARCHAR" property="addrcontenter" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    BID, HID, inventoryid, num, speci, color, price, specialremark, sendaddr, addrcontenter
+  </sql>
+  <select id="selectByExample" parameterType="com.szjc.OrderManag.bean.PurchaseorderBExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from purchaseorder_b
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from purchaseorder_b
+    where BID = #{bid,jdbcType=NVARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from purchaseorder_b
+    where BID = #{bid,jdbcType=NVARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.szjc.OrderManag.bean.PurchaseorderBExample">
+    delete from purchaseorder_b
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.szjc.OrderManag.bean.PurchaseorderB">
+    insert into purchaseorder_b (BID, HID, inventoryid, 
+      num, speci, color, 
+      price, specialremark, sendaddr, 
+      addrcontenter)
+    values (#{bid,jdbcType=NVARCHAR}, #{hid,jdbcType=NVARCHAR}, #{inventoryid,jdbcType=NCHAR}, 
+      #{num,jdbcType=DECIMAL}, #{speci,jdbcType=NVARCHAR}, #{color,jdbcType=NVARCHAR}, 
+      #{price,jdbcType=DECIMAL}, #{specialremark,jdbcType=NVARCHAR}, #{sendaddr,jdbcType=NVARCHAR}, 
+      #{addrcontenter,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.szjc.OrderManag.bean.PurchaseorderB">
+    insert into purchaseorder_b
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bid != null">
+        BID,
+      </if>
+      <if test="hid != null">
+        HID,
+      </if>
+      <if test="inventoryid != null">
+        inventoryid,
+      </if>
+      <if test="num != null">
+        num,
+      </if>
+      <if test="speci != null">
+        speci,
+      </if>
+      <if test="color != null">
+        color,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="specialremark != null">
+        specialremark,
+      </if>
+      <if test="sendaddr != null">
+        sendaddr,
+      </if>
+      <if test="addrcontenter != null">
+        addrcontenter,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bid != null">
+        #{bid,jdbcType=NVARCHAR},
+      </if>
+      <if test="hid != null">
+        #{hid,jdbcType=NVARCHAR},
+      </if>
+      <if test="inventoryid != null">
+        #{inventoryid,jdbcType=NCHAR},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=DECIMAL},
+      </if>
+      <if test="speci != null">
+        #{speci,jdbcType=NVARCHAR},
+      </if>
+      <if test="color != null">
+        #{color,jdbcType=NVARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="specialremark != null">
+        #{specialremark,jdbcType=NVARCHAR},
+      </if>
+      <if test="sendaddr != null">
+        #{sendaddr,jdbcType=NVARCHAR},
+      </if>
+      <if test="addrcontenter != null">
+        #{addrcontenter,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.szjc.OrderManag.bean.PurchaseorderBExample" resultType="java.lang.Long">
+    select count(*) from purchaseorder_b
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update purchaseorder_b
+    <set>
+      <if test="record.bid != null">
+        BID = #{record.bid,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.hid != null">
+        HID = #{record.hid,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.inventoryid != null">
+        inventoryid = #{record.inventoryid,jdbcType=NCHAR},
+      </if>
+      <if test="record.num != null">
+        num = #{record.num,jdbcType=DECIMAL},
+      </if>
+      <if test="record.speci != null">
+        speci = #{record.speci,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.color != null">
+        color = #{record.color,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=DECIMAL},
+      </if>
+      <if test="record.specialremark != null">
+        specialremark = #{record.specialremark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sendaddr != null">
+        sendaddr = #{record.sendaddr,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.addrcontenter != null">
+        addrcontenter = #{record.addrcontenter,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update purchaseorder_b
+    set BID = #{record.bid,jdbcType=NVARCHAR},
+      HID = #{record.hid,jdbcType=NVARCHAR},
+      inventoryid = #{record.inventoryid,jdbcType=NCHAR},
+      num = #{record.num,jdbcType=DECIMAL},
+      speci = #{record.speci,jdbcType=NVARCHAR},
+      color = #{record.color,jdbcType=NVARCHAR},
+      price = #{record.price,jdbcType=DECIMAL},
+      specialremark = #{record.specialremark,jdbcType=NVARCHAR},
+      sendaddr = #{record.sendaddr,jdbcType=NVARCHAR},
+      addrcontenter = #{record.addrcontenter,jdbcType=NVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.szjc.OrderManag.bean.PurchaseorderB">
+    update purchaseorder_b
+    <set>
+      <if test="hid != null">
+        HID = #{hid,jdbcType=NVARCHAR},
+      </if>
+      <if test="inventoryid != null">
+        inventoryid = #{inventoryid,jdbcType=NCHAR},
+      </if>
+      <if test="num != null">
+        num = #{num,jdbcType=DECIMAL},
+      </if>
+      <if test="speci != null">
+        speci = #{speci,jdbcType=NVARCHAR},
+      </if>
+      <if test="color != null">
+        color = #{color,jdbcType=NVARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="specialremark != null">
+        specialremark = #{specialremark,jdbcType=NVARCHAR},
+      </if>
+      <if test="sendaddr != null">
+        sendaddr = #{sendaddr,jdbcType=NVARCHAR},
+      </if>
+      <if test="addrcontenter != null">
+        addrcontenter = #{addrcontenter,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where BID = #{bid,jdbcType=NVARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.szjc.OrderManag.bean.PurchaseorderB">
+    update purchaseorder_b
+    set HID = #{hid,jdbcType=NVARCHAR},
+      inventoryid = #{inventoryid,jdbcType=NCHAR},
+      num = #{num,jdbcType=DECIMAL},
+      speci = #{speci,jdbcType=NVARCHAR},
+      color = #{color,jdbcType=NVARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      specialremark = #{specialremark,jdbcType=NVARCHAR},
+      sendaddr = #{sendaddr,jdbcType=NVARCHAR},
+      addrcontenter = #{addrcontenter,jdbcType=NVARCHAR}
+    where BID = #{bid,jdbcType=NVARCHAR}
+  </update>
+</mapper>

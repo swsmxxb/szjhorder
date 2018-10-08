@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.szjc.OrderManag.dao.PurchaseorderHMapper">
+  <resultMap id="BaseResultMap" type="com.szjc.OrderManag.bean.PurchaseorderH">
+    <id column="HID" jdbcType="NVARCHAR" property="hid" />
+    <result column="supplierid" jdbcType="NVARCHAR" property="supplierid" />
+    <result column="orderno" jdbcType="NVARCHAR" property="orderno" />
+    <result column="sendtime" jdbcType="TIMESTAMP" property="sendtime" />
+    <result column="creatuser" jdbcType="NVARCHAR" property="creatuser" />
+    <result column="creattime" jdbcType="TIMESTAMP" property="creattime" />
+    <result column="status" jdbcType="NVARCHAR" property="status" />
+    <result column="picaddr" jdbcType="NVARCHAR" property="picaddr" />
+    <result column="problemtype" jdbcType="NVARCHAR" property="problemtype" />
+    <result column="problemremark" jdbcType="NVARCHAR" property="problemremark" />
+    <result column="suppliershotname" jdbcType="NVARCHAR" property="suppliershotname" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    HID, supplierid, orderno, sendtime, creatuser, creattime, status, picaddr, problemtype, 
+    problemremark
+  </sql>
+  <select id="selectByExample" parameterType="com.szjc.OrderManag.bean.PurchaseorderHExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from purchaseorder_h
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from purchaseorder_h
+    where HID = #{hid,jdbcType=NVARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from purchaseorder_h
+    where HID = #{hid,jdbcType=NVARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.szjc.OrderManag.bean.PurchaseorderHExample">
+    delete from purchaseorder_h
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.szjc.OrderManag.bean.PurchaseorderH">
+    insert into purchaseorder_h (HID, supplierid, orderno, 
+      sendtime, creatuser, creattime, 
+      status, picaddr, problemtype, 
+      problemremark)
+    values (#{hid,jdbcType=NVARCHAR}, #{supplierid,jdbcType=NVARCHAR}, #{orderno,jdbcType=NVARCHAR}, 
+      #{sendtime,jdbcType=TIMESTAMP}, #{creatuser,jdbcType=NVARCHAR}, #{creattime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=NVARCHAR}, #{picaddr,jdbcType=NVARCHAR}, #{problemtype,jdbcType=NVARCHAR}, 
+      #{problemremark,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.szjc.OrderManag.bean.PurchaseorderH">
+    insert into purchaseorder_h
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="hid != null">
+        HID,
+      </if>
+      <if test="supplierid != null">
+        supplierid,
+      </if>
+      <if test="orderno != null">
+        orderno,
+      </if>
+      <if test="sendtime != null">
+        sendtime,
+      </if>
+      <if test="creatuser != null">
+        creatuser,
+      </if>
+      <if test="creattime != null">
+        creattime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="picaddr != null">
+        picaddr,
+      </if>
+      <if test="problemtype != null">
+        problemtype,
+      </if>
+      <if test="problemremark != null">
+        problemremark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="hid != null">
+        #{hid,jdbcType=NVARCHAR},
+      </if>
+      <if test="supplierid != null">
+        #{supplierid,jdbcType=NVARCHAR},
+      </if>
+      <if test="orderno != null">
+        #{orderno,jdbcType=NVARCHAR},
+      </if>
+      <if test="sendtime != null">
+        #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatuser != null">
+        #{creatuser,jdbcType=NVARCHAR},
+      </if>
+      <if test="creattime != null">
+        #{creattime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=NVARCHAR},
+      </if>
+      <if test="picaddr != null">
+        #{picaddr,jdbcType=NVARCHAR},
+      </if>
+      <if test="problemtype != null">
+        #{problemtype,jdbcType=NVARCHAR},
+      </if>
+      <if test="problemremark != null">
+        #{problemremark,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.szjc.OrderManag.bean.PurchaseorderHExample" resultType="java.lang.Long">
+    select count(*) from purchaseorder_h
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update purchaseorder_h
+    <set>
+      <if test="record.hid != null">
+        HID = #{record.hid,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.supplierid != null">
+        supplierid = #{record.supplierid,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.orderno != null">
+        orderno = #{record.orderno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sendtime != null">
+        sendtime = #{record.sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creatuser != null">
+        creatuser = #{record.creatuser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.creattime != null">
+        creattime = #{record.creattime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.picaddr != null">
+        picaddr = #{record.picaddr,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.problemtype != null">
+        problemtype = #{record.problemtype,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.problemremark != null">
+        problemremark = #{record.problemremark,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update purchaseorder_h
+    set HID = #{record.hid,jdbcType=NVARCHAR},
+      supplierid = #{record.supplierid,jdbcType=NVARCHAR},
+      orderno = #{record.orderno,jdbcType=NVARCHAR},
+      sendtime = #{record.sendtime,jdbcType=TIMESTAMP},
+      creatuser = #{record.creatuser,jdbcType=NVARCHAR},
+      creattime = #{record.creattime,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=NVARCHAR},
+      picaddr = #{record.picaddr,jdbcType=NVARCHAR},
+      problemtype = #{record.problemtype,jdbcType=NVARCHAR},
+      problemremark = #{record.problemremark,jdbcType=NVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.szjc.OrderManag.bean.PurchaseorderH">
+    update purchaseorder_h
+    <set>
+      <if test="supplierid != null">
+        supplierid = #{supplierid,jdbcType=NVARCHAR},
+      </if>
+      <if test="orderno != null">
+        orderno = #{orderno,jdbcType=NVARCHAR},
+      </if>
+      <if test="sendtime != null">
+        sendtime = #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatuser != null">
+        creatuser = #{creatuser,jdbcType=NVARCHAR},
+      </if>
+      <if test="creattime != null">
+        creattime = #{creattime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=NVARCHAR},
+      </if>
+      <if test="picaddr != null">
+        picaddr = #{picaddr,jdbcType=NVARCHAR},
+      </if>
+      <if test="problemtype != null">
+        problemtype = #{problemtype,jdbcType=NVARCHAR},
+      </if>
+      <if test="problemremark != null">
+        problemremark = #{problemremark,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where HID = #{hid,jdbcType=NVARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.szjc.OrderManag.bean.PurchaseorderH">
+    update purchaseorder_h
+    set supplierid = #{supplierid,jdbcType=NVARCHAR},
+      orderno = #{orderno,jdbcType=NVARCHAR},
+      sendtime = #{sendtime,jdbcType=TIMESTAMP},
+      creatuser = #{creatuser,jdbcType=NVARCHAR},
+      creattime = #{creattime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=NVARCHAR},
+      picaddr = #{picaddr,jdbcType=NVARCHAR},
+      problemtype = #{problemtype,jdbcType=NVARCHAR},
+      problemremark = #{problemremark,jdbcType=NVARCHAR}
+    where HID = #{hid,jdbcType=NVARCHAR}
+  </update>
+
+  <select id="searchpurchaseorderh"  parameterType="com.szjc.OrderManag.bean.PurchaseorderH" resultMap="BaseResultMap">
+    SELECT puh.HID
+    ,puh.supplierid
+    ,puh.orderno
+    ,puh.sendtime
+    ,puh.creatuser
+    ,puh.creattime
+    ,puh.status
+    ,puh.picaddr
+    ,sup.suppliershotname
+    FROM dbo.purchaseorder_h puh
+    LEFT JOIN  dbo.supplierinfo sup ON puh.supplierid = sup.ID
+    <if test="quickSearch != null and quickSearch !=''">
+      where puh.orderno like '%${quickSearch}%' or sup.suppliername like '%${quickSearch}%'
+    </if>
+  </select>
+</mapper>

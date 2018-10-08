@@ -70,7 +70,7 @@ function printinfo(getid) {
 function purchaselist(getparam){
     $.ajax({
         type:"POST",
-        url:'/searchpurchase',
+        url:'/searchpurchaseorderh',
         contentType: 'application/json',
         async: false,
         data:JSON.stringify({quickSearch : getparam}),
@@ -108,43 +108,29 @@ function purchaselist(getparam){
                         }
                     }, {
                         field: 'orderno',
-                        title: '订单号',
+                        title: '采购单号',
                         halign: 'center',
                         align: 'center',
                         visible: true,
                         sortable: true
                     }, {
-                        field: 'drwno',
-                        title: '图纸号',
+                        field: 'suppliershotname',
+                        title: '供应商',
                         halign: 'center',
                         align: 'center',
                         visible: true,
                         sortable: true
                     }, {
-                        field: 'inventoryname',
-                        title: '品名',
+                        field: 'sendtime',
+                        title: '交货日期',
                         halign: 'center',
                         align: 'center',
                         visible: true,
                         sortable: true
                         // formatter: statusFormatter
                     }, {
-                        field: 'num',
-                        title: '数量',
-                        halign: 'center',
-                        align: 'center',
-                        visible: true,
-                        sortable: true
-                    }, {
-                        field: 'color',
-                        title: '颜色',
-                        halign: 'center',
-                        align: 'center',
-                        visible: true,
-                        sortable: true
-                    }, {
-                        field: 'speci',
-                        title: '规格',
+                        field: 'status',
+                        title: '状态',
                         halign: 'center',
                         align: 'center',
                         visible: true,
