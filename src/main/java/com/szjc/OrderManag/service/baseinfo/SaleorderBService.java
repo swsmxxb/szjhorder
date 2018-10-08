@@ -1,11 +1,13 @@
-package com.szjc.OrderManag.dao;
+package com.szjc.OrderManag.service.baseinfo;
 
 import com.szjc.OrderManag.bean.SaleorderB;
 import com.szjc.OrderManag.bean.SaleorderBExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface SaleorderBMapper {
+import java.util.List;
+
+public interface SaleorderBService<SaleorderB, SaleorderBExample> {
+
     long countByExample(SaleorderBExample example);
 
     int deleteByExample(SaleorderBExample example);

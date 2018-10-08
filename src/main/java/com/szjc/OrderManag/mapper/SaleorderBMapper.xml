@@ -367,4 +367,29 @@
       status = #{status,jdbcType=NVARCHAR}
     where BID = #{bid,jdbcType=NVARCHAR}
   </update>
+
+  <select id="searchorderb"  parameterType="com.szjc.OrderManag.bean.SaleorderB" resultMap="BaseResultMap">
+    select
+    sab.BID
+    ,sab.HID
+    ,sab.orderno
+    ,sab.speci
+    ,sab.color
+    ,sab.num
+    ,sab.price
+    ,sab.supplierid
+    ,sab.sendaddr
+    ,sab.sendtime
+    ,sab.specialremark
+    ,sab.creattaime
+    ,sab.creatuser
+    ,sab.status,
+    ini.inventoryname,
+    ini.inventorycode drwno
+    FROM saleorder_b sab
+    left join inventoryinfo ini on sab.drwno= ini.id
+    <if test="HID != null and HID !=''">
+      where sab.HID = '${HID}'
+    </if>
+  </select>
 </mapper>
