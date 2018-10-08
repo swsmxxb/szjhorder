@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.szjc.OrderManag.dao.SaleorderBMapper">
+  <resultMap id="BaseResultMap" type="com.szjc.OrderManag.bean.SaleorderB">
+    <id column="BID" jdbcType="NVARCHAR" property="bid" />
+    <result column="HID" jdbcType="NVARCHAR" property="hid" />
+    <result column="orderno" jdbcType="NVARCHAR" property="orderno" />
+    <result column="drwno" jdbcType="NVARCHAR" property="drwno" />
+    <result column="speci" jdbcType="NVARCHAR" property="speci" />
+    <result column="color" jdbcType="NVARCHAR" property="color" />
+    <result column="num" jdbcType="NVARCHAR" property="num" />
+    <result column="price" jdbcType="NVARCHAR" property="price" />
+    <result column="supplierid" jdbcType="NVARCHAR" property="supplierid" />
+    <result column="sendaddr" jdbcType="NVARCHAR" property="sendaddr" />
+    <result column="sendtime" jdbcType="TIMESTAMP" property="sendtime" />
+    <result column="specialremark" jdbcType="NVARCHAR" property="specialremark" />
+    <result column="creattaime" jdbcType="TIMESTAMP" property="creattaime" />
+    <result column="creatuser" jdbcType="NVARCHAR" property="creatuser" />
+    <result column="status" jdbcType="NVARCHAR" property="status" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    BID, HID, orderno, drwno, speci, color, num, price, supplierid, sendaddr, sendtime, 
+    specialremark, creattaime, creatuser, status
+  </sql>
+  <select id="selectByExample" parameterType="com.szjc.OrderManag.bean.SaleorderBExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from saleorder_b
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from saleorder_b
+    where BID = #{bid,jdbcType=NVARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from saleorder_b
+    where BID = #{bid,jdbcType=NVARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.szjc.OrderManag.bean.SaleorderBExample">
+    delete from saleorder_b
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.szjc.OrderManag.bean.SaleorderB">
+    insert into saleorder_b (BID, HID, orderno, 
+      drwno, speci, color, 
+      num, price, supplierid, 
+      sendaddr, sendtime, specialremark, 
+      creattaime, creatuser, status
+      )
+    values (#{bid,jdbcType=NVARCHAR}, #{hid,jdbcType=NVARCHAR}, #{orderno,jdbcType=NVARCHAR}, 
+      #{drwno,jdbcType=NVARCHAR}, #{speci,jdbcType=NVARCHAR}, #{color,jdbcType=NVARCHAR}, 
+      #{num,jdbcType=NVARCHAR}, #{price,jdbcType=NVARCHAR}, #{supplierid,jdbcType=NVARCHAR}, 
+      #{sendaddr,jdbcType=NVARCHAR}, #{sendtime,jdbcType=TIMESTAMP}, #{specialremark,jdbcType=NVARCHAR}, 
+      #{creattaime,jdbcType=TIMESTAMP}, #{creatuser,jdbcType=NVARCHAR}, #{status,jdbcType=NVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.szjc.OrderManag.bean.SaleorderB">
+    insert into saleorder_b
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bid != null">
+        BID,
+      </if>
+      <if test="hid != null">
+        HID,
+      </if>
+      <if test="orderno != null">
+        orderno,
+      </if>
+      <if test="drwno != null">
+        drwno,
+      </if>
+      <if test="speci != null">
+        speci,
+      </if>
+      <if test="color != null">
+        color,
+      </if>
+      <if test="num != null">
+        num,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="supplierid != null">
+        supplierid,
+      </if>
+      <if test="sendaddr != null">
+        sendaddr,
+      </if>
+      <if test="sendtime != null">
+        sendtime,
+      </if>
+      <if test="specialremark != null">
+        specialremark,
+      </if>
+      <if test="creattaime != null">
+        creattaime,
+      </if>
+      <if test="creatuser != null">
+        creatuser,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bid != null">
+        #{bid,jdbcType=NVARCHAR},
+      </if>
+      <if test="hid != null">
+        #{hid,jdbcType=NVARCHAR},
+      </if>
+      <if test="orderno != null">
+        #{orderno,jdbcType=NVARCHAR},
+      </if>
+      <if test="drwno != null">
+        #{drwno,jdbcType=NVARCHAR},
+      </if>
+      <if test="speci != null">
+        #{speci,jdbcType=NVARCHAR},
+      </if>
+      <if test="color != null">
+        #{color,jdbcType=NVARCHAR},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=NVARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=NVARCHAR},
+      </if>
+      <if test="supplierid != null">
+        #{supplierid,jdbcType=NVARCHAR},
+      </if>
+      <if test="sendaddr != null">
+        #{sendaddr,jdbcType=NVARCHAR},
+      </if>
+      <if test="sendtime != null">
+        #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="specialremark != null">
+        #{specialremark,jdbcType=NVARCHAR},
+      </if>
+      <if test="creattaime != null">
+        #{creattaime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatuser != null">
+        #{creatuser,jdbcType=NVARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.szjc.OrderManag.bean.SaleorderBExample" resultType="java.lang.Long">
+    select count(*) from saleorder_b
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update saleorder_b
+    <set>
+      <if test="record.bid != null">
+        BID = #{record.bid,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.hid != null">
+        HID = #{record.hid,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.orderno != null">
+        orderno = #{record.orderno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.drwno != null">
+        drwno = #{record.drwno,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.speci != null">
+        speci = #{record.speci,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.color != null">
+        color = #{record.color,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.num != null">
+        num = #{record.num,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.supplierid != null">
+        supplierid = #{record.supplierid,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sendaddr != null">
+        sendaddr = #{record.sendaddr,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sendtime != null">
+        sendtime = #{record.sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.specialremark != null">
+        specialremark = #{record.specialremark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.creattaime != null">
+        creattaime = #{record.creattaime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creatuser != null">
+        creatuser = #{record.creatuser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update saleorder_b
+    set BID = #{record.bid,jdbcType=NVARCHAR},
+      HID = #{record.hid,jdbcType=NVARCHAR},
+      orderno = #{record.orderno,jdbcType=NVARCHAR},
+      drwno = #{record.drwno,jdbcType=NVARCHAR},
+      speci = #{record.speci,jdbcType=NVARCHAR},
+      color = #{record.color,jdbcType=NVARCHAR},
+      num = #{record.num,jdbcType=NVARCHAR},
+      price = #{record.price,jdbcType=NVARCHAR},
+      supplierid = #{record.supplierid,jdbcType=NVARCHAR},
+      sendaddr = #{record.sendaddr,jdbcType=NVARCHAR},
+      sendtime = #{record.sendtime,jdbcType=TIMESTAMP},
+      specialremark = #{record.specialremark,jdbcType=NVARCHAR},
+      creattaime = #{record.creattaime,jdbcType=TIMESTAMP},
+      creatuser = #{record.creatuser,jdbcType=NVARCHAR},
+      status = #{record.status,jdbcType=NVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.szjc.OrderManag.bean.SaleorderB">
+    update saleorder_b
+    <set>
+      <if test="hid != null">
+        HID = #{hid,jdbcType=NVARCHAR},
+      </if>
+      <if test="orderno != null">
+        orderno = #{orderno,jdbcType=NVARCHAR},
+      </if>
+      <if test="drwno != null">
+        drwno = #{drwno,jdbcType=NVARCHAR},
+      </if>
+      <if test="speci != null">
+        speci = #{speci,jdbcType=NVARCHAR},
+      </if>
+      <if test="color != null">
+        color = #{color,jdbcType=NVARCHAR},
+      </if>
+      <if test="num != null">
+        num = #{num,jdbcType=NVARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=NVARCHAR},
+      </if>
+      <if test="supplierid != null">
+        supplierid = #{supplierid,jdbcType=NVARCHAR},
+      </if>
+      <if test="sendaddr != null">
+        sendaddr = #{sendaddr,jdbcType=NVARCHAR},
+      </if>
+      <if test="sendtime != null">
+        sendtime = #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="specialremark != null">
+        specialremark = #{specialremark,jdbcType=NVARCHAR},
+      </if>
+      <if test="creattaime != null">
+        creattaime = #{creattaime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatuser != null">
+        creatuser = #{creatuser,jdbcType=NVARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where BID = #{bid,jdbcType=NVARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.szjc.OrderManag.bean.SaleorderB">
+    update saleorder_b
+    set HID = #{hid,jdbcType=NVARCHAR},
+      orderno = #{orderno,jdbcType=NVARCHAR},
+      drwno = #{drwno,jdbcType=NVARCHAR},
+      speci = #{speci,jdbcType=NVARCHAR},
+      color = #{color,jdbcType=NVARCHAR},
+      num = #{num,jdbcType=NVARCHAR},
+      price = #{price,jdbcType=NVARCHAR},
+      supplierid = #{supplierid,jdbcType=NVARCHAR},
+      sendaddr = #{sendaddr,jdbcType=NVARCHAR},
+      sendtime = #{sendtime,jdbcType=TIMESTAMP},
+      specialremark = #{specialremark,jdbcType=NVARCHAR},
+      creattaime = #{creattaime,jdbcType=TIMESTAMP},
+      creatuser = #{creatuser,jdbcType=NVARCHAR},
+      status = #{status,jdbcType=NVARCHAR}
+    where BID = #{bid,jdbcType=NVARCHAR}
+  </update>
+</mapper>

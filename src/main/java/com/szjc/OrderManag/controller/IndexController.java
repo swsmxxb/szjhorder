@@ -12,6 +12,11 @@ public class IndexController {
         return "index";
     }
 
+    @GetMapping("/")
+    public String defaultpage (Model model) {
+        return "index";
+    }
+
     @GetMapping("/tables")
     public String tables(Model model) {
         return "table_bootstrap";

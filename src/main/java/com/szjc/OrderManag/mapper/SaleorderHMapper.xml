@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.szjc.OrderManag.dao.SaleorderHMapper">
+  <resultMap id="BaseResultMap" type="com.szjc.OrderManag.bean.SaleorderH">
+    <id column="HID" jdbcType="VARCHAR" property="hid" />
+    <result column="purchaseno" jdbcType="VARCHAR" property="purchaseno" />
+    <result column="orderno" jdbcType="VARCHAR" property="orderno" />
+    <result column="custommanag" jdbcType="VARCHAR" property="custommanag" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="creatuser" jdbcType="VARCHAR" property="creatuser" />
+    <result column="creattime" jdbcType="TIMESTAMP" property="creattime" />
+    <result column="customs" jdbcType="VARCHAR" property="customs" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    HID, purchaseno, orderno, custommanag, status, creatuser, creattime, customs
+  </sql>
+  <select id="selectByExample" parameterType="com.szjc.OrderManag.bean.SaleorderHExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from saleorder_h
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from saleorder_h
+    where HID = #{hid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from saleorder_h
+    where HID = #{hid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.szjc.OrderManag.bean.SaleorderHExample">
+    delete from saleorder_h
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.szjc.OrderManag.bean.SaleorderH">
+    insert into saleorder_h (HID, purchaseno, orderno, 
+      custommanag, status, creatuser, 
+      creattime, customs)
+    values (#{hid,jdbcType=VARCHAR}, #{purchaseno,jdbcType=VARCHAR}, #{orderno,jdbcType=VARCHAR}, 
+      #{custommanag,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{creatuser,jdbcType=VARCHAR}, 
+      #{creattime,jdbcType=TIMESTAMP}, #{customs,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.szjc.OrderManag.bean.SaleorderH">
+    insert into saleorder_h
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="hid != null">
+        HID,
+      </if>
+      <if test="purchaseno != null">
+        purchaseno,
+      </if>
+      <if test="orderno != null">
+        orderno,
+      </if>
+      <if test="custommanag != null">
+        custommanag,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="creatuser != null">
+        creatuser,
+      </if>
+      <if test="creattime != null">
+        creattime,
+      </if>
+      <if test="customs != null">
+        customs,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="hid != null">
+        #{hid,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseno != null">
+        #{purchaseno,jdbcType=VARCHAR},
+      </if>
+      <if test="orderno != null">
+        #{orderno,jdbcType=VARCHAR},
+      </if>
+      <if test="custommanag != null">
+        #{custommanag,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="creatuser != null">
+        #{creatuser,jdbcType=VARCHAR},
+      </if>
+      <if test="creattime != null">
+        #{creattime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="customs != null">
+        #{customs,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.szjc.OrderManag.bean.SaleorderHExample" resultType="java.lang.Long">
+    select count(*) from saleorder_h
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update saleorder_h
+    <set>
+      <if test="record.hid != null">
+        HID = #{record.hid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.purchaseno != null">
+        purchaseno = #{record.purchaseno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderno != null">
+        orderno = #{record.orderno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custommanag != null">
+        custommanag = #{record.custommanag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creatuser != null">
+        creatuser = #{record.creatuser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creattime != null">
+        creattime = #{record.creattime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.customs != null">
+        customs = #{record.customs,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update saleorder_h
+    set HID = #{record.hid,jdbcType=VARCHAR},
+      purchaseno = #{record.purchaseno,jdbcType=VARCHAR},
+      orderno = #{record.orderno,jdbcType=VARCHAR},
+      custommanag = #{record.custommanag,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      creatuser = #{record.creatuser,jdbcType=VARCHAR},
+      creattime = #{record.creattime,jdbcType=TIMESTAMP},
+      customs = #{record.customs,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.szjc.OrderManag.bean.SaleorderH">
+    update saleorder_h
+    <set>
+      <if test="purchaseno != null">
+        purchaseno = #{purchaseno,jdbcType=VARCHAR},
+      </if>
+      <if test="orderno != null">
+        orderno = #{orderno,jdbcType=VARCHAR},
+      </if>
+      <if test="custommanag != null">
+        custommanag = #{custommanag,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="creatuser != null">
+        creatuser = #{creatuser,jdbcType=VARCHAR},
+      </if>
+      <if test="creattime != null">
+        creattime = #{creattime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="customs != null">
+        customs = #{customs,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where HID = #{hid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.szjc.OrderManag.bean.SaleorderH">
+    update saleorder_h
+    set purchaseno = #{purchaseno,jdbcType=VARCHAR},
+      orderno = #{orderno,jdbcType=VARCHAR},
+      custommanag = #{custommanag,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      creatuser = #{creatuser,jdbcType=VARCHAR},
+      creattime = #{creattime,jdbcType=TIMESTAMP},
+      customs = #{customs,jdbcType=VARCHAR}
+    where HID = #{hid,jdbcType=VARCHAR}
+  </update>
+
+  <select id="searchpurchase"  parameterType="com.szjc.OrderManag.bean.SaleorderH" resultMap="BaseResultMap">
+    select
+    sah.HID
+    ,sah.purchaseno
+    ,sah.orderno
+    ,sah.custommanag
+    ,sah.status
+    ,sah.creatuser
+    ,sah.creattime
+    ,sah.customs
+    FROM saleorder_h sah
+    <if test="quickSearch != null and quickSearch !=''">
+      where sa.orderno like '%${quickSearch}%' or sah.purchaseno like '%${quickSearch}%'
+    </if>
+  </select>
+</mapper>
