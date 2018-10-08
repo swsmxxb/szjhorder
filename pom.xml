@@ -144,7 +144,7 @@
 					<!-- 是否覆盖 -->
 					<overwrite>true</overwrite>
 
-					<skip>true</skip>
+					<!--<skip>true</skip>-->
 					<!-- 自动生成的配置 -->
 					<configurationFile>src/main/resources/generatorConfig.xml</configurationFile>
 				</configuration>

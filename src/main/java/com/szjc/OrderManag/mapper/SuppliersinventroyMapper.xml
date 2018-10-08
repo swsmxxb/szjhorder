@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.szjc.OrderManag.dao.SuppliersinventroyMapper">
+  <resultMap id="BaseResultMap" type="com.szjc.OrderManag.bean.Suppliersinventroy">
+    <id column="ID" jdbcType="NVARCHAR" property="id" />
+    <result column="inventoryid" jdbcType="NVARCHAR" property="inventoryid" />
+    <result column="supplierid" jdbcType="NVARCHAR" property="supplierid" />
+    <result column="unitprice" jdbcType="DECIMAL" property="unitprice" />
+    <result column="unit" jdbcType="NVARCHAR" property="unit" />
+    <result column="specialremark" jdbcType="NVARCHAR" property="specialremark" />
+    <result column="creatuser" jdbcType="NVARCHAR" property="creatuser" />
+    <result column="creattime" jdbcType="TIMESTAMP" property="creattime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, inventoryid, supplierid, unitprice, unit, specialremark, creatuser, creattime
+  </sql>
+  <select id="selectByExample" parameterType="com.szjc.OrderManag.bean.SuppliersinventroyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from suppliersinventroy
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from suppliersinventroy
+    where ID = #{id,jdbcType=NVARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from suppliersinventroy
+    where ID = #{id,jdbcType=NVARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.szjc.OrderManag.bean.SuppliersinventroyExample">
+    delete from suppliersinventroy
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.szjc.OrderManag.bean.Suppliersinventroy">
+    insert into suppliersinventroy (ID, inventoryid, supplierid, 
+      unitprice, unit, specialremark, 
+      creatuser, creattime)
+    values (#{id,jdbcType=NVARCHAR}, #{inventoryid,jdbcType=NVARCHAR}, #{supplierid,jdbcType=NVARCHAR}, 
+      #{unitprice,jdbcType=DECIMAL}, #{unit,jdbcType=NVARCHAR}, #{specialremark,jdbcType=NVARCHAR}, 
+      #{creatuser,jdbcType=NVARCHAR}, #{creattime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.szjc.OrderManag.bean.Suppliersinventroy">
+    insert into suppliersinventroy
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="inventoryid != null">
+        inventoryid,
+      </if>
+      <if test="supplierid != null">
+        supplierid,
+      </if>
+      <if test="unitprice != null">
+        unitprice,
+      </if>
+      <if test="unit != null">
+        unit,
+      </if>
+      <if test="specialremark != null">
+        specialremark,
+      </if>
+      <if test="creatuser != null">
+        creatuser,
+      </if>
+      <if test="creattime != null">
+        creattime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=NVARCHAR},
+      </if>
+      <if test="inventoryid != null">
+        #{inventoryid,jdbcType=NVARCHAR},
+      </if>
+      <if test="supplierid != null">
+        #{supplierid,jdbcType=NVARCHAR},
+      </if>
+      <if test="unitprice != null">
+        #{unitprice,jdbcType=DECIMAL},
+      </if>
+      <if test="unit != null">
+        #{unit,jdbcType=NVARCHAR},
+      </if>
+      <if test="specialremark != null">
+        #{specialremark,jdbcType=NVARCHAR},
+      </if>
+      <if test="creatuser != null">
+        #{creatuser,jdbcType=NVARCHAR},
+      </if>
+      <if test="creattime != null">
+        #{creattime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.szjc.OrderManag.bean.SuppliersinventroyExample" resultType="java.lang.Long">
+    select count(*) from suppliersinventroy
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update suppliersinventroy
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.inventoryid != null">
+        inventoryid = #{record.inventoryid,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.supplierid != null">
+        supplierid = #{record.supplierid,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.unitprice != null">
+        unitprice = #{record.unitprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.unit != null">
+        unit = #{record.unit,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.specialremark != null">
+        specialremark = #{record.specialremark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.creatuser != null">
+        creatuser = #{record.creatuser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.creattime != null">
+        creattime = #{record.creattime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update suppliersinventroy
+    set ID = #{record.id,jdbcType=NVARCHAR},
+      inventoryid = #{record.inventoryid,jdbcType=NVARCHAR},
+      supplierid = #{record.supplierid,jdbcType=NVARCHAR},
+      unitprice = #{record.unitprice,jdbcType=DECIMAL},
+      unit = #{record.unit,jdbcType=NVARCHAR},
+      specialremark = #{record.specialremark,jdbcType=NVARCHAR},
+      creatuser = #{record.creatuser,jdbcType=NVARCHAR},
+      creattime = #{record.creattime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.szjc.OrderManag.bean.Suppliersinventroy">
+    update suppliersinventroy
+    <set>
+      <if test="inventoryid != null">
+        inventoryid = #{inventoryid,jdbcType=NVARCHAR},
+      </if>
+      <if test="supplierid != null">
+        supplierid = #{supplierid,jdbcType=NVARCHAR},
+      </if>
+      <if test="unitprice != null">
+        unitprice = #{unitprice,jdbcType=DECIMAL},
+      </if>
+      <if test="unit != null">
+        unit = #{unit,jdbcType=NVARCHAR},
+      </if>
+      <if test="specialremark != null">
+        specialremark = #{specialremark,jdbcType=NVARCHAR},
+      </if>
+      <if test="creatuser != null">
+        creatuser = #{creatuser,jdbcType=NVARCHAR},
+      </if>
+      <if test="creattime != null">
+        creattime = #{creattime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=NVARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.szjc.OrderManag.bean.Suppliersinventroy">
+    update suppliersinventroy
+    set inventoryid = #{inventoryid,jdbcType=NVARCHAR},
+      supplierid = #{supplierid,jdbcType=NVARCHAR},
+      unitprice = #{unitprice,jdbcType=DECIMAL},
+      unit = #{unit,jdbcType=NVARCHAR},
+      specialremark = #{specialremark,jdbcType=NVARCHAR},
+      creatuser = #{creatuser,jdbcType=NVARCHAR},
+      creattime = #{creattime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=NVARCHAR}
+  </update>
+
+  <select id="searchSuppliersinventroy" parameterType="com.szjc.OrderManag.bean.Suppliersinventroy" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from suppliersinventroy
+    where inventoryid like  '%${quickSearch}%'  or supplierid  like  '%${quickSearch}%'
+  </select>
+</mapper>

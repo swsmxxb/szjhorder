@@ -1,7 +1,7 @@
 $(document).ready(function () {
-    $('#purchaseinfo').bootstrapTable('resetView');
+    $('#userinfo').bootstrapTable('resetView');
     // purchasequery();
-    inventroyinfolist();
+    queryinfolist();
 });
 $("#addsendtime").datetimepicker({  // 日期框
     format: "yyyy-mm-dd",
@@ -24,10 +24,10 @@ function editinfo(getid) {
 
 
 // 查询
-function inventroyinfolist(getparam){
+function queryinfolist(getparam){
     $.ajax({
         type:"POST",
-        url:'/searchInventory',
+        url:'/searchuserinfo',
         contentType: 'application/json',
         async: false,
         data:JSON.stringify({quickSearch : getparam}),
@@ -35,7 +35,7 @@ function inventroyinfolist(getparam){
             //  var dataJson = eval('(' + data.data + ')');
             //  console.log(data.data);
             var datalist = data.data;
-            $('#inventoryinfo').bootstrapTable('destroy').bootstrapTable('resetView').bootstrapTable({    //'destroy' 是必须要加的==作用是加载服务器//    //数据，初始化表格的内容Destroy the bootstrap table.
+            $('#userinfo').bootstrapTable('destroy').bootstrapTable('resetView').bootstrapTable({    //'destroy' 是必须要加的==作用是加载服务器//    //数据，初始化表格的内容Destroy the bootstrap table.
                 data:datalist,     //datalist  即为需要的数据
                 dataType:'json',
                 // data_locale:"zh-US",    //转换中文 但是没有什么用处
@@ -58,27 +58,20 @@ function inventroyinfolist(getparam){
                             return index+1;
                         }
                     }, {
-                        field: 'inventorycode',
-                        title: '编码',
+                        field: 'username',
+                        title: '用户名',
                         halign: 'center',
                         align: 'center',
                         visible: true,
                         sortable: true
                     }, {
-                        field: 'inventoryname',
-                        title: '品名',
+                        field: 'personname',
+                        title: '姓名',
                         halign: 'center',
                         align: 'center',
                         visible: true,
                         sortable: true
                         // formatter: statusFormatter
-                    },{
-                        field: 'speci',
-                        title: '规格',
-                        halign: 'center',
-                        align: 'center',
-                        visible: true,
-                        sortable: true
                     },{
                         field: 'creattime',
                         title: '创建时间',
@@ -107,19 +100,19 @@ function inventroyinfolist(getparam){
 }
 
 // 新增
-function saveinventorylist(){
-    var addinventorycode=$("#addinventorycode").val();
-    var addinventoryname=$("#addinventoryname").val();
-    var addspeci=$("#addspeci").val();
+function saveuserinfo(){
+    var addusername=$("#addusername").val();
+    var addpassword=$("#addpassword").val();
+    var addpersonname=$("#addpersonname").val();
     $.ajax({
         type:"POST",
-        url:'/addinventoryinfo',
+        url:'/adduserinfo',
         contentType: 'application/json',
-        data:JSON.stringify({inventorycode :addinventorycode,inventoryname:addinventoryname,speci:addspeci}),
+        data:JSON.stringify({username :addusername,password:addpassword,personname:addpersonname}),
         success:function(data){
             $('#inventoryadd').modal('hide')
             ZENG.msgbox.show("保存成功！", 4,1500);
-            inventroyinfolist();
+            queryinfolist();
             // console.log(data);
         },error:function(data){
             ZENG.msgbox.show("服务器异常！", 5,2000);

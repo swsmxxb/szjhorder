@@ -1,7 +1,7 @@
 $(document).ready(function () {
-    $('#purchaseinfo').bootstrapTable('resetView');
+    $('#suppliersinventroy').bootstrapTable('resetView');
     // purchasequery();
-    inventroyinfolist();
+    suppliersinventroylist();
 });
 $("#addsendtime").datetimepicker({  // 日期框
     format: "yyyy-mm-dd",
@@ -24,10 +24,10 @@ function editinfo(getid) {
 
 
 // 查询
-function inventroyinfolist(getparam){
+function suppliersinventroylist(getparam){
     $.ajax({
         type:"POST",
-        url:'/searchInventory',
+        url:'/searchSuppliersinventroy',
         contentType: 'application/json',
         async: false,
         data:JSON.stringify({quickSearch : getparam}),
@@ -35,7 +35,7 @@ function inventroyinfolist(getparam){
             //  var dataJson = eval('(' + data.data + ')');
             //  console.log(data.data);
             var datalist = data.data;
-            $('#inventoryinfo').bootstrapTable('destroy').bootstrapTable('resetView').bootstrapTable({    //'destroy' 是必须要加的==作用是加载服务器//    //数据，初始化表格的内容Destroy the bootstrap table.
+            $('#suppliersinventroy').bootstrapTable('destroy').bootstrapTable('resetView').bootstrapTable({    //'destroy' 是必须要加的==作用是加载服务器//    //数据，初始化表格的内容Destroy the bootstrap table.
                 data:datalist,     //datalist  即为需要的数据
                 dataType:'json',
                 // data_locale:"zh-US",    //转换中文 但是没有什么用处
