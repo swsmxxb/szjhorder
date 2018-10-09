@@ -135,16 +135,18 @@ function purchaselist(getparam){
                         align: 'center',
                         visible: true,
                         sortable: true
-                    },{
-                        field: 'opation',
-                        title: '操作',
-                        halign: 'center',
-                        align: 'center',
-                        visible: true,
-                        formatter: function statusFormatter(value, row, index){
-                            return "<a href=\"javascript:editinfo('"+row.id+"','"+row.orderno+"','"+row.drwno+"','"+row.num+"')\">编辑</a> | <a href=\"javascript:printinfo('"+row.id+"')\">打印</a>";
-                        }
-                    },]
+                    }
+                    // ,{
+                    //     field: 'opation',
+                    //     title: '操作',
+                    //     halign: 'center',
+                    //     align: 'center',
+                    //     visible: true,
+                    //     formatter: function statusFormatter(value, row, index){
+                    //         return "<a href=\"javascript:editinfo('"+row.id+"','"+row.orderno+"','"+row.drwno+"','"+row.num+"')\">编辑</a> | <a href=\"javascript:printinfo('"+row.id+"')\">打印</a>";
+                    //     }
+                    // },
+                ]
 
             });
 

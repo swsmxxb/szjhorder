@@ -7,6 +7,8 @@ import com.szjc.OrderManag.service.baseinfo.PurchaseorderHService;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 import java.util.List;
 
@@ -64,7 +66,23 @@ public class PurchaseorderHImpl implements PurchaseorderHService<PurchaseorderH,
 
     @Override
     public int updateByPrimaryKeySelective(PurchaseorderH record) {
-        return 0;
+        {
+            try {
+                Method updateByPrimaryKeySelective = purchaseorderHMapper.getClass().getDeclaredMethod("updateByPrimaryKeySelective", record.getClass());
+                Object result = updateByPrimaryKeySelective.invoke(purchaseorderHMapper, record);
+                return Integer.parseInt(result.toString());
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return 0;
+//        return mapper.updateByPrimaryKeySelective(record);
+        }
     }
 
     @Override

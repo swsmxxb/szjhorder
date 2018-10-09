@@ -31,4 +31,10 @@ public class IndexController {
     public String loginpage(Model model) {
         return "login";
     }
+
+    @GetMapping("/dashboard")
+    public String dashboard(Model model) {
+        return "graph_echarts";
+    }
+
 }
