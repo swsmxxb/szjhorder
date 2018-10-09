@@ -8,6 +8,8 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.List;
 
 @Service
@@ -34,6 +36,19 @@ public class SaleorderHImpl implements SaleorderHService<SaleorderH, SaleorderHE
 
     @Override
     public int insert(SaleorderH record) {
+        try {
+            Method insert = saleorderHMapper.getClass().getDeclaredMethod("insert", record.getClass());
+            Object result = insert.invoke(saleorderHMapper, record);
+            return Integer.parseInt(result.toString());
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return 0;
     }
 

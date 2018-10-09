@@ -63,13 +63,12 @@ public class PurchaseController {
     @RequestMapping(value = "/addpurchase", method = RequestMethod.POST)
     @ResponseBody
     public Result  addpurchase(@RequestBody SaleorderH staff) {
-     //   System.out.println(staff);
 //        Saleorder staff = new Saleorder();
         String uuid = UUID.randomUUID().toString().replace("-", "").toLowerCase();
         staff.setHid(uuid);
-//        staff.setOrderno((String) map.get("orderno"));
-//        staff.setDrwno((String) map.get("drwno"));
-//        staff.setSendtime(new Date());
+       staff.setPurchaseno("1");
+        staff.setStatus("1");
+        staff.setCustoms("1");
         staff.setCreatuser("admin");
         int list = saleorderHService.insert(staff);
 

@@ -32,7 +32,7 @@
         </div>
         <div class="col-sm-8">
             <div class="title-action">
-                <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#orderadd"><i class="fa fa-plus"></i>&nbsp;新增</button>
+                <button class="btn btn-primary " type="button" onclick="eddevent()"><i class="fa fa-plus"></i>&nbsp;新增</button>
                 <!--<button class="btn btn-warning " type="button" onClick="delinfo()"><i class="fa fa-warning"></i> <span class="bold">删除</span></button>-->
             </div>
         </div>
@@ -85,48 +85,38 @@
                             <label class="col-sm-3 control-label">订单号：</label>
 
                             <div class="col-sm-8">
-                                <input type="text" placeholder="订单号" class="form-control" id="addorderno" >
+                                <input type="text" placeholder="订单号" class="form-control" id="addorderno" required="">
                                 <!--<span class="help-block m-b-none">请输入您注册时所填的E-mail</span>-->
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">图纸号：</label>
+                            <label class="col-sm-3 control-label">客户担当：</label>
                             <div class="col-sm-8">
 
-                                <select class="selectpicker form-control" data-live-search="true" id="adddrwno">
+                                <select class="selectpicker form-control" data-live-search="true" id="addcustommanag">
                                 </select>
 
                                 <!--<input type="text" placeholder="图纸号" class="form-control" >-->
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">类型：</label>
-                            <div class="col-sm-8">
-                                <select class="selectpicker form-control" data-live-search="true" id="addtypes">
-                                    <option value="">-请选择-</option>
-                                    <option value="1">类型1</option>
-                                    <option value="1">类型2</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">规格：</label>
-                            <div class="col-sm-8">
-                                <input type="text" placeholder="规格" class="form-control" id="addspeci" >
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">颜色：</label>
-                            <div class="col-sm-8">
-                                <input type="text" placeholder="颜色" class="form-control" id="addcolor" >
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">采购数量：</label>
-                            <div class="col-sm-8">
-                                <input type="number" placeholder="采购数量" class="form-control" id="addnum" >
-                            </div>
-                        </div>
+                        <!--<div class="form-group">-->
+                            <!--<label class="col-sm-3 control-label">规格：</label>-->
+                            <!--<div class="col-sm-8">-->
+                                <!--<input type="text" placeholder="规格" class="form-control" id="addspeci" >-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label class="col-sm-3 control-label">颜色：</label>-->
+                            <!--<div class="col-sm-8">-->
+                                <!--<input type="text" placeholder="颜色" class="form-control" id="addcolor" >-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label class="col-sm-3 control-label">采购数量：</label>-->
+                            <!--<div class="col-sm-8">-->
+                                <!--<input type="number" placeholder="采购数量" class="form-control" id="addnum" >-->
+                            <!--</div>-->
+                        <!--</div>-->
                         <div class="form-group">
                             <label class="col-sm-3 control-label">交货日期：</label>
                             <div class="col-sm-8">
@@ -134,6 +124,14 @@
                             </div>
                         </div>
                     </form>
+
+                    <hr style="margin-top: 5px" />
+                    <div id="addtrdiv" style="margin-top:-15px; width: 8%; float: right;">
+                        <button type="button" class="btn btn-info" onclick="addtr()" style="margin-bottom:5px;">添加</button>
+                    </div>
+                    <table class="table  table-bordered" id="para_table">
+
+                    </table>
                 </div>
 
                 <div class="modal-footer">

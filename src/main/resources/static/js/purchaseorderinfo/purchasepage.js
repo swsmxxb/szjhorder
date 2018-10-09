@@ -1,7 +1,11 @@
+var idcount;
+var inventroylist;
 $(document).ready(function () {
     $('#purchaseinfo').bootstrapTable('resetView');
    // purchasequery();
-    Bindselected("#adddrwno","search");
+    Bindselected();
+    Bindselected2("#addcustommanag","search");
+
     purchaselist();
 });
 $("#addsendtime").datetimepicker({  // 日期框
@@ -106,13 +110,6 @@ function purchaselist(getparam){
                     }, {
                         field: 'orderno',
                         title: '订单号',
-                        halign: 'center',
-                        align: 'center',
-                        visible: true,
-                        sortable: true
-                    }, {
-                        field: 'customs',
-                        title: '客户',
                         halign: 'center',
                         align: 'center',
                         visible: true,
@@ -264,17 +261,14 @@ InitSubTable = function (index, row, $detail) {
 // 新增
 function saveorderlist(){
     var addorderno=$("#addorderno").val();
-    var adddrwno=$("#adddrwno").val();
-    var addspeci=$("#addspeci").val();
-    var addcolor=$("#addcolor").val();
-    var addnum=$("#addnum").val();
+    var addcustommanag=$("#addcustommanag").val();
     var addsendtime=$("#addsendtime").val();
       console.log(addsendtime);
     $.ajax({
         type:"POST",
         url:'/addpurchase',
         contentType: 'application/json',
-        data:JSON.stringify({orderno :addorderno,drwno:adddrwno,speci:addspeci,color:addcolor,num:addnum,sendtime:addsendtime}),
+        data:JSON.stringify({orderno :addorderno,custommanag:addcustommanag,sendtime:addsendtime}),
         success:function(data){
             $('#orderadd').modal('hide');
             ZENG.msgbox.show("保存成功！", 4,1500);
@@ -289,9 +283,26 @@ function saveorderlist(){
  }
 
  // 下拉框绑定
-function Bindselected(selector,entry) {
+function Bindselected() {
     $.ajax({
         url: "/searchInventory",
+        type: "POST",
+        async: false,
+        contentType: 'application/json',
+        data:JSON.stringify({quickSearch : ""}),
+        success: function (data) {
+            inventroylist=data.data;
+           // console.log(inventroylist)
+        },
+        error: function (event, XMLHttpRequest, ajaxOptions, thrownError) {
+            ZENG.msgbox.show("服务器异常！", 5,1500);
+        }
+    })
+          }
+
+function Bindselected2(selector,entry) {
+    $.ajax({
+        url: "/searchuserinfo",
         type: "POST",
         async: false,
         contentType: 'application/json',
@@ -303,7 +314,7 @@ function Bindselected(selector,entry) {
                 operationName.append("<option value=''>请选择</option>");
             }
             for (var i = 0; i < data.data.length; i++) {
-                operationName.append("<option value='" + data.data[i].id + "'>" + data.data[i].inventorycode + "</option>");
+                operationName.append("<option value='" + data.data[i].uid + "'>" + data.data[i].personname + "</option>");
             }
             $(selector).selectpicker('refresh');
         },
@@ -311,7 +322,8 @@ function Bindselected(selector,entry) {
             ZENG.msgbox.show("服务器异常！", 5,1500);
         }
     })
-          }
+}
+
 
 $('#adddrwno').change(function(){
     $.ajax({
@@ -329,3 +341,164 @@ $('#adddrwno').change(function(){
     })
 
 });
+
+function eddevent() {
+    idcount = 0;
+    $("#para_table").text("");
+    // $("#para_table").empty();
+    var pi = $(
+        "<tr>\n" +
+        "                        <th style=\"text-align:center\" width=\"100\">序号</th>\n" +
+        "                        <th style=\"text-align:center\" width=\"200\">图纸号</th>\n" +
+        "                        <th style=\"text-align:center\" width=\"200\">规格</th>\n" +
+        "                        <th style=\"text-align:center\" width=\"200\">颜色</th>\n" +
+        "                        <th style=\"text-align:center\" width=\"200\">用料</th>\n" +
+        "                        <th style=\"text-align:center\" width=\"200\">采购数量</th>\n" +
+        "                        <th style=\"text-align:center\" width=\"80\">编辑</th>\n" +
+        "                    </tr>\n"
+        +
+        "                    <tr>\n" +
+        "                        <td id=\"a0\" style=\"text-align:center; \" >1</td>\n" +
+        "                        <td id=\"b0\" style=\"text-align:center; \" >" + "<select id=\"bs0\" class=\"form-control selectpicker\" data-live-search=\"true\" required></select>" + "</td>\n" +
+        "                        <td id=\"c0\" style=\"text-align:center; \" ></td>\n" +
+        "                        <td id=\"f0\" style=\"text-align:center; \" ></td>\n" +
+        "                        <td id=\"g0\" style=\"text-align:center; \" ></td>\n" +
+        "                        <td id=\"d0\" style=\"text-align:center; \" onclick=\"tdclick(this)\"></td>\n" +
+        "                        <td id=\"e0\"  style=\"text-align:center; \" onclick=\"deletetr(this)\">\n" +
+        "                            <button type=\"button\"  class=\"btn btn-xs btn-link\">删除</button>\n" +
+        "                        </td>\n" +
+        "                    </tr>"
+    );
+
+    $("#para_table").append(pi);
+    equipCodeBind("#bs0");
+    $("#bs0").change(function () {
+        //alert($("#bs0").val());
+        var id = $("#bs0").val();
+        for (var j = 0; j < inventroylist.length; j++) {
+            if (inventroylist[j].id == id) {
+                $("#c0").text(inventroylist[j].speci);
+                $("#f0").text(inventroylist[j].color);
+                $("#g0").text(inventroylist[j].material);
+                return;
+            }
+        }
+    });
+    $("#orderadd").modal('show');
+}
+
+// 对于增加的列的绑定
+function chooseName(object) {
+    var s = $(object);
+    var index = object.id.charAt(object.id.length-1)
+    var id = s.val();
+    for (var j = 0; j < inventroylist.length; j++) {
+        if (inventroylist[j].id == id) {
+            $("#c"+ index).text(inventroylist[j].speci);
+            $("#f"+ index).text(inventroylist[j].color);
+            $("#g"+ index).text(inventroylist[j].material);
+            return;
+        }
+    }
+}
+
+function equipCodeBind(selector) {
+    // idcount = 0;
+    var data = inventroylist;
+    var operationName = $(selector);
+    operationName.empty();
+    operationName.append("<option value=''>请选择</option>");
+    for (var i = 0; i < data.length; i++) {
+        operationName.append("<option value='" + data[i].id + "'>" + data[i].inventorycode + "</option>");
+    }
+    $(selector).selectpicker('refresh');
+}
+
+
+function addtr() {
+    console.log("add1:"+idcount)
+    idcount = idcount + 1;
+    console.log("add2:"+idcount)
+    var table = $("#para_table");
+    var tr = $("<tr>" +
+        "<td id='a" + idcount + "' align='center' >" + "1</td>" +
+        "<td id='b" + idcount + "' align='center'>" + "<select id='bs" + idcount + "' onchange='chooseName(this)' class='form-control selectpicker' data-live-search='true' required></select>" + "</td>" +
+        "<td id='c" + idcount + "' align='center'>" + "</td>" +
+        "<td id='f" + idcount + "' align='center'>" + "</td>" +
+        "<td id='g" + idcount + "' align='center'>" + "</td>" +
+        "<td id='d" + idcount + "' align='center' onclick='tdclick(this)'>" + "</td>" +
+        "<td id='e" + idcount + "' align='center' onclick='deletetr(this)'><button type='button'  class='btn btn-xs btn-link' >" + "删除" + "</button></td></tr>");
+    table.append(tr);
+    equipCodeBind("#bs" + idcount);
+    //alert($("#bs2"));
+    console.log("add3:"+idcount)
+    var j = 1;
+    for (i = 0; i <= idcount; i++) {
+        //alert($("#a"+i));
+        if ($("#a" + i).text() != "") {
+            $("#a" + i).text(j);
+            j++;
+        }
+    }
+}
+
+
+// 自添项的绑定
+function tdclick(tdobject) {
+    var td = $(tdobject);
+    td.attr("onclick", "");
+    //1,取出当前td中的文本内容保存起来
+    var text = td.text();
+    //2,清空td里面的内容
+    td.html(""); //也可以用td.empty();
+    //3，建立一个文本框，也就是input的元素节点
+    var input = $("<input>");
+    //4，设置文本框的值是保存起来的文本内容
+    input.attr("value", text);
+    input.attr("type","number");
+    input.attr("style","width: 100px;");
+    input.bind("blur", function () {
+        var inputnode = $(this);
+        var inputtext = inputnode.val();
+        var tdNode = inputnode.parent();
+        tdNode.html(inputtext);
+        tdNode.click(tdclick);
+        td.attr("onclick", "tdclick(this)");
+    });
+    input.keyup(function (event) {
+        var myEvent = event || window.event;
+        var kcode = myEvent.keyCode;
+        if (kcode == 13) {
+            var inputnode = $(this);
+            var inputtext = inputnode.val();
+            var tdNode = inputnode.parent();
+            tdNode.html(inputtext);
+            tdNode.click(tdclick);
+        }
+    });
+    //5，将文本框加入到td中
+    td.append(input);
+    var t = input.val();
+    input.val("").focus().val(t);
+//              input.focus();
+    //6,清除点击事件
+    td.unbind("click");
+}
+// 删除行
+function deletetr(tdobject) {
+
+    var td = $(tdobject);
+    td.parents("tr").remove();
+    var j = 1;
+    var trcount=$("#para_table tbody").children('tr').length-2;
+    console.log(trcount)
+    for (i = 0; i <= idcount; i++) {
+
+        //alert($("#a"+i));
+        if ($("#a" + i).text() != "") {
+            $("#a" + i).text(j);
+            j++;
+        }
+    }
+
+}

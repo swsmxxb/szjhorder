@@ -104,11 +104,11 @@
   </delete>
   <insert id="insert" parameterType="com.szjc.OrderManag.bean.SaleorderH">
     insert into saleorder_h (HID, purchaseno, orderno, 
-      custommanag, status, creatuser, 
-      creattime, customs)
+      custommanag, status, creatuser
+      , customs)
     values (#{hid,jdbcType=VARCHAR}, #{purchaseno,jdbcType=VARCHAR}, #{orderno,jdbcType=VARCHAR}, 
       #{custommanag,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{creatuser,jdbcType=VARCHAR}, 
-      #{creattime,jdbcType=TIMESTAMP}, #{customs,jdbcType=VARCHAR})
+     #{customs,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.szjc.OrderManag.bean.SaleorderH">
     insert into saleorder_h
