@@ -385,6 +385,146 @@ public class InventoryinfoExample {
             return (Criteria) this;
         }
 
+        public Criteria andMaterialIsNull() {
+            addCriterion("material is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialIsNotNull() {
+            addCriterion("material is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialEqualTo(String value) {
+            addCriterion("material =", value, "material");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialNotEqualTo(String value) {
+            addCriterion("material <>", value, "material");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialGreaterThan(String value) {
+            addCriterion("material >", value, "material");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialGreaterThanOrEqualTo(String value) {
+            addCriterion("material >=", value, "material");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialLessThan(String value) {
+            addCriterion("material <", value, "material");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialLessThanOrEqualTo(String value) {
+            addCriterion("material <=", value, "material");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialLike(String value) {
+            addCriterion("material like", value, "material");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialNotLike(String value) {
+            addCriterion("material not like", value, "material");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialIn(List<String> values) {
+            addCriterion("material in", values, "material");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialNotIn(List<String> values) {
+            addCriterion("material not in", values, "material");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialBetween(String value1, String value2) {
+            addCriterion("material between", value1, value2, "material");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialNotBetween(String value1, String value2) {
+            addCriterion("material not between", value1, value2, "material");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorIsNull() {
+            addCriterion("color is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorIsNotNull() {
+            addCriterion("color is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorEqualTo(String value) {
+            addCriterion("color =", value, "color");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorNotEqualTo(String value) {
+            addCriterion("color <>", value, "color");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorGreaterThan(String value) {
+            addCriterion("color >", value, "color");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorGreaterThanOrEqualTo(String value) {
+            addCriterion("color >=", value, "color");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorLessThan(String value) {
+            addCriterion("color <", value, "color");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorLessThanOrEqualTo(String value) {
+            addCriterion("color <=", value, "color");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorLike(String value) {
+            addCriterion("color like", value, "color");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorNotLike(String value) {
+            addCriterion("color not like", value, "color");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorIn(List<String> values) {
+            addCriterion("color in", values, "color");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorNotIn(List<String> values) {
+            addCriterion("color not in", values, "color");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorBetween(String value1, String value2) {
+            addCriterion("color between", value1, value2, "color");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorNotBetween(String value1, String value2) {
+            addCriterion("color not between", value1, value2, "color");
+            return (Criteria) this;
+        }
+
         public Criteria andCreattimeIsNull() {
             addCriterion("creattime is null");
             return (Criteria) this;
@@ -442,6 +582,76 @@ public class InventoryinfoExample {
 
         public Criteria andCreattimeNotBetween(Date value1, Date value2) {
             addCriterion("creattime not between", value1, value2, "creattime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatuserIsNull() {
+            addCriterion("creatuser is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatuserIsNotNull() {
+            addCriterion("creatuser is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatuserEqualTo(String value) {
+            addCriterion("creatuser =", value, "creatuser");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatuserNotEqualTo(String value) {
+            addCriterion("creatuser <>", value, "creatuser");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatuserGreaterThan(String value) {
+            addCriterion("creatuser >", value, "creatuser");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatuserGreaterThanOrEqualTo(String value) {
+            addCriterion("creatuser >=", value, "creatuser");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatuserLessThan(String value) {
+            addCriterion("creatuser <", value, "creatuser");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatuserLessThanOrEqualTo(String value) {
+            addCriterion("creatuser <=", value, "creatuser");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatuserLike(String value) {
+            addCriterion("creatuser like", value, "creatuser");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatuserNotLike(String value) {
+            addCriterion("creatuser not like", value, "creatuser");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatuserIn(List<String> values) {
+            addCriterion("creatuser in", values, "creatuser");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatuserNotIn(List<String> values) {
+            addCriterion("creatuser not in", values, "creatuser");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatuserBetween(String value1, String value2) {
+            addCriterion("creatuser between", value1, value2, "creatuser");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatuserNotBetween(String value1, String value2) {
+            addCriterion("creatuser not between", value1, value2, "creatuser");
             return (Criteria) this;
         }
     }

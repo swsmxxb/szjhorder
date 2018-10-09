@@ -86,7 +86,7 @@ function queryinfolist(getparam){
                         align: 'center',
                         visible: true,
                         formatter: function statusFormatter(value, row, index){
-                            return "<a href=\"javascript:editinfo('"+row.id+"')\">编辑</a>";
+                            return "<a href=\"javascript:editinfo('"+row.id+"')\"></a>";
                         }
                     },]
 

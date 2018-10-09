@@ -6,6 +6,8 @@
     <result column="inventorycode" jdbcType="NVARCHAR" property="inventorycode" />
     <result column="inventoryname" jdbcType="NVARCHAR" property="inventoryname" />
     <result column="speci" jdbcType="NVARCHAR" property="speci" />
+    <result column="material" jdbcType="NVARCHAR" property="material" />
+    <result column="color" jdbcType="NVARCHAR" property="color" />
     <result column="creattime" jdbcType="TIMESTAMP" property="creattime" />
     <result column="creatuser" jdbcType="NVARCHAR" property="creatuser" />
   </resultMap>
@@ -68,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ID, inventorycode, inventoryname, speci, creattime, creatuser
+    ID, inventorycode, inventoryname, speci, material, color, creattime, creatuser
   </sql>
   <select id="selectByExample" parameterType="com.szjc.OrderManag.bean.InventoryinfoExample" resultMap="BaseResultMap">
     select
@@ -102,9 +104,11 @@
   </delete>
   <insert id="insert" parameterType="com.szjc.OrderManag.bean.Inventoryinfo">
     insert into inventoryinfo (ID, inventorycode, inventoryname, 
-      speci, creatuser)
+      speci, material, color, 
+      creattime, creatuser)
     values (#{id,jdbcType=NVARCHAR}, #{inventorycode,jdbcType=NVARCHAR}, #{inventoryname,jdbcType=NVARCHAR}, 
-      #{speci,jdbcType=NVARCHAR}, #{creatuser,jdbcType=NVARCHAR})
+      #{speci,jdbcType=NVARCHAR}, #{material,jdbcType=NVARCHAR}, #{color,jdbcType=NVARCHAR}, 
+      #{creattime,jdbcType=TIMESTAMP}, #{creatuser,jdbcType=NVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.szjc.OrderManag.bean.Inventoryinfo">
     insert into inventoryinfo
@@ -121,9 +125,15 @@
       <if test="speci != null">
         speci,
       </if>
+      <if test="material != null">
+        material,
+      </if>
+      <if test="color != null">
+        color,
+      </if>
       <if test="creattime != null">
-      creattime,
-    </if>
+        creattime,
+      </if>
       <if test="creatuser != null">
         creatuser,
       </if>
@@ -141,13 +151,18 @@
       <if test="speci != null">
         #{speci,jdbcType=NVARCHAR},
       </if>
+      <if test="material != null">
+        #{material,jdbcType=NVARCHAR},
+      </if>
+      <if test="color != null">
+        #{color,jdbcType=NVARCHAR},
+      </if>
       <if test="creattime != null">
         #{creattime,jdbcType=TIMESTAMP},
       </if>
       <if test="creatuser != null">
         #{creatuser,jdbcType=NVARCHAR},
       </if>
-
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.szjc.OrderManag.bean.InventoryinfoExample" resultType="java.lang.Long">
@@ -171,11 +186,17 @@
       <if test="record.speci != null">
         speci = #{record.speci,jdbcType=NVARCHAR},
       </if>
+      <if test="record.material != null">
+        material = #{record.material,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.color != null">
+        color = #{record.color,jdbcType=NVARCHAR},
+      </if>
       <if test="record.creattime != null">
         creattime = #{record.creattime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.creatuser != null">
-        speci = #{record.creatuser,jdbcType=NVARCHAR},
+        creatuser = #{record.creatuser,jdbcType=NVARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -188,8 +209,10 @@
       inventorycode = #{record.inventorycode,jdbcType=NVARCHAR},
       inventoryname = #{record.inventoryname,jdbcType=NVARCHAR},
       speci = #{record.speci,jdbcType=NVARCHAR},
+      material = #{record.material,jdbcType=NVARCHAR},
+      color = #{record.color,jdbcType=NVARCHAR},
       creattime = #{record.creattime,jdbcType=TIMESTAMP},
-    creatuser = #{record.creatuser,jdbcType=NVARCHAR}
+      creatuser = #{record.creatuser,jdbcType=NVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -206,11 +229,17 @@
       <if test="speci != null">
         speci = #{speci,jdbcType=NVARCHAR},
       </if>
+      <if test="material != null">
+        material = #{material,jdbcType=NVARCHAR},
+      </if>
+      <if test="color != null">
+        color = #{color,jdbcType=NVARCHAR},
+      </if>
       <if test="creattime != null">
         creattime = #{creattime,jdbcType=TIMESTAMP},
       </if>
       <if test="creatuser != null">
-        speci = #{creatuser,jdbcType=NVARCHAR},
+        creatuser = #{creatuser,jdbcType=NVARCHAR},
       </if>
     </set>
     where ID = #{id,jdbcType=NVARCHAR}
@@ -220,8 +249,10 @@
     set inventorycode = #{inventorycode,jdbcType=NVARCHAR},
       inventoryname = #{inventoryname,jdbcType=NVARCHAR},
       speci = #{speci,jdbcType=NVARCHAR},
+      material = #{material,jdbcType=NVARCHAR},
+      color = #{color,jdbcType=NVARCHAR},
       creattime = #{creattime,jdbcType=TIMESTAMP},
-      creatuser = #{creatuser,jdbcType=NVARCHAR},
+      creatuser = #{creatuser,jdbcType=NVARCHAR}
     where ID = #{id,jdbcType=NVARCHAR}
   </update>
 

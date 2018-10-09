@@ -15,7 +15,7 @@ import java.util.List;
 public class SuppliersinventroyImpl implements SuppliersinventroyService<Suppliersinventroy, SuppliersinventroyExample> {
 
     @Autowired
-    SuppliersinventroyMapper suppliersinventroyMapper;
+    private SuppliersinventroyMapper suppliersinventroyMapper;
 
     @Override
     public long countByExample(SuppliersinventroyExample example) {

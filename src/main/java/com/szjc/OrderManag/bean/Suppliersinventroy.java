@@ -20,6 +20,26 @@ public class Suppliersinventroy {
 
     private String creatuser;
 
+    // 物料信息
+    private String inventorycode;
+
+    private String inventoryname;
+
+    private String speci;
+
+    private String material;
+
+    private String color;
+
+    // 供应商信息
+
+    private String suppliercode;
+
+    private String suppliername;
+
+    private String suppliershotname;
+
+    //
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date creattime;
 
@@ -85,5 +105,69 @@ public class Suppliersinventroy {
 
     public void setCreattime(Date creattime) {
         this.creattime = creattime;
+    }
+
+    public String getInventorycode() {
+        return inventorycode;
+    }
+
+    public void setInventorycode(String inventorycode) {
+        this.inventorycode = inventorycode == null ? null : inventorycode.trim();
+    }
+
+    public String getInventoryname() {
+        return inventoryname;
+    }
+
+    public void setInventoryname(String inventoryname) {
+        this.inventoryname = inventoryname == null ? null : inventoryname.trim();
+    }
+
+    public String getSpeci() {
+        return speci;
+    }
+
+    public void setSpeci(String speci) {
+        this.speci = speci == null ? null : speci.trim();
+    }
+
+    public String getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(String material) {
+        this.material = material == null ? null : material.trim();
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color == null ? null : color.trim();
+    }
+
+    public String getSuppliercode() {
+        return suppliercode;
+    }
+
+    public void setSuppliercode(String suppliercode) {
+        this.suppliercode = suppliercode == null ? null : suppliercode.trim();
+    }
+
+    public String getSuppliername() {
+        return suppliername;
+    }
+
+    public void setSuppliername(String suppliername) {
+        this.suppliername = suppliername == null ? null : suppliername.trim();
+    }
+
+    public String getSuppliershotname() {
+        return suppliershotname;
+    }
+
+    public void setSuppliershotname(String suppliershotname) {
+        this.suppliershotname = suppliershotname == null ? null : suppliershotname.trim();
     }
 }

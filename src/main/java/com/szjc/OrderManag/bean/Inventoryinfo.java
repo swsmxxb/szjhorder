@@ -1,7 +1,5 @@
 package com.szjc.OrderManag.bean;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.util.Date;
 
 public class Inventoryinfo {
@@ -13,7 +11,10 @@ public class Inventoryinfo {
 
     private String speci;
 
-    @JsonFormat(pattern="yyyy-MM-dd")
+    private String material;
+
+    private String color;
+
     private Date creattime;
 
     private String creatuser;
@@ -48,6 +49,22 @@ public class Inventoryinfo {
 
     public void setSpeci(String speci) {
         this.speci = speci == null ? null : speci.trim();
+    }
+
+    public String getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(String material) {
+        this.material = material == null ? null : material.trim();
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color == null ? null : color.trim();
     }
 
     public Date getCreattime() {

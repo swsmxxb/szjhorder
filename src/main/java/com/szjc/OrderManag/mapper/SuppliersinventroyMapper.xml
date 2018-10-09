@@ -10,6 +10,14 @@
     <result column="specialremark" jdbcType="NVARCHAR" property="specialremark" />
     <result column="creatuser" jdbcType="NVARCHAR" property="creatuser" />
     <result column="creattime" jdbcType="TIMESTAMP" property="creattime" />
+    <result column="inventorycode" jdbcType="NVARCHAR" property="inventorycode" />
+    <result column="inventoryname" jdbcType="NVARCHAR" property="inventoryname" />
+    <result column="speci" jdbcType="NVARCHAR" property="speci" />
+    <result column="material" jdbcType="NVARCHAR" property="material" />
+    <result column="color" jdbcType="NVARCHAR" property="color" />
+    <result column="suppliercode" jdbcType="NVARCHAR" property="suppliercode" />
+    <result column="suppliername" jdbcType="NVARCHAR" property="suppliername" />
+    <result column="suppliershotname" jdbcType="NVARCHAR" property="suppliershotname" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -256,10 +264,27 @@
     where ID = #{id,jdbcType=NVARCHAR}
   </update>
 
-  <select id="searchSuppliersinventroy" parameterType="com.szjc.OrderManag.bean.Suppliersinventroy" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from suppliersinventroy
-    where inventoryid like  '%${quickSearch}%'  or supplierid  like  '%${quickSearch}%'
+  <select id="searchsuppliersinventroy" parameterType="com.szjc.OrderManag.bean.Suppliersinventroy" resultMap="BaseResultMap">
+   SELECT
+suy.ID
+,suy.inventoryid
+,suy.supplierid
+,suy.unitprice
+,suy.unit
+,suy.specialremark
+,suy.creatuser
+,suy.creattime
+,ino.inventorycode
+,ino.inventoryname
+,ino.speci
+,ino.material
+,ino.color
+,suo.suppliercode
+,suo.suppliername
+,suo.suppliershotname
+FROM suppliersinventroy suy
+left join inventoryinfo ino on suy.inventoryid= ino.ID
+left join supplierinfo suo on suy.supplierid=suo.ID
+    where suy.inventoryid like  '%${quickSearch}%'  or suy.supplierid  like  '%${quickSearch}%'
   </select>
 </mapper>

@@ -41,12 +41,13 @@ function queryinfo(getparam){
                 dataType:'json',
                 // data_locale:"zh-US",    //转换中文 但是没有什么用处
                 pagination: true,
-                pageSize: 10,
-                pageList:[10, 20, 50, 100, 200],
+                pageSize: 20,
+                pageList:[20, 50, 100, 200],
                 pageNumber:1,
                 paginationLoop:false,
                 sortable:true,
                 pagination: true, // 是否显示分页（*）
+                height:$(window).height() - 275,
                 //这里也可以将TABLE样式中的<tr>标签里的内容挪到这里面：
                 columns: [
                     {
@@ -101,7 +102,7 @@ function queryinfo(getparam){
                         align: 'center',
                         visible: true,
                         formatter: function statusFormatter(value, row, index){
-                            return "<a href=\"javascript:editinfo('"+row.id+"')\">编辑</a>";
+                            return "<a href=\"javascript:editinfo('"+row.id+"')\"></a>";
                         }
                     },]
 

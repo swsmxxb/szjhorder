@@ -104,7 +104,7 @@ public class BaseinfoController {
 
     }
 
-    // 查询物料数据
+    // 查询供应商数据
     @RequestMapping(value = "/searchSupplier", method = RequestMethod.POST)
     @ResponseBody
     public Result searchSupplier(@RequestBody Map<String,Object> map) {
