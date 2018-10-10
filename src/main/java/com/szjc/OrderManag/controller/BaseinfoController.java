@@ -90,7 +90,6 @@ public class BaseinfoController {
     @RequestMapping(value = "/addinventoryinfo", method = RequestMethod.POST)
     @ResponseBody
     public Result  addinventoryinfo(@RequestBody Inventoryinfo staff) {
-        //   System.out.println(staff);
 //        Saleorder staff = new Saleorder();
         String uuid = UUID.randomUUID().toString().replace("-", "").toLowerCase();
         staff.setId(uuid);
@@ -99,10 +98,18 @@ public class BaseinfoController {
 //        staff.setSendtime(new Date());
         staff.setCreatuser("admin");
         int list = inventoryinfoService.insert(staff);
-
         return Result.successResult(list);
-
     }
+
+    // 编辑物料
+    @RequestMapping(value = "/editinventoryinfo", method = RequestMethod.POST)
+    @ResponseBody
+    public Result  editinventoryinfo(@RequestBody Inventoryinfo staff) {
+        int i = inventoryinfoService.updateByPrimaryKeySelective(staff);
+        return Result.successResult(i);
+    }
+
+
 
     // 查询供应商数据
     @RequestMapping(value = "/searchSupplier", method = RequestMethod.POST)
@@ -122,4 +129,6 @@ public class BaseinfoController {
         List list = suppliersinventroyService.searchsuppliersinventroy(quickSearch);
         return Result.successResult(list);
     }
+
+
 }

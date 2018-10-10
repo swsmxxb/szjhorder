@@ -1,5 +1,7 @@
 package com.szjc.OrderManag.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Inventoryinfo {
@@ -15,6 +17,7 @@ public class Inventoryinfo {
 
     private String color;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date creattime;
 
     private String creatuser;

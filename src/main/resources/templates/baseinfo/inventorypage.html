@@ -43,7 +43,14 @@
         <div class="col-sm-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-content">
-
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <label for="orderkeyword" class="sr-only">关键字</label>
+                            <input type="text" placeholder="请输入查询关键字" id="orderkeyword" class="form-control">
+                        </div>
+                        <button class="btn btn-sm btn-info" type="submit" onclick="dosearch()">查询</button>
+                        <button class="btn btn-sm btn-info" type="submit" onclick="doreset()">重置</button>
+                    </div>
 
                 </div>
             </div>
@@ -95,7 +102,18 @@
                             <input type="text" placeholder="规格" class="form-control" id="addspeci" >
                         </div>
                     </div>
-
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">颜色：</label>
+                        <div class="col-sm-8">
+                            <input type="text" placeholder="颜色" class="form-control" id="addcolor" >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">用料：</label>
+                        <div class="col-sm-8">
+                            <input type="text" placeholder="用料" class="form-control" id="addmaterial" >
+                        </div>
+                    </div>
                 </form>
             </div>
 
@@ -107,6 +125,58 @@
     </div>
 </div>
 
+
+<div class="modal inmodal fade" id="inventoryedit" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <small class="font-bold">物料编辑</small>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">物料编码：</label>
+                        <input type="hidden" id="editinventoryid">
+                        <div class="col-sm-8">
+                            <input type="text" placeholder="物料编码" class="form-control" id="editinventorycode" >
+                            <!--<span class="help-block m-b-none">请输入您注册时所填的E-mail</span>-->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">物料名称：</label>
+                        <div class="col-sm-8">
+                            <input type="text" placeholder="物料名称" class="form-control" id="editinventoryname" >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">规格：</label>
+                        <div class="col-sm-8">
+                            <input type="text" placeholder="规格" class="form-control" id="editspeci" >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">颜色：</label>
+                        <div class="col-sm-8">
+                            <input type="text" placeholder="颜色" class="form-control" id="editcolor" >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">用料：</label>
+                        <div class="col-sm-8">
+                            <input type="text" placeholder="用料" class="form-control" id="editmaterial" >
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onClick="editinfo()">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 

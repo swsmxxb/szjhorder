@@ -18,9 +18,8 @@ function  delinfo() {
     ZENG.msgbox.show("删除", 1,1500);
 }
 
-function editinfo(getid) {
-    ZENG.msgbox.show(getid, 1,1500);
-}
+
+
 
 
 // 查询
@@ -40,12 +39,13 @@ function inventroyinfolist(getparam){
                 dataType:'json',
                 // data_locale:"zh-US",    //转换中文 但是没有什么用处
                 pagination: true,
-                pageSize: 10,
-                pageList:[10, 20, 50, 100, 200],
+                pageSize: 20,
+                pageList:[20, 50, 100, 200],
                 pageNumber:1,
                 paginationLoop:false,
                 sortable:true,
                 pagination: true, // 是否显示分页（*）
+                height: $(window).height()-275,
                 //这里也可以将TABLE样式中的<tr>标签里的内容挪到这里面：
                 columns: [
                    {
@@ -80,6 +80,20 @@ function inventroyinfolist(getparam){
                         visible: true,
                         sortable: true
                     },{
+                        field: 'color',
+                        title: '颜色',
+                        halign: 'center',
+                        align: 'center',
+                        visible: true,
+                        sortable: true
+                    },{
+                        field: 'material',
+                        title: '用料',
+                        halign: 'center',
+                        align: 'center',
+                        visible: true,
+                        sortable: true
+                    },{
                         field: 'creattime',
                         title: '创建时间',
                         halign: 'center',
@@ -93,7 +107,7 @@ function inventroyinfolist(getparam){
                         align: 'center',
                         visible: true,
                         formatter: function statusFormatter(value, row, index){
-                            return "<a href=\"javascript:editinfo('"+row.id+"')\"></a>";
+                            return "<a href=\"javascript:editshow('"+row.id+"')\">编辑</a>";
                         }
                     },]
 
@@ -106,16 +120,19 @@ function inventroyinfolist(getparam){
     });
 }
 
+
 // 新增
 function saveinventorylist(){
     var addinventorycode=$("#addinventorycode").val();
     var addinventoryname=$("#addinventoryname").val();
     var addspeci=$("#addspeci").val();
+    var addcolor=$("#addcolor").val();
+    var addmaterial=$("#addmaterial").val();
     $.ajax({
         type:"POST",
         url:'/addinventoryinfo',
         contentType: 'application/json',
-        data:JSON.stringify({inventorycode :addinventorycode,inventoryname:addinventoryname,speci:addspeci}),
+        data:JSON.stringify({inventorycode :addinventorycode,inventoryname:addinventoryname,speci:addspeci,color:addcolor,material:addmaterial}),
         success:function(data){
             $('#inventoryadd').modal('hide')
             ZENG.msgbox.show("保存成功！", 4,1500);
@@ -128,6 +145,69 @@ function saveinventorylist(){
     })
 
 }
+
+function editshow(getid) {
+    $.ajax({
+        type:"POST",
+        url:'/searchInventory',
+        contentType: 'application/json',
+        data:JSON.stringify({quickSearch : getid}),
+        success:function(data){
+            $("#editinventoryid").val(data.data[0].id);
+           $("#editinventorycode").val(data.data[0].inventorycode);
+            $("#editinventoryname").val(data.data[0].inventoryname);
+           $("#editspeci").val(data.data[0].speci);
+           $("#editcolor").val(data.data[0].color);
+           $("#editmaterial").val(data.data[0].material);
+            $('#inventoryedit').modal('show')
+        },error:function(data){
+            ZENG.msgbox.show("服务器异常！", 5,2000);
+        }
+
+    });
+}
+
+// 查询
+function dosearch(){
+    var getkeyword=$('#orderkeyword').val();
+    // console.log(getkeyword);
+    inventroyinfolist(getkeyword);
+}
+
+function doreset(){
+    $('#orderkeyword').val("");
+    var getkeyword="";
+    // console.log(getkeyword);
+    inventroyinfolist(getkeyword);
+}
+
+
+//  编辑保存
+function editinfo() {
+    var editinventoryid=$("#editinventoryid").val();
+    var editinventorycode=$("#editinventorycode").val();
+    var editinventoryname=$("#editinventoryname").val();
+    var editspeci=$("#editspeci").val();
+    var editcolor=$("#editcolor").val();
+    var editmaterial=$("#editmaterial").val();
+
+    $.ajax({
+        type:"POST",
+        url:'/editinventoryinfo',
+        contentType: 'application/json',
+        data:JSON.stringify({id:editinventoryid,inventorycode :editinventorycode,inventoryname:editinventoryname,speci:editspeci,color:editcolor,material:editmaterial}),
+        success:function(data){
+            $('#inventoryedit').modal('hide')
+            ZENG.msgbox.show("编辑成功！", 4,1500);
+            inventroyinfolist();
+            // console.log(data);
+        },error:function(data){
+            ZENG.msgbox.show("服务器异常！", 5,2000);
+        }
+
+    });
+}
+
 
 function BindWorkShop(selector,entry) {
     $.ajax({

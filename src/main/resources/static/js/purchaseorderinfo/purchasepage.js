@@ -24,6 +24,13 @@ function dosearch(){
     purchaselist(getkeyword);
 }
 
+function doreset(){
+    $('#orderkeyword').val("");
+    var getkeyword="";
+    // console.log(getkeyword);
+    inventroyinfolist(getkeyword);
+}
+
 // 删除按钮
 function  delinfo() {
     ZENG.msgbox.show("删除", 1,1500);

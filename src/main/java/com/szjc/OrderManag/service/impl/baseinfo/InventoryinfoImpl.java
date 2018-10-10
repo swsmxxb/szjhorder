@@ -78,7 +78,23 @@ public class InventoryinfoImpl implements InventoryinfoService {
 
     @Override
     public int updateByPrimaryKeySelective(Object record) {
-        return 0;
+        {
+            try {
+                Method updateByPrimaryKeySelective = inventoryinfoMapper.getClass().getDeclaredMethod("updateByPrimaryKeySelective", record.getClass());
+                Object result = updateByPrimaryKeySelective.invoke(inventoryinfoMapper, record);
+                return Integer.parseInt(result.toString());
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return 0;
+//        return mapper.updateByPrimaryKeySelective(record);
+        }
     }
 
     @Override
