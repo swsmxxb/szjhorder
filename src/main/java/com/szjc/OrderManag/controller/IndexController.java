@@ -37,4 +37,9 @@ public class IndexController {
         return "graph_echarts";
     }
 
+    @GetMapping("/uplodpage")
+    public String uplodpage(Model model) {
+        return "form_webuploader";
+    }
+
 }

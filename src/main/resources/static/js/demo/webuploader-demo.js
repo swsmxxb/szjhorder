@@ -71,8 +71,8 @@ jQuery(function() {
 
         accept: {
             title: 'Images',
-            extensions: 'gif,jpg,jpeg,bmp,png',
-            mimeTypes: 'image/*'
+            extensions: 'gif,jpg,jpeg,bmp,png,txt,dwg',
+            mimeTypes: 'image/*,text/*,application/x-autocad'
         },
 
         // swf文件路径
@@ -82,7 +82,7 @@ jQuery(function() {
 
         chunked: true,
         // server: 'http://webuploader.duapp.com/server/fileupload.php',
-        server: 'http://2betop.net/fileupload.php',
+        server: '/file/uploadFiles',
         fileNumLimit: 300,
         fileSizeLimit: 5 * 1024 * 1024,    // 200 M
         fileSingleSizeLimit: 1 * 1024 * 1024    // 50 M

@@ -63,7 +63,10 @@ function inventroyinfolist(getparam){
                         halign: 'center',
                         align: 'center',
                         visible: true,
-                        sortable: true
+                        sortable: true,
+                        formatter: function statusFormatter(value, row, index){
+                            return "<a href=\"javascript:showpic('"+value+"')\">"+value+"</a>";
+                        }
                     }, {
                         field: 'inventoryname',
                         title: '品名',
@@ -197,7 +200,7 @@ function editinfo() {
         contentType: 'application/json',
         data:JSON.stringify({id:editinventoryid,inventorycode :editinventorycode,inventoryname:editinventoryname,speci:editspeci,color:editcolor,material:editmaterial}),
         success:function(data){
-            $('#inventoryedit').modal('hide')
+            $('#inventoryedit').modal('hide');
             ZENG.msgbox.show("编辑成功！", 4,1500);
             inventroyinfolist();
             // console.log(data);
@@ -262,4 +265,11 @@ function BindProductClassSelected(selector,values)
             alert(event);
         }
     })
+}
+
+function  showpic(getfilename) {
+    $('#pictitle').html(getfilename);
+    $("#targetpic").attr("src","inventroypic/"+getfilename+".jpg");
+    $('#showinventorypic').modal('show');
+
 }

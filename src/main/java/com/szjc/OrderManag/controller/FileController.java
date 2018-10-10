@@ -2,6 +2,7 @@ package com.szjc.OrderManag.controller;
 
 
 import com.szjc.OrderManag.common.Result;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -21,12 +22,16 @@ import java.util.List;
          * @param request
          * @return
          */
+        @Value("${web.upload-path}")
+        private String path;
+
         @PostMapping("/upload")
         @ResponseBody
         public String upload(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
             if (!file.isEmpty()) {
                 String saveFileName = file.getOriginalFilename();
-                File saveFile = new File(request.getSession().getServletContext().getRealPath("upload/") + saveFileName);
+                //File saveFile = new File(request.getSession().getServletContext().getRealPath("upload/") + saveFileName);
+                File saveFile = new File(path + saveFileName);
                 if (!saveFile.getParentFile().exists()) {
                     saveFile.getParentFile().mkdirs();
                 }
@@ -57,7 +62,8 @@ import java.util.List;
         @PostMapping("/uploadFiles")
         @ResponseBody
         public String uploadFiles(HttpServletRequest request) throws IOException {
-            File savePath = new File(request.getSession().getServletContext().getRealPath("/upload/"));
+//            File savePath = new File(request.getSession().getServletContext().getRealPath("/upload/"));
+            File savePath = new File(path);
             if (!savePath.exists()) {
                 savePath.mkdirs();
             }
