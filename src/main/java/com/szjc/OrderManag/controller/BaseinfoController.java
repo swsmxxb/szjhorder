@@ -1,7 +1,6 @@
 package com.szjc.OrderManag.controller;
 
-import com.szjc.OrderManag.bean.Inventoryinfo;
-import com.szjc.OrderManag.bean.Userinfo;
+import com.szjc.OrderManag.bean.*;
 import com.szjc.OrderManag.service.baseinfo.SupplierinfoService;
 import com.szjc.OrderManag.service.baseinfo.SuppliersinventroyService;
 import com.szjc.OrderManag.service.baseinfo.UserinfoService;
@@ -101,6 +100,8 @@ public class BaseinfoController {
         return Result.successResult(list);
     }
 
+
+
     // 编辑物料
     @RequestMapping(value = "/editinventoryinfo", method = RequestMethod.POST)
     @ResponseBody
@@ -108,6 +109,33 @@ public class BaseinfoController {
         int i = inventoryinfoService.updateByPrimaryKeySelective(staff);
         return Result.successResult(i);
     }
+
+
+    // 编辑供应商
+    @RequestMapping(value = "/editsupplierinfo", method = RequestMethod.POST)
+    @ResponseBody
+    public Result  editsupplierinfo(@RequestBody  Supplierinfo staff) {
+        int i = supplierinfoService.updateByPrimaryKeySelective(staff);
+        return Result.successResult(i);
+    }
+
+
+    // 新增供应商数据
+    @RequestMapping(value = "/addsupplierinfo", method = RequestMethod.POST)
+    @ResponseBody
+    public Result  addsupplierinfo(@RequestBody Supplierinfo staff) {
+//        Saleorder staff = new Saleorder();
+        String uuid = UUID.randomUUID().toString().replace("-", "").toLowerCase();
+        staff.setId(uuid);
+//        staff.setOrderno((String) map.get("orderno"));
+//        staff.setDrwno((String) map.get("drwno"));
+//        staff.setSendtime(new Date());
+        staff.setCreatuser("admin");
+        int list = supplierinfoService.insert(staff);
+        return Result.successResult(list);
+    }
+
+
 
 
 

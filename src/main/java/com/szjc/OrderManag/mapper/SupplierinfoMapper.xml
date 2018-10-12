@@ -326,5 +326,6 @@
     <include refid="Base_Column_List" />
     from supplierinfo
     where suppliercode LIKE '%${quickSearch}%' or suppliername LIKE '%${quickSearch}%' or suppliershotname LIKE '%${quickSearch}%' or contenter LIKE '%${quickSearch}%'
+    or id  LIKE '%${quickSearch}%'
   </select>
 </mapper>

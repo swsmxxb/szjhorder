@@ -102,7 +102,7 @@ function queryinfo(getparam){
                         align: 'center',
                         visible: true,
                         formatter: function statusFormatter(value, row, index){
-                            return "<a href=\"javascript:editinfo('"+row.id+"')\"></a>";
+                            return "<a href=\"javascript:editshow('"+row.id+"')\">编辑</a>";
                         }
                     },]
 
@@ -196,4 +196,72 @@ function BindProductClassSelected(selector,values)
             alert(event);
         }
     })
+}
+
+
+function dosearch(){
+    var getkeyword=$('#orderkeyword').val();
+    // console.log(getkeyword);
+    queryinfo(getkeyword);
+}
+
+function doreset(){
+    $('#orderkeyword').val("");
+    var getkeyword="";
+    // console.log(getkeyword);
+    queryinfo(getkeyword);
+}
+
+function editshow(getid) {
+    console.log(getid);
+    $.ajax({
+        type:"POST",
+        url:'/searchSupplier',
+        contentType: 'application/json',
+        data:JSON.stringify({quickSearch : getid}),
+        success:function(data){
+            $("#editsupplierid").val(data.data[0].id);
+            $("#editsuppliercode").val(data.data[0].suppliercode);
+            $("#editsuppliername").val(data.data[0].suppliername);
+            $("#editsuppliershotname").val(data.data[0].suppliershotname);
+            $("#editcontenter").val(data.data[0].contenter);
+            $("#edittels").val(data.data[0].tels);
+            $("#editemail").val(data.data[0].email);
+            $("#editaddress").val(data.data[0].address);
+            $("#editfaxs").val(data.data[0].faxs);
+            $('#supplieredit').modal('show')
+        },error:function(data){
+            ZENG.msgbox.show("服务器异常！", 5,2000);
+        }
+
+    });
+}
+
+//  编辑保存
+function editinfo() {
+  var  editsupplierid= $("#editsupplierid").val();
+ var  editsuppliercode=  $("#editsuppliercode").val();
+  var editsuppliername=  $("#editsuppliername").val();
+  var editsuppliershotname=  $("#editsuppliershotname").val();
+  var editcontenter=  $("#editcontenter").val();
+  var edittels=  $("#edittels").val();
+  var editemail=  $("#editemail").val();
+   var editaddress= $("#editaddress").val();
+  var editfaxs=  $("#editfaxs").val();
+    $.ajax({
+        type:"POST",
+        url:'/editsupplierinfo',
+        contentType: 'application/json',
+        data:JSON.stringify({id:editsupplierid,suppliercode :editsuppliercode,suppliername:editsuppliername,suppliershotname:editsuppliershotname,
+            contenter:editcontenter,tels:edittels,email:editemail,address:editaddress,faxs:editfaxs}),
+        success:function(data){
+            $('#supplieredit').modal('hide');
+            ZENG.msgbox.show("编辑成功！", 4,1500);
+            queryinfo();
+            // console.log(data);
+        },error:function(data){
+            ZENG.msgbox.show("服务器异常！", 5,2000);
+        }
+
+    });
 }
