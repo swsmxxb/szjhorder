@@ -110,7 +110,7 @@ function inventroyinfolist(getparam){
                         align: 'center',
                         visible: true,
                         formatter: function statusFormatter(value, row, index){
-                            return "<a href=\"javascript:editshow('"+row.id+"')\">编辑</a>";
+                            return "<a href=\"javascript:editshow('"+row.id+"')\">编辑</a> | <a href=\"javascript:upload('"+row.id+"')\">上传</a>";
                         }
                     },]
 
@@ -272,4 +272,9 @@ function  showpic(getfilename) {
     $("#targetpic").attr("src","inventroypic/"+getfilename+".jpg");
     $('#showinventorypic').modal('show');
 
+}
+
+function  upload() {
+
+    $('#uploadpage').modal('show');
 }

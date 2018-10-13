@@ -20,7 +20,8 @@
     <link href="js/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
     <link href="js/plugins/messagebox/msgbox.css" rel="stylesheet">
     <link href="js/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" type="text/css" href="css/plugins/webuploader/webuploader.css">
+    <link rel="stylesheet" type="text/css" href="css/demo/webuploader-demo.css">
 
 
 </head>
@@ -183,17 +184,58 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <small class="font-bold" id="uploadtitle"></small>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal inmodal fade" id="uploadpage" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                 <small class="font-bold" id="pictitle"></small>
             </div>
             <div class="modal-body">
-               <img src="" style="width: 100%;" id="targetpic" alt="暂无图片">
+                <div class="page-container">
+                    <p>您可以尝试文件拖拽，使用QQ截屏工具，然后激活窗口后粘贴，或者点击添加图片按钮，来体验此demo.</p>
+                    <div id="uploader" class="wu-example">
+                        <div class="queueList">
+                            <div id="dndArea" class="placeholder">
+                                <div id="filePicker"></div>
+                                <p>或将照片拖到这里，单次最多可选300张</p>
+                            </div>
+                        </div>
+                        <div class="statusBar" style="display:none;">
+                            <div class="progress">
+                                <span class="text">0%</span>
+                                <span class="percentage"></span>
+                            </div>
+                            <div class="info"></div>
+                            <div class="btns">
+                                <div id="filePicker2"></div>
+                                <div class="uploadBtn">开始上传</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
 
         </div>
     </div>
 </div>
-
 </body>
 
 <!-- 全局js -->
@@ -220,5 +262,15 @@
 
 <!-- 自定义js -->
 <script src="js/baseinfo/inventoryinfo.js"></script>
+
+
+<!-- Web Uploader -->
+<script type="text/javascript">
+    // 添加全局站点信息
+    var BASE_URL = 'js/plugins/webuploader';
+</script>
+<script src="js/plugins/webuploader/webuploader.min.js"></script>
+
+<script src="js/demo/webuploader-demo.js"></script>
 
 </html>
