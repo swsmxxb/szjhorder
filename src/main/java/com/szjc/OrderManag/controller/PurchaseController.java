@@ -103,7 +103,6 @@ public class PurchaseController {
         String HID = (String) map.get("hid");
         List list = saleorderBService.searchorderb(HID);
         return Result.successResult(list);
-
     }
 
 }

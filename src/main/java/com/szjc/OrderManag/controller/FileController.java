@@ -22,7 +22,7 @@ import java.util.List;
          * @param request
          * @return
          */
-        @Value("${web.upload-path}")
+        @Value("${web.upload-path}inventroypic/")
         private String path;
 
         @PostMapping("/upload")

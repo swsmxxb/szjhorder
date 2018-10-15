@@ -36,9 +36,6 @@ function  delinfo() {
     ZENG.msgbox.show("删除", 1,1500);
 }
 
-function editinfo(getid) {
-    ZENG.msgbox.show(getid, 1,1500);
-}
 
 function printinfo(getid) {
     // ZENG.msgbox.show("打印"+getid, 1,1500);
@@ -150,10 +147,9 @@ function purchaselist(getparam){
                         align: 'center',
                         visible: true,
                         formatter: function statusFormatter(value, row, index){
-                            return "<a href=\"javascript:editinfo('"+row.id+"')\">编辑</a> | <a href=\"javascript:printinfo('"+row.id+"')\">打印</a>";
+                            return "<a href=\"javascript:editinfo('"+row.hid+"')\">开单</a> | <a href=\"javascript:printinfo('"+row.id+"')\">打印</a>";
                         }
                     },]
-
             });
 
         },error:function(data){
@@ -421,7 +417,6 @@ function equipCodeBind(selector) {
     $(selector).selectpicker('refresh');
 }
 
-
 function addtr() {
     console.log("add1:"+idcount)
     idcount = idcount + 1;
@@ -448,7 +443,6 @@ function addtr() {
         }
     }
 }
-
 
 // 自添项的绑定
 function tdclick(tdobject) {
@@ -498,14 +492,93 @@ function deletetr(tdobject) {
     td.parents("tr").remove();
     var j = 1;
     var trcount=$("#para_table tbody").children('tr').length-2;
-    console.log(trcount)
+    console.log(trcount);
     for (i = 0; i <= idcount; i++) {
-
         //alert($("#a"+i));
         if ($("#a" + i).text() != "") {
             $("#a" + i).text(j);
             j++;
         }
     }
+}
 
+// 生单页面
+function editinfo(getid) {
+    // ZENG.msgbox.show(getid, 1,1500);
+    $("#editpara_table").text("");
+    // $("#para_table").empty();
+    getDetailList(getid);
+    var pi = $(
+        "<tr>\n" +
+        "                        <th style=\"text-align:center\" width=\"100\">序号</th>\n" +
+        "                        <th style=\"text-align:center\" width=\"200\">图纸号</th>\n" +
+        "                        <th style=\"text-align:center\" width=\"200\">规格</th>\n" +
+        "                        <th style=\"text-align:center\" width=\"200\">颜色</th>\n" +
+        "                        <th style=\"text-align:center\" width=\"200\">用料</th>\n" +
+        "                        <th style=\"text-align:center\" width=\"200\">采购数量</th>\n" +
+        "                    </tr>\n"
+        +
+        "                    <tr>\n" +
+        "                        <td id=\"a0\" style=\"text-align:center; \" >1</td>\n" +
+        "                        <td id=\"b0\" style=\"text-align:center; \" >" + "<select id=\"bs0\" class=\"form-control selectpicker\" data-live-search=\"true\" required></select>" + "</td>\n" +
+        "                        <td id=\"c0\" style=\"text-align:center; \" ></td>\n" +
+        "                        <td id=\"f0\" style=\"text-align:center; \" ></td>\n" +
+        "                        <td id=\"g0\" style=\"text-align:center; \" ></td>\n" +
+        "                        <td id=\"d0\" style=\"text-align:center; \" onclick=\"tdclick(this)\"></td>\n" +
+        "                    </tr>"
+    );
+
+    $("#editpara_table").append(pi);
+
+    if (detailList.length!=0) {
+        for(i=1;i<detailList.length;i++){
+            addtrEdit1(detailList.length);
+        }
+    }
+    else {
+        addtrEdit1(detailList.length);
+    }
+
+
+    $('#orderedit').modal('show');
+    // editpara_table
+}
+
+function getDetailList(keyid) {
+
+    $.ajax({
+        url: "/searchpurchaseorderb",
+        type: "POST",
+        async: false,
+        contentType: 'application/json',
+        data:JSON.stringify({hid : keyid}),
+        success: function (data) {
+            return detailList = data.data;
+        },
+        error: function (event, XMLHttpRequest, ajaxOptions, thrownError) {
+            ZENG.msgbox.show("服务器异常！", 5,1500);
+        }
+    });
+
+}
+
+//  修改子表
+function addtrEdit1(detailListlength) {
+    if (detailListlength!=0) {     // 2018年6月22日 15:39:57  判断当子表没有数据时默认序号为（0+1）   by xxb
+        idcount = idcount + 1;
+    }
+    else {
+        idcount=0;
+    }
+    var table = $("#editpara_table");
+    var tr = $("<tr>" +
+
+        "<td id='a" + idcount + "' align='center' >" +(idcount+1)+ "</td>" +
+        "<td id='b" + idcount + "' align='center'>" + "<select id='bs" + idcount + "' onchange='chooseName(this)' class='form-control selectpicker' data-live-search='true' required></select>" + "</td>" +
+        "<td id='c" + idcount + "' align='center'>" + "</td>" +
+        "<td id='f" + idcount + "' align='center'>" + "</td>" +
+        "<td id='g" + idcount + "' align='center'>" + "</td>" +
+        "<td id='d" + idcount + "' align='center' onclick='tdclick(this)'>" + "</td>");
+    table.append(tr)
+    // equipCodeBind("#bs" + idcount);
 }

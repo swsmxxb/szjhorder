@@ -261,12 +261,13 @@
     sah.HID
     ,sah.purchaseno
     ,sah.orderno
-    ,sah.custommanag
+    ,ufo.personname custommanag
     ,sah.status
     ,sah.creatuser
     ,sah.creattime
     ,sah.customs
     FROM saleorder_h sah
+    left join userinfo ufo on sah.custommanag=ufo.UID
     <if test="quickSearch != null and quickSearch !=''">
       where sa.orderno like '%${quickSearch}%' or sah.purchaseno like '%${quickSearch}%'
     </if>
