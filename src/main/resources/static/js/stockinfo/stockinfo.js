@@ -100,10 +100,7 @@ function queryinfo(getparam){
                         halign: 'center',
                         align: 'center',
                         visible: true,
-                        sortable: true,
-                        formatter: function statusFormatter(value, row, index){
-                            return "<a href=\"javascript:showdetail('"+value+"')\">"+value+"</a>";
-                        }
+                        sortable: true
                     }, {
                         field: 'inventoryname',
                         title: '品名',
@@ -185,81 +182,6 @@ function queryinfo(getparam){
     });
 }
 
-// 查询统计
-function querystatusinfo(getparam){
-    $.ajax({
-        type:"POST",
-        url:'/searchStockstatus',
-        contentType: 'application/json',
-        async: false,
-        data:JSON.stringify({quickSearch : getparam}),
-        success:function(data){
-            //  var dataJson = eval('(' + data.data + ')');
-            //  console.log(data.data);
-            var datalist = data.data;
-            $('#stockstatusinfo').bootstrapTable('destroy').bootstrapTable('resetView').bootstrapTable({    //'destroy' 是必须要加的==作用是加载服务器//    //数据，初始化表格的内容Destroy the bootstrap table.
-                data:datalist,     //datalist  即为需要的数据
-                dataType:'json',
-                // data_locale:"zh-US",    //转换中文 但是没有什么用处
-                pagination: true,
-                pageSize: 20,
-                pageList:[20, 50, 100, 200],
-                pageNumber:1,
-                paginationLoop:false,
-                sortable:true,
-                pagination: true, // 是否显示分页（*）
-                height: $(window).height()-275,
-                //这里也可以将TABLE样式中的<tr>标签里的内容挪到这里面：
-                columns: [
-                    {
-                        field: 'id',
-                        title: 'NO.',
-                        halign: 'center',
-                        align: 'center',
-                        visible: true,
-                        formatter: function statusFormatter(value, row, index){
-                            return index+1;
-                        }
-                    }, {
-                        field: 'inventorycode',
-                        title: '编码',
-                        halign: 'center',
-                        align: 'center',
-                        visible: true,
-                        sortable: true
-                    }, {
-                        field: 'inventoryname',
-                        title: '品名',
-                        halign: 'center',
-                        align: 'center',
-                        visible: true,
-                        sortable: true
-                        // formatter: statusFormatter
-                    },{
-                        field: 'speci',
-                        title: '规格',
-                        halign: 'center',
-                        align: 'center',
-                        visible: true,
-                        sortable: true
-                    }
-                    ,{
-                        field: 'nums',
-                        title: '数量',
-                        halign: 'center',
-                        align: 'center',
-                        visible: true,
-                        sortable: true
-                    }]
-
-            });
-
-        },error:function(data){
-            ZENG.msgbox.show("服务器异常！", 5,1500);
-        }
-
-    });
-}
 
 function stockopation(gettype) {
 
@@ -272,26 +194,45 @@ function stockopation(gettype) {
     else if  (gettype=="3") {
         $('#cardtitle').html("返库");
     }
+    $('#addtypes').val(gettype);
     equipCodeBind("#addinventoryid");
     $("#stockopation").modal('show')
 }
 
 // 新增
 function saveinventorylist(){
-    var addinventorycode=$("#addinventorycode").val();
-    var addinventoryname=$("#addinventoryname").val();
-    var addspeci=$("#addspeci").val();
-    var addcolor=$("#addcolor").val();
-    var addmaterial=$("#addmaterial").val();
+    var addorderno=$("#addorderno").val();
+    var addinventoryid=$("#addinventoryid").val();
+    var addnums=$("#addnums").val();
+    var addtypes=$("#addtypes").val();
+   if (addtypes=="2") {   // 出库
+       addnums=addnums*-1;
+  //  console.log(addnums);
+   }
     $.ajax({
         type:"POST",
         url:'/addstockinfo',
         contentType: 'application/json',
-        data:JSON.stringify({inventorycode :addinventorycode,inventoryname:addinventoryname,speci:addspeci,color:addcolor,material:addmaterial}),
+        data:JSON.stringify({orderno :addorderno,inventoryid:addinventoryid,nums:addnums,types:addtypes}),
         success:function(data){
-            $('#inventoryadd').modal('hide')
-            ZENG.msgbox.show("保存成功！", 4,1500);
-            inventroyinfolist();
+            console.log(data.data);
+            switch (data.data)
+            {
+                case 0:
+                    ZENG.msgbox.show("保存成功！", 4,2000);
+                    break
+                case 1:
+                    ZENG.msgbox.show("当前产品未在库，无法出库！", 3,2000);
+                    break
+                case 2:
+                    ZENG.msgbox.show("当前产品在库数量不足，无法出库！", 3,2000);
+                    break
+            }
+            $('#stockopation').modal('hide')
+
+            $("#addorderno").val("");
+            $("#addnums").val("");
+            queryinfo();
             // console.log(data);
         },error:function(data){
             ZENG.msgbox.show("服务器异常！", 5,2000);

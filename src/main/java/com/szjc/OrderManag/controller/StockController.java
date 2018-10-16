@@ -53,11 +53,30 @@ public class StockController {
     @ResponseBody
     Result  addstockinfo(@RequestBody Stockinfo staff) {
         String uuid = UUID.randomUUID().toString().replace("-", "").toLowerCase();
+        int returninfo=0;
         staff.setId(uuid);
         staff.setCreatuser("bd64766be9934e4c8d9586dd224cece3");
-        int list = stockinfoService.insert(staff);
+//        System.out.println("test:"+staff.getInventoryid());
+        if (staff.getTypes().equals("2")) {
+        List<Stockinfo> listsize = stockinfoService.searchStockstatus(staff.getInventoryid());
+        if (listsize.size()>0) {
+          //  System.out.println("test:"+ listsize.get(0).getNums());
+            if (listsize.get(0).getNums()>Math.abs(staff.getNums())) {  // 判断出库数量是否大于入库数量
+               stockinfoService.insert(staff);
+            }
+            else {
+                returninfo=2;  // 出库数超过在库数 无法出库
+            }
+        }
+        else {
+            returninfo=1;  // 当前原来未在库，无法出库
+        }
+        }
+        else {
+            stockinfoService.insert(staff);
+        }
 
-        return Result.successResult(list);
+        return Result.successResult(returninfo);
 
     }
 

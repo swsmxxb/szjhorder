@@ -49,14 +49,14 @@ function equipCodeBind(selector) {
 function dosearch(){
     var getkeyword=$('#orderkeyword').val();
     console.log(getkeyword);
-    queryinfo(getkeyword);
+    querystatusinfo(getkeyword);
 }
 
 function doreset(){
     $('#orderkeyword').val("");
     var getkeyword="";
     // console.log(getkeyword);
-    queryinfo(getkeyword);
+    querystatusinfo(getkeyword);
 }
 
 

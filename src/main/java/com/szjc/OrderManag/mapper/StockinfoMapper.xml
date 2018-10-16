@@ -261,11 +261,13 @@ FROM stockinfo sto
 left join inventoryinfo ino on sto.inventoryid = ino.ID
 left join userinfo ufo on sto.creatuser = ufo.UID
  where ino.inventorycode like  '%${quickSearch}%'  or ino.inventoryname  like  '%${quickSearch}%' or sto.ID like '%${quickSearch}%'
+ order BY sto.creattime DESC
   </select>
   <select id="searchStockstatus" parameterType="com.szjc.OrderManag.bean.Stockinfo" resultMap="BaseResultMap">
-  SELECT
+SELECT
 
-  ino.inventorycode
+  sto.inventoryid
+  ,ino.inventorycode
   ,ino.inventoryname
   ,ino.speci
   ,sum(sto.nums) nums
@@ -273,11 +275,13 @@ left join userinfo ufo on sto.creatuser = ufo.UID
   FROM stockinfo sto
   left join inventoryinfo ino on sto.inventoryid = ino.ID
   left join userinfo ufo on sto.creatuser = ufo.UID
- where ino.inventorycode like  '%${quickSearch}%'  or ino.inventoryname  like  '%${quickSearch}%' or ino.speci like '%${quickSearch}%'
+ where ino.inventorycode like  '%${quickSearch}%'  or ino.inventoryname  like  '%${quickSearch}%' or ino.speci like '%${quickSearch}%' or  sto.inventoryid like '%${quickSearch}%'
    GROUP BY
-  ino.inventorycode
+	 sto.inventoryid
+  ,ino.inventorycode
   ,ino.inventoryname
   ,ino.speci
+
   </select>
 
 
