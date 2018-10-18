@@ -42,14 +42,15 @@ public class BaseinfoController {
 
     // 新增物料数据
     @RequestMapping(value = "/addinventoryinfo", method = RequestMethod.POST)
-    public Result  addinventoryinfo(@RequestBody Inventoryinfo staff) {
-//        Saleorder staff = new Saleorder();
+    public Result  addinventoryinfo(HttpServletRequest request,@RequestBody Inventoryinfo staff) {
+        Userinfo user = (Userinfo) request.getAttribute("user");
+        String userId = user.getUid();
         String uuid = UUID.randomUUID().toString().replace("-", "").toLowerCase();
         staff.setId(uuid);
 //        staff.setOrderno((String) map.get("orderno"));
 //        staff.setDrwno((String) map.get("drwno"));
 //        staff.setSendtime(new Date());
-        staff.setCreatuser("admin");
+        staff.setCreatuser(userId);
         int list = inventoryinfoService.insert(staff);
         return Result.successResult(list);
     }

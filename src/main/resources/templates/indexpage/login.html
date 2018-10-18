@@ -79,8 +79,10 @@
                 contentType: 'application/json',
                 data:JSON.stringify({username :username,password:password}),
                 success:function(data){
-    // console.log(data.data.Authorization);
+     // console.log(data.data);
+
         if (data.code == "0") {
+            window.localStorage.setItem("username",data.data.user.personname);
                window.location.href="/index";
            }
          else {
@@ -93,6 +95,7 @@
             });
 
         });
+
 
     </script>
     

@@ -75,16 +75,27 @@ public class LoginController {
 
     @RequestMapping(value = "/tlogin", method = RequestMethod.GET)
     @ResponseBody
-    public Result toLogin(HttpServletRequest request, HttpServletResponse response) {
+    public Result tlogin(HttpServletRequest request, HttpServletResponse response) {
+     //   System.out.println("return:"+loginResult);
         if (loginResult != null && loginResult.getMessage() != null && loginResult.getMessage() != "") {
             Result loginResultCopy = loginResult;
             loginResult = null;
             return loginResultCopy;
         } else {
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);//401
+           // response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);//401
             return new Result("10", "用户还未被认证，跳转到登录界面！", null);
         }
     }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    public Result logout(){
+//        Userinfo user = (Userinfo) SecurityUtils.getSubject().getPrincipal();
+        SecurityUtils.getSubject().logout();
+
+        return new Result("11", "退出成功！", null);
+    }
+
+
 
     @RequestMapping(value = "/loginSuccess", method = RequestMethod.GET)
     @ResponseBody

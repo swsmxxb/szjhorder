@@ -6,6 +6,8 @@
 
 $(document).ready(function () {
 
+   $('#getsessionusername').html(window.localStorage.getItem("username"));    // 设置前端用户名缓存
+
     // MetsiMenu
     $('#side-menu').metisMenu();
 
@@ -75,6 +77,10 @@ $(document).ready(function () {
         $('#content-main').css('overflow-y', 'auto');
     }
 
+});
+
+$('#logoutclear').click(function () {    // 删除前端用户名缓存
+    window.localStorage.removeItem("username")
 });
 
 $(window).bind("load resize", function () {

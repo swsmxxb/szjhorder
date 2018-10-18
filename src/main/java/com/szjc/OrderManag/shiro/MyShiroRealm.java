@@ -39,7 +39,7 @@ import java.util.List;
  * @version：V1.0
  */
 @Service
-public class ShiroRealm extends AuthorizingRealm {
+public class MyShiroRealm extends AuthorizingRealm {
 
     @Autowired
     private UserinfoService<Userinfo, UserinfoExample> userinfoService;

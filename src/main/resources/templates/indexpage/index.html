@@ -175,11 +175,11 @@
                         </form>
                     </div>
                     <ul class="nav navbar-top-links navbar-right">
-                        <li class="dropdown">
-                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                                <i class="fa fa-envelope"></i> <span class="label label-warning">0</span>
-                            </a>
-                            <ul class="dropdown-menu dropdown-messages">
+                        <!--<li class="dropdown">-->
+                            <!--<a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">-->
+                                <!--<i class="fa fa-envelope"></i> <span class="label label-warning">0</span>-->
+                            <!--</a>-->
+                            <!--<ul class="dropdown-menu dropdown-messages">-->
                                 <!--<li class="m-t-xs">-->
                                     <!--<div class="dropdown-messages-box">-->
                                         <!--<a href="profile.html" class="pull-left">-->
@@ -215,22 +215,22 @@
                                         <!--</a>-->
                                     <!--</div>-->
                                 <!--</li>-->
-                            </ul>
-                        </li>
+                            <!--</ul>-->
+                        <!--</li>-->
                         <li class="dropdown">
                             <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                                <i class="fa fa-bell"></i>
-                                <span class="label label-primary">0</span>
+                                <i class="fa fa-user"></i><span id="getsessionusername"></span>
+                                <!--<span class="label label-primary">8</span>-->
                             </a>
-                            <!--<ul class="dropdown-menu dropdown-alerts">-->
-                                <!--<li>-->
-                                    <!--<a href="mailbox.html">-->
-                                        <!--<div>-->
-                                            <!--<i class="fa fa-envelope fa-fw"></i> 您有16条未读消息-->
+                            <ul class="dropdown-menu dropdown-alerts" style="width: 150px;">
+                                <li>
+                                    <a href="/logout" id="logoutclear">
+                                        <div>
+                                            <i class="fa fa-reply"></i> 退出登录
                                             <!--<span class="pull-right text-muted small">4分钟前</span>-->
-                                        <!--</div>-->
-                                    <!--</a>-->
-                                <!--</li>-->
+                                        </div>
+                                    </a>
+                                </li>
                                 <!--<li class="divider"></li>-->
                                 <!--<li>-->
                                     <!--<a href="profile.html">-->
@@ -249,7 +249,7 @@
                                         <!--</a>-->
                                     <!--</div>-->
                                 <!--</li>-->
-                            <!--</ul>-->
+                            </ul>
                         </li>
                     </ul>
                 </nav>
