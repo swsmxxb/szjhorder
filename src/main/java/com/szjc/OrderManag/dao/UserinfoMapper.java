@@ -29,4 +29,8 @@ public interface UserinfoMapper {
     int updateByPrimaryKey(Userinfo record);
 
     List<Userinfo> searchuserinfo(@Param("quickSearch") String quickSearch);
+
+    Userinfo userlogincheck(String usernameinfo);
+
+    List<Userinfo> selectUserByUserName(String userName);
 }

@@ -8,9 +8,5 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class StatementController {
 
-      // 结算页面
-    @GetMapping("/statementpage")
-    public String suppliertype(Model model) {
-        return "statement/statementpage";
-    }
+
 }

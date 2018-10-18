@@ -92,4 +92,14 @@ public class UserinfoImpl implements UserinfoService<Userinfo, UserinfoExample> 
         List<Userinfo> userinfoList = userinfoMapper.searchuserinfo(quickSearch);
         return userinfoList;
     }
+
+    @Override
+    public List<Userinfo> selectUserByUserName(String userName) {
+        UserinfoExample example = new UserinfoExample();
+        UserinfoExample.Criteria criteria = example.createCriteria();
+        criteria.andUsernameEqualTo(userName);
+        criteria.andStatusNotEqualTo("2");
+        List<Userinfo> list = userinfoMapper.selectByExample(example);
+        return list;
+    }
 }

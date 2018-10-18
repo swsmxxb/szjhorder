@@ -9,12 +9,12 @@ public class IndexController {
 
     @GetMapping("/index")
     public String mainpage(Model model) {
-        return "index";
+        return "indexpage/index";
     }
 
     @GetMapping("/")
     public String defaultpage (Model model) {
-        return "login";
+        return "indexpage/index";
     }
 
     @GetMapping("/tables")
@@ -27,9 +27,9 @@ public class IndexController {
         return "printtempl/printpage";
     }
 
-    @GetMapping("/login")
+    @GetMapping("/toLogin")
     public String loginpage(Model model) {
-        return "login";
+        return "indexpage/login";
     }
 
     @GetMapping("/dashboard")

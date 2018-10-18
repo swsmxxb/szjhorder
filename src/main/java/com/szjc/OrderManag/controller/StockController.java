@@ -17,18 +17,6 @@ public class StockController {
     @Autowired
     private StockinfoService stockinfoService;
 
-    // 库存管理页面
-    @GetMapping("/stocklist")
-    public String stocklistpage(Model model) {
-        return "stockinfo/stockinfopage";
-    }
-
-    // 库存查询页面
-    @GetMapping("/stocksearch")
-    public String stocksearch(Model model) {
-        return "stockinfo/stocksearchpage";
-    }
-
 
     // 查询库存操作流水
     @RequestMapping(value = "/searchstockinfo", method = RequestMethod.POST)

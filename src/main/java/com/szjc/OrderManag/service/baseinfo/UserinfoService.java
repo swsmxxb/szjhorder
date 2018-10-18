@@ -31,4 +31,6 @@ public interface UserinfoService<Userinfo, UserinfoExample> {
     int updateByPrimaryKey(com.szjc.OrderManag.bean.Userinfo record);
 
     List<com.szjc.OrderManag.bean.Userinfo> searchuserinfo(@Param("quickSearch") String quickSearch);
+
+    List<com.szjc.OrderManag.bean.Userinfo> selectUserByUserName(String userName);
 }

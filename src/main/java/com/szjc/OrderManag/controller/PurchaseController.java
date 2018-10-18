@@ -29,11 +29,7 @@ public class PurchaseController {
 
     @Autowired
     private PurchaseorderHService purchaseorderHService;
-    // 开单页面
-    @GetMapping("/purchasepage")
-    public String puchasepage(Model model) {
-        return "purchaseorderinfo/purchasepage";
-    }
+
 
     // 开单页面查询主表
     @RequestMapping(value = "/searchpurchase", method = RequestMethod.POST)
@@ -76,11 +72,6 @@ public class PurchaseController {
 
     }
 
-    // 采购管理页面
-    @GetMapping("/purchasemanapage")
-    public String purchasemanapage(Model model) {
-        return "purchaseorderinfo/purchasemanapage";
-    }
 
     // 采购单主表查询
     @RequestMapping(value = "/searchpurchaseorderh", method = RequestMethod.POST)

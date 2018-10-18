@@ -19,12 +19,6 @@ public class DeliverController {
    @Autowired
    private PurchaseorderHService purchaseorderHService;
 
-    // 收货管理
-    @GetMapping("/delivermanage")
-    public String suppliertype(Model model) {
-        return "delivermanage/delivermanagepage";
-    }
-
 
     // 验收
     @RequestMapping(value = "/editpurchase", method = RequestMethod.POST)

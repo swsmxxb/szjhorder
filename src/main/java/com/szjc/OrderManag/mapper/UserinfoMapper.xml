@@ -8,6 +8,7 @@
     <result column="personname" jdbcType="NVARCHAR" property="personname" />
     <result column="creattime" jdbcType="TIMESTAMP" property="creattime" />
     <result column="creatuser" jdbcType="NVARCHAR" property="creatuser" />
+    <result column="status" jdbcType="NVARCHAR" property="status" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    UID, username, password, personname, creattime, creatuser
+    UID, username, password, personname, creattime, creatuser, status
   </sql>
   <select id="selectByExample" parameterType="com.szjc.OrderManag.bean.UserinfoExample" resultMap="BaseResultMap">
     select
@@ -102,11 +103,11 @@
   </delete>
   <insert id="insert" parameterType="com.szjc.OrderManag.bean.Userinfo">
     insert into userinfo (UID, username, password, 
-      personname, creatuser
-      )
+      personname, creattime, creatuser, 
+      status)
     values (#{uid,jdbcType=NVARCHAR}, #{username,jdbcType=NVARCHAR}, #{password,jdbcType=NVARCHAR}, 
-      #{personname,jdbcType=NVARCHAR}, #{creatuser,jdbcType=NVARCHAR}
-      )
+      #{personname,jdbcType=NVARCHAR}, #{creattime,jdbcType=TIMESTAMP}, #{creatuser,jdbcType=NVARCHAR}, 
+      #{status,jdbcType=NVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.szjc.OrderManag.bean.Userinfo">
     insert into userinfo
@@ -129,6 +130,9 @@
       <if test="creatuser != null">
         creatuser,
       </if>
+      <if test="status != null">
+        status,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="uid != null">
@@ -148,6 +152,9 @@
       </if>
       <if test="creatuser != null">
         #{creatuser,jdbcType=NVARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=NVARCHAR},
       </if>
     </trim>
   </insert>
@@ -178,6 +185,9 @@
       <if test="record.creatuser != null">
         creatuser = #{record.creatuser,jdbcType=NVARCHAR},
       </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=NVARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -190,7 +200,8 @@
       password = #{record.password,jdbcType=NVARCHAR},
       personname = #{record.personname,jdbcType=NVARCHAR},
       creattime = #{record.creattime,jdbcType=TIMESTAMP},
-      creatuser = #{record.creatuser,jdbcType=NVARCHAR}
+      creatuser = #{record.creatuser,jdbcType=NVARCHAR},
+      status = #{record.status,jdbcType=NVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -213,6 +224,9 @@
       <if test="creatuser != null">
         creatuser = #{creatuser,jdbcType=NVARCHAR},
       </if>
+      <if test="status != null">
+        status = #{status,jdbcType=NVARCHAR},
+      </if>
     </set>
     where UID = #{uid,jdbcType=NVARCHAR}
   </update>
@@ -222,14 +236,15 @@
       password = #{password,jdbcType=NVARCHAR},
       personname = #{personname,jdbcType=NVARCHAR},
       creattime = #{creattime,jdbcType=TIMESTAMP},
-      creatuser = #{creatuser,jdbcType=NVARCHAR}
+      creatuser = #{creatuser,jdbcType=NVARCHAR},
+      status = #{status,jdbcType=NVARCHAR}
     where UID = #{uid,jdbcType=NVARCHAR}
   </update>
+
   <select id="searchuserinfo" parameterType="com.szjc.OrderManag.bean.Userinfo" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from userinfo
     where username like  '%${quickSearch}%'  or personname  like  '%${quickSearch}%'
   </select>
-
 </mapper>
