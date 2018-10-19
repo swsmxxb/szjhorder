@@ -103,10 +103,10 @@
   </delete>
   <insert id="insert" parameterType="com.szjc.OrderManag.bean.Userinfo">
     insert into userinfo (UID, username, password, 
-      personname, creattime, creatuser, 
+      personname, creatuser,
       status)
     values (#{uid,jdbcType=NVARCHAR}, #{username,jdbcType=NVARCHAR}, #{password,jdbcType=NVARCHAR}, 
-      #{personname,jdbcType=NVARCHAR}, #{creattime,jdbcType=TIMESTAMP}, #{creatuser,jdbcType=NVARCHAR}, 
+      #{personname,jdbcType=NVARCHAR}, #{creatuser,jdbcType=NVARCHAR},
       #{status,jdbcType=NVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.szjc.OrderManag.bean.Userinfo">
@@ -245,6 +245,6 @@
     select
     <include refid="Base_Column_List" />
     from userinfo
-    where username like  '%${quickSearch}%'  or personname  like  '%${quickSearch}%'
+    where username like  '%${quickSearch}%'  or personname  like  '%${quickSearch}%' or UID like '%${quickSearch}%'
   </select>
 </mapper>

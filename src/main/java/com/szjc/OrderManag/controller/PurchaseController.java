@@ -1,9 +1,6 @@
 package com.szjc.OrderManag.controller;
 
-import com.szjc.OrderManag.bean.Saleorder;
-import com.szjc.OrderManag.bean.SaleorderExample;
-import com.szjc.OrderManag.bean.SaleorderH;
-import com.szjc.OrderManag.bean.SaleorderHExample;
+import com.szjc.OrderManag.bean.*;
 import com.szjc.OrderManag.common.Result;
 import com.szjc.OrderManag.service.baseinfo.PurchaseorderHService;
 import com.szjc.OrderManag.service.baseinfo.SaleorderBService;
@@ -14,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -58,14 +56,15 @@ public class PurchaseController {
     // 新增数据
     @RequestMapping(value = "/addpurchase", method = RequestMethod.POST)
     @ResponseBody
-    public Result  addpurchase(@RequestBody SaleorderH staff) {
-//        Saleorder staff = new Saleorder();
+    public Result  addpurchase(HttpServletRequest request, @RequestBody SaleorderH staff) {
+      Userinfo user = (Userinfo) request.getAttribute("user");
+        String userId = user.getUid();
         String uuid = UUID.randomUUID().toString().replace("-", "").toLowerCase();
         staff.setHid(uuid);
        staff.setPurchaseno("1");
         staff.setStatus("1");
         staff.setCustoms("1");
-        staff.setCreatuser("admin");
+        staff.setCreatuser(userId);
         int list = saleorderHService.insert(staff);
 
         return Result.successResult(list);

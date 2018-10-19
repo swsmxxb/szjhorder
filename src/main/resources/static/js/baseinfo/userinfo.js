@@ -18,9 +18,6 @@ function  delinfo() {
     ZENG.msgbox.show("删除", 1,1500);
 }
 
-function editinfo(getid) {
-    ZENG.msgbox.show(getid, 1,1500);
-}
 
 
 // 查询
@@ -86,7 +83,7 @@ function queryinfolist(getparam){
                         align: 'center',
                         visible: true,
                         formatter: function statusFormatter(value, row, index){
-                            return "<a href=\"javascript:editinfo('"+row.id+"')\"></a>";
+                            return "<a href=\"javascript:editshow('"+row.uid+"')\">编辑</a>";
                         }
                     },]
 
@@ -175,4 +172,47 @@ function BindProductClassSelected(selector,values)
             alert(event);
         }
     })
+}
+
+
+function editshow(getid) {
+    $.ajax({
+        type:"POST",
+        url:'/searchuserinfo',
+        contentType: 'application/json',
+        data:JSON.stringify({quickSearch : getid}),
+        success:function(data){
+            $("#edituid").val(getid);
+            $("#editusername").val(data.data[0].username);
+            $("#editpersonname").val(data.data[0].personname);
+            $('#edituser').modal('show')
+        },error:function(data){
+            ZENG.msgbox.show("服务器异常！", 5,2000);
+        }
+
+    });
+}
+
+//  编辑保存
+function editinfo() {
+    var editusername=$("#editusername").val();
+    var editpersonname=$("#editpersonname").val();
+    var editpassword=$("#editpassword").val();
+    var edituid=$("#edituid").val();
+
+    $.ajax({
+        type:"POST",
+        url:'/edituserinfo',
+        contentType: 'application/json',
+        data:JSON.stringify({uid:edituid,username:editusername,personname :editpersonname,password:editpassword}),
+        success:function(data){
+            $('#edituser').modal('hide');
+            ZENG.msgbox.show("编辑成功！", 4,1500);
+            queryinfolist();
+            // console.log(data);
+        },error:function(data){
+            ZENG.msgbox.show("服务器异常！", 5,2000);
+        }
+
+    });
 }

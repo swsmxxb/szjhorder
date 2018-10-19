@@ -15,6 +15,8 @@ public class OrderManagApplication {
 
 	public static void main(String[] args) throws UnirestException {
 		SpringApplication.run(OrderManagApplication.class, args);
+		String uuid = UUID.randomUUID().toString().replace("-", "").toLowerCase();
+System.out.println(uuid);
 
 	}
 }

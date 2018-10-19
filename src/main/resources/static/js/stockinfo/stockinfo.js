@@ -95,6 +95,13 @@ function queryinfo(getparam){
                             return index+1;
                         }
                     }, {
+                        field: 'orderno',
+                        title: '订单号',
+                        halign: 'center',
+                        align: 'center',
+                        visible: true,
+                        sortable: true
+                    }, {
                         field: 'inventorycode',
                         title: '编码',
                         halign: 'center',

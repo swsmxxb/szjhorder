@@ -2,6 +2,7 @@ package com.szjc.OrderManag.controller;
 
 import com.szjc.OrderManag.bean.Roleinfo;
 import com.szjc.OrderManag.bean.Userinfo;
+import com.szjc.OrderManag.common.Encryption;
 import com.szjc.OrderManag.common.Result;
 import com.szjc.OrderManag.service.baseinfo.RoleinfoService;
 import com.szjc.OrderManag.service.baseinfo.UserinfoService;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -45,23 +47,41 @@ public class SyssettingController {
     // 新增用户信息
     @RequestMapping(value = "/adduserinfo", method = RequestMethod.POST)
     @ResponseBody
-    public  Result  adduserinfo(@RequestBody Userinfo staff) {
+    public  Result  adduserinfo(HttpServletRequest request,@RequestBody Userinfo staff) {
+        Userinfo user = (Userinfo) request.getAttribute("user");
+        String userId = user.getUid();
+        Encryption encryption = new Encryption();
+        String psw = encryption.getMD5(staff.getPassword());
         String uuid = UUID.randomUUID().toString().replace("-", "").toLowerCase();
         staff.setUid(uuid);
-        staff.setCreatuser("admin");
+        staff.setPassword(psw);
+        staff.setCreatuser(userId);
         int list = userinfoService.insert(staff);
 
         return Result.successResult(list);
 
     }
 
+    // 编辑用户
+    @RequestMapping(value = "/edituserinfo", method = RequestMethod.POST)
+    @ResponseBody
+    public Result  edituserinfo(@RequestBody Userinfo staff) {
+        Encryption encryption = new Encryption();
+        String psw = encryption.getMD5(staff.getPassword());
+        staff.setPassword(psw);
+        int i = userinfoService.updateByPrimaryKeySelective(staff);
+        return Result.successResult(i);
+    }
+
     // 新增角色信息
     @RequestMapping(value = "/addroleinfo", method = RequestMethod.POST)
     @ResponseBody
-    public Result  addroleinfo(@RequestBody Roleinfo staff) {
+    public Result  addroleinfo(HttpServletRequest request, @RequestBody Roleinfo staff) {
+        Userinfo user = (Userinfo) request.getAttribute("user");
+        String userId = user.getUid();
         String uuid = UUID.randomUUID().toString().replace("-", "").toLowerCase();
         staff.setRid(uuid);
-        staff.setCreatuser("bd64766be9934e4c8d9586dd224cece3");
+        staff.setCreatuser(userId);
         int list = roleinfoService.insert(staff);
         return Result.successResult(list);
     }

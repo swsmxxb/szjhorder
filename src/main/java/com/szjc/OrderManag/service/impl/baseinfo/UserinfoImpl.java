@@ -79,7 +79,23 @@ public class UserinfoImpl implements UserinfoService<Userinfo, UserinfoExample> 
 
     @Override
     public int updateByPrimaryKeySelective(Userinfo record) {
-        return 0;
+        {
+            try {
+                Method updateByPrimaryKeySelective = userinfoMapper.getClass().getDeclaredMethod("updateByPrimaryKeySelective", record.getClass());
+                Object result = updateByPrimaryKeySelective.invoke(userinfoMapper, record);
+                return Integer.parseInt(result.toString());
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return 0;
+//        return mapper.updateByPrimaryKeySelective(record);
+        }
     }
 
     @Override

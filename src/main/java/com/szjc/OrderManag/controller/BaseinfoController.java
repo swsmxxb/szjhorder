@@ -76,14 +76,15 @@ public class BaseinfoController {
 
     // 新增供应商数据
     @RequestMapping(value = "/addsupplierinfo", method = RequestMethod.POST)
-    public Result  addsupplierinfo(@RequestBody Supplierinfo staff) {
-//        Saleorder staff = new Saleorder();
+    public Result  addsupplierinfo(HttpServletRequest request,@RequestBody Supplierinfo staff) {
+        Userinfo user = (Userinfo) request.getAttribute("user");
+        String userId = user.getUid();
         String uuid = UUID.randomUUID().toString().replace("-", "").toLowerCase();
         staff.setId(uuid);
 //        staff.setOrderno((String) map.get("orderno"));
 //        staff.setDrwno((String) map.get("drwno"));
 //        staff.setSendtime(new Date());
-        staff.setCreatuser("admin");
+        staff.setCreatuser(userId);
         int list = supplierinfoService.insert(staff);
         return Result.successResult(list);
     }

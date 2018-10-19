@@ -1,12 +1,15 @@
 package com.szjc.OrderManag.controller;
 
 import com.szjc.OrderManag.bean.Stockinfo;
+import com.szjc.OrderManag.bean.Userinfo;
 import com.szjc.OrderManag.common.Result;
 import com.szjc.OrderManag.service.baseinfo.StockinfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -39,11 +42,13 @@ public class StockController {
     // 新增库存信息
     @RequestMapping(value = "/addstockinfo", method = RequestMethod.POST)
     @ResponseBody
-    Result  addstockinfo(@RequestBody Stockinfo staff) {
+    Result  addstockinfo(HttpServletRequest request, @RequestBody Stockinfo staff) {
+        Userinfo user = (Userinfo) request.getAttribute("user");
+        String userId = user.getUid();
         String uuid = UUID.randomUUID().toString().replace("-", "").toLowerCase();
         int returninfo=0;
         staff.setId(uuid);
-        staff.setCreatuser("bd64766be9934e4c8d9586dd224cece3");
+        staff.setCreatuser(userId);
 //        System.out.println("test:"+staff.getInventoryid());
         if (staff.getTypes().equals("2")) {
         List<Stockinfo> listsize = stockinfoService.searchStockstatus(staff.getInventoryid());
