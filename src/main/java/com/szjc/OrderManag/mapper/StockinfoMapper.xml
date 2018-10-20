@@ -107,10 +107,10 @@
   </delete>
   <insert id="insert" parameterType="com.szjc.OrderManag.bean.Stockinfo">
     insert into stockinfo (ID, inventoryid, nums, 
-      types, creatuser,
+      types, creatuser, creattime,
       orderno)
     values (#{id,jdbcType=NVARCHAR}, #{inventoryid,jdbcType=NVARCHAR}, #{nums,jdbcType=INTEGER}, 
-      #{types,jdbcType=NVARCHAR}, #{creatuser,jdbcType=NVARCHAR},
+      #{types,jdbcType=NVARCHAR}, #{creatuser,jdbcType=NVARCHAR},#{creattime,jdbcType=TIMESTAMP},
       #{orderno,jdbcType=NVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.szjc.OrderManag.bean.Stockinfo">

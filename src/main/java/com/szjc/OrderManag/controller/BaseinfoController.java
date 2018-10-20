@@ -12,6 +12,7 @@ import com.szjc.OrderManag.common.Result;
 import com.szjc.OrderManag.service.baseinfo.InventoryinfoService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -50,6 +51,7 @@ public class BaseinfoController {
 //        staff.setOrderno((String) map.get("orderno"));
 //        staff.setDrwno((String) map.get("drwno"));
 //        staff.setSendtime(new Date());
+        staff.setCreattime(new Date());
         staff.setCreatuser(userId);
         int list = inventoryinfoService.insert(staff);
         return Result.successResult(list);
@@ -85,6 +87,7 @@ public class BaseinfoController {
 //        staff.setDrwno((String) map.get("drwno"));
 //        staff.setSendtime(new Date());
         staff.setCreatuser(userId);
+        staff.setCreattime(new Date());
         int list = supplierinfoService.insert(staff);
         return Result.successResult(list);
     }

@@ -103,10 +103,10 @@
   </delete>
   <insert id="insert" parameterType="com.szjc.OrderManag.bean.Userinfo">
     insert into userinfo (UID, username, password, 
-      personname, creatuser,
+      personname, creatuser, creattime,
       status)
     values (#{uid,jdbcType=NVARCHAR}, #{username,jdbcType=NVARCHAR}, #{password,jdbcType=NVARCHAR}, 
-      #{personname,jdbcType=NVARCHAR}, #{creatuser,jdbcType=NVARCHAR},
+      #{personname,jdbcType=NVARCHAR}, #{creatuser,jdbcType=NVARCHAR},  #{creattime,jdbcType=TIMESTAMP},
       #{status,jdbcType=NVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.szjc.OrderManag.bean.Userinfo">

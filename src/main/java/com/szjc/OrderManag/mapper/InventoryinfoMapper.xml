@@ -104,9 +104,9 @@
   </delete>
   <insert id="insert" parameterType="com.szjc.OrderManag.bean.Inventoryinfo">
     insert into inventoryinfo (ID, inventorycode, inventoryname, 
-      speci, material, color, creatuser)
+      speci, material, color, creattime, creatuser)
     values (#{id,jdbcType=NVARCHAR}, #{inventorycode,jdbcType=NVARCHAR}, #{inventoryname,jdbcType=NVARCHAR}, 
-      #{speci,jdbcType=NVARCHAR}, #{material,jdbcType=NVARCHAR}, #{color,jdbcType=NVARCHAR}, #{creatuser,jdbcType=NVARCHAR})
+      #{speci,jdbcType=NVARCHAR}, #{material,jdbcType=NVARCHAR}, #{color,jdbcType=NVARCHAR}, #{creattime,jdbcType=TIMESTAMP}, #{creatuser,jdbcType=NVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.szjc.OrderManag.bean.Inventoryinfo">
     insert into inventoryinfo

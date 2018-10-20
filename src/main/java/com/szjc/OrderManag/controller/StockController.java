@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -49,12 +50,13 @@ public class StockController {
         int returninfo=0;
         staff.setId(uuid);
         staff.setCreatuser(userId);
+        staff.setCreattime(new Date());
 //        System.out.println("test:"+staff.getInventoryid());
         if (staff.getTypes().equals("2")) {
         List<Stockinfo> listsize = stockinfoService.searchStockstatus(staff.getInventoryid());
         if (listsize.size()>0) {
           //  System.out.println("test:"+ listsize.get(0).getNums());
-            if (listsize.get(0).getNums()>Math.abs(staff.getNums())) {  // 判断出库数量是否大于入库数量
+            if (listsize.get(0).getNums()>=Math.abs(staff.getNums())) {  // 判断出库数量是否大于入库数量
                stockinfoService.insert(staff);
             }
             else {

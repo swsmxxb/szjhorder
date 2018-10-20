@@ -76,6 +76,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/js/*/*/*", "anon");
         filterChainDefinitionMap.put("/img/*/**", "anon");
         filterChainDefinitionMap.put("/fonts/*/**", "anon");
+        filterChainDefinitionMap.put("/inventroypic/**", "anon");
         //自定义加载权限资源关系 配置perms权限过滤器
 //        List<SysPermission> list = sysPermissionService.getAllPermission();
 //        for(SysPermission sysPermission : list){

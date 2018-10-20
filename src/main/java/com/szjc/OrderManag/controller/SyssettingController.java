@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -56,6 +57,8 @@ public class SyssettingController {
         staff.setUid(uuid);
         staff.setPassword(psw);
         staff.setCreatuser(userId);
+        staff.setCreattime(new Date());
+        staff.setStatus("1");
         int list = userinfoService.insert(staff);
 
         return Result.successResult(list);
@@ -82,6 +85,7 @@ public class SyssettingController {
         String uuid = UUID.randomUUID().toString().replace("-", "").toLowerCase();
         staff.setRid(uuid);
         staff.setCreatuser(userId);
+        staff.setCreattime(new Date());
         int list = roleinfoService.insert(staff);
         return Result.successResult(list);
     }

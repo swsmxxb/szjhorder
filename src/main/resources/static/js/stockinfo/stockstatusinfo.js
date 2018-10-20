@@ -125,6 +125,16 @@ function querystatusinfo(getparam){
                         align: 'center',
                         visible: true,
                         sortable: true
+                    }  ,{
+                        field: 'opation',
+                        title: '操作',
+                        halign: 'center',
+                        align: 'center',
+                        visible: true,
+                        sortable: true,
+                        formatter: function statusFormatter(value, row, index){
+                            return "<a href=\"javascript:stockactionopation('"+row.inventoryid+"','1')\">入库</a> | <a href=\"javascript:stockactionopation('"+row.inventoryid+"','2')\">出库</a> | <a href=\"javascript:stockactionopation('"+row.inventoryid+"','3')\">返库</a>";
+                        }
                     }]
 
             });
@@ -136,7 +146,42 @@ function querystatusinfo(getparam){
     });
 }
 
-function stockopation(gettype) {
+function stockactionopation(getid,gettype) { //行菜单事件
+
+    if (gettype=="1") {
+        $('#opationtitle').html("入库");
+    }
+    else if  (gettype=="2") {
+        $('#opationtitle').html("出库");
+    }
+    else if  (gettype=="3") {
+        $('#opationtitle').html("返库");
+    }
+    $('#opationtypes').val(gettype);
+    // equipCodeBind("#addinventoryid");
+   console.log(getid);
+    $.ajax({
+        url: "/searchInventory",
+        type: "POST",
+        async: false,
+        contentType: 'application/json',
+        data:JSON.stringify({quickSearch : getid}),
+        success: function (data) {
+          // console.log(data.data.inventoryname);
+            $("#opationinventorycode").val(data.data[0].inventorycode);
+            $("#opationinventoryname").val(data.data[0].inventoryname);
+            $("#opationinventoryid").val(data.data[0].id);
+            $("#opationspeci").val(data.data[0].speci);
+        },
+        error: function (event, XMLHttpRequest, ajaxOptions, thrownError) {
+            ZENG.msgbox.show("服务器异常！", 5,1500);
+        }
+    });
+
+    $("#opationedit").modal('show')
+}
+
+function stockopation(gettype) {   //顶部新增菜单
 
     if (gettype=="1") {
         $('#cardtitle').html("入库");
@@ -147,7 +192,96 @@ function stockopation(gettype) {
     else if  (gettype=="3") {
         $('#cardtitle').html("返库");
     }
+    $('#addtypes').val(gettype);
     equipCodeBind("#addinventoryid");
-    $("#stockopation").modal('show')
+    $("#stockopation").modal('show');
 }
 
+
+// 顶部按钮新增
+function saveinventorylist(){
+    var addorderno=$("#addorderno").val();
+    var addinventoryid=$("#addinventoryid").val();
+    var addnums=$("#addnums").val();
+    var addtypes=$("#addtypes").val();
+    if (addtypes=="2") {   // 出库
+        addnums=addnums*-1;
+        //  console.log(addnums);
+    }
+    $.ajax({
+        type:"POST",
+        url:'/addstockinfo',
+        contentType: 'application/json',
+        data:JSON.stringify({orderno :addorderno,inventoryid:addinventoryid,nums:addnums,types:addtypes}),
+        success:function(data){
+            console.log(data.data);
+            switch (data.data)
+            {
+                case 0:
+                    ZENG.msgbox.show("保存成功！", 4,2000);
+                    $('#stockopation').modal('hide');
+
+                    $("#addorderno").val("");
+                    $("#addnums").val("");
+                    querystatusinfo();
+                    break;
+                case 1:
+                    ZENG.msgbox.show("当前产品未在库，无法出库！", 3,2000);
+                    break;
+                case 2:
+                    ZENG.msgbox.show("当前产品在库数量不足，无法出库！", 3,2000);
+                    break
+            }
+
+            // console.log(data);
+        },error:function(data){
+            ZENG.msgbox.show("服务器异常！", 5,2000);
+        }
+
+    })
+
+}
+
+// 行菜单新增
+function opationadd(){
+    var opationorderno=$("#opationorderno").val();
+    var opationinventoryid=$("#opationinventoryid").val();
+    var opationnums=$("#opationnums").val();
+    var opationtypes=$("#opationtypes").val();
+    if (opationtypes=="2") {   // 出库
+        opationnums=opationnums*-1;
+        //  console.log(addnums);
+    }
+    $.ajax({
+        type:"POST",
+        url:'/addstockinfo',
+        contentType: 'application/json',
+        data:JSON.stringify({orderno :opationorderno,inventoryid:opationinventoryid,nums:opationnums,types:opationtypes}),
+        success:function(data){
+            console.log(data.data);
+            switch (data.data)
+            {
+                case 0:
+                    ZENG.msgbox.show("保存成功！", 4,2000);
+                    $('#opationedit').modal('hide');
+
+                    $("#opationorderno").val("");
+                    $("#opationnums").val("");
+                    querystatusinfo();
+                    break;
+                case 1:
+                    ZENG.msgbox.show("当前产品未在库，无法出库！", 3,2000);
+                    break;
+                case 2:
+                    ZENG.msgbox.show("当前产品在库数量不足，无法出库！", 3,2000);
+                    break
+            }
+
+            // console.log(data);
+        },error:function(data){
+            ZENG.msgbox.show("服务器异常！", 5,2000);
+        }
+
+    })
+
+}

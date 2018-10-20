@@ -269,6 +269,7 @@ function BindProductClassSelected(selector,values)
 
 function  showpic(getfilename) {
     $('#pictitle').html(getfilename);
+    console.log(getfilename);
     $("#targetpic").attr("src","inventroypic/"+getfilename+".jpg");
     $('#showinventorypic').modal('show');
 
