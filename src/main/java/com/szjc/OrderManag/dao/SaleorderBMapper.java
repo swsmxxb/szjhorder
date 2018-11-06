@@ -29,4 +29,6 @@ public interface SaleorderBMapper {
     int updateByPrimaryKey(SaleorderB record);
 
     List<SaleorderB> searchorderb(@Param("HID") String HID);
+
+    List<SaleorderB> searchorderbgroup(@Param("hid") String HID);
 }

@@ -17,7 +17,7 @@ $("#addsendtime").datetimepicker({  // 日期框
 function dosearch(){
      var getkeyword=$('#orderkeyword').val();
      console.log(getkeyword);
-    purchaselist(getkeyword);
+    queryinfo(getkeyword);
 }
 
 // 删除按钮
@@ -121,7 +121,20 @@ function queryinfo(getparam){
                         halign: 'center',
                         align: 'center',
                         visible: true,
-                        sortable: true
+                        sortable: true,
+                        formatter: function statusFormatter(value, row, index){
+                            var returninfo;
+                            if (row.status="1") {
+                                returninfo="未验收"
+                            }
+                          else  if (row.status="2") {
+                                returninfo="验收OK"
+                            }
+                            else  if (row.status="3") {
+                                returninfo="验收NG"
+                            }
+                            return returninfo;
+                        }
                     },{
                         field: 'opation',
                         title: '操作',
@@ -156,7 +169,7 @@ function saveorderlist(){
         success:function(data){
             $('#orderedit').modal('hide');
             ZENG.msgbox.show("保存成功！", 4,1500);
-            purchaselist();
+            queryinfo();
             // console.log(data);
         },error:function(data){
             ZENG.msgbox.show("服务器异常！", 5,1500);

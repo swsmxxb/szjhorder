@@ -23,6 +23,20 @@ function editinfo(getid) {
 }
 
 
+function dosearch(){
+    var getkeyword=$('#orderkeyword').val();
+    // console.log(getkeyword);
+    suppliersinventroylist(getkeyword);
+}
+
+function doreset(){
+    $('#orderkeyword').val("");
+    var getkeyword="";
+    // console.log(getkeyword);
+    suppliersinventroylist(getkeyword);
+}
+
+
 // 查询
 function suppliersinventroylist(getparam){
     $.ajax({

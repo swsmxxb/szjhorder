@@ -19,9 +19,6 @@ function  delinfo() {
 }
 
 
-
-
-
 // 查询
 function inventroyinfolist(getparam){
     $.ajax({

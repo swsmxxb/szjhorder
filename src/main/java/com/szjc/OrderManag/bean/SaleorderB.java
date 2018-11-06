@@ -33,6 +33,18 @@ public class SaleorderB {
 
     private String status;
 
+
+    private String inventoryname;
+
+    public String getInventoryname() {
+        return inventoryname;
+    }
+
+    public void setInventoryname(String inventoryname) {
+        this.inventoryname = inventoryname == null ? null : inventoryname.trim();
+    }
+
+
     public String getBid() {
         return bid;
     }

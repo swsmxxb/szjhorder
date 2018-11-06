@@ -285,6 +285,6 @@ suy.ID
 FROM suppliersinventroy suy
 left join inventoryinfo ino on suy.inventoryid= ino.ID
 left join supplierinfo suo on suy.supplierid=suo.ID
-    where suy.inventoryid like  '%${quickSearch}%'  or suy.supplierid  like  '%${quickSearch}%'
+    where ino.inventoryname like  '%${quickSearch}%'  or ino.inventorycode like  '%${quickSearch}%'  or suo.suppliername  like  '%${quickSearch}%'
   </select>
 </mapper>

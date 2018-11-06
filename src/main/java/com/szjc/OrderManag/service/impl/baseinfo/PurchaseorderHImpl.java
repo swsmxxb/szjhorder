@@ -35,8 +35,21 @@ public class PurchaseorderHImpl implements PurchaseorderHService<PurchaseorderH,
     }
 
     @Override
-    public int insert(PurchaseorderH record) {
+    public int insert(PurchaseorderH record) {   try {
+        Method insert = purchaseorderHMapper.getClass().getDeclaredMethod("insert", record.getClass());
+        Object result = insert.invoke(purchaseorderHMapper, record);
+        return Integer.parseInt(result.toString());
+    } catch (NoSuchMethodException e) {
+        e.printStackTrace();
+    } catch (IllegalAccessException e) {
+        e.printStackTrace();
+    } catch (InvocationTargetException e) {
+        e.printStackTrace();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
         return 0;
+
     }
 
     @Override

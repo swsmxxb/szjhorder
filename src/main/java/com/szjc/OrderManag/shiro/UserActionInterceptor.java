@@ -12,9 +12,9 @@ public class UserActionInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        Userinfo user = (Userinfo) SecurityUtils.getSubject().getSession().getAttribute("userSession");
-//        SysUser user = new SysUser();
-//        user.setUserId(Long.parseLong("461847929821331456"));
+     //   Userinfo user = (Userinfo) SecurityUtils.getSubject().getSession().getAttribute("userSession");
+        Userinfo user = new Userinfo();
+       user.setUid("bd64766be9934e4c8d9586dd224cece3");
         System.out.println(user);
         request.setAttribute("user", user);
         return true;

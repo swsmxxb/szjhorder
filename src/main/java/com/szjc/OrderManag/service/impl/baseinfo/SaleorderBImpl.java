@@ -9,6 +9,8 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.List;
 
 @Service
@@ -34,8 +36,21 @@ public class SaleorderBImpl implements SaleorderBService<SaleorderB, SaleorderBE
     }
 
     @Override
-    public int insert(SaleorderB record) {
+    public int insert(SaleorderB record) {   try {
+        Method insert = saleorderBMapper.getClass().getDeclaredMethod("insert", record.getClass());
+        Object result = insert.invoke(saleorderBMapper, record);
+        return Integer.parseInt(result.toString());
+    } catch (NoSuchMethodException e) {
+        e.printStackTrace();
+    } catch (IllegalAccessException e) {
+        e.printStackTrace();
+    } catch (InvocationTargetException e) {
+        e.printStackTrace();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
         return 0;
+
     }
 
     @Override
@@ -65,7 +80,23 @@ public class SaleorderBImpl implements SaleorderBService<SaleorderB, SaleorderBE
 
     @Override
     public int updateByPrimaryKeySelective(SaleorderB record) {
-        return 0;
+        {
+            try {
+                Method updateByPrimaryKeySelective = saleorderBMapper.getClass().getDeclaredMethod("updateByPrimaryKeySelective", record.getClass());
+                Object result = updateByPrimaryKeySelective.invoke(saleorderBMapper, record);
+                return Integer.parseInt(result.toString());
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return 0;
+//        return mapper.updateByPrimaryKeySelective(record);
+        }
     }
 
     @Override
@@ -78,5 +109,10 @@ public class SaleorderBImpl implements SaleorderBService<SaleorderB, SaleorderBE
         List<SaleorderB> SaleorderBList = saleorderBMapper.searchorderb(HID);
         return SaleorderBList;
     }
-    
+
+    @Override
+    public List<SaleorderB> searchorderbgroup(String hid) {
+        List<SaleorderB> SaleorderBList = saleorderBMapper.searchorderbgroup(hid);
+        return SaleorderBList;
+    }
 }

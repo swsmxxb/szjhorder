@@ -17,6 +17,7 @@
     <result column="creattaime" jdbcType="TIMESTAMP" property="creattaime" />
     <result column="creatuser" jdbcType="NVARCHAR" property="creatuser" />
     <result column="status" jdbcType="NVARCHAR" property="status" />
+    <result column="inventoryname" jdbcType="NVARCHAR" property="inventoryname" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -374,7 +375,7 @@
     ,sab.HID
     ,sab.orderno
     ,sab.speci
-    ,sab.color
+    ,ini.color
     ,sab.num
     ,sab.price
     ,sab.supplierid
@@ -391,5 +392,13 @@
     <if test="HID != null and HID !=''">
       where sab.HID = '${HID}'
     </if>
+  </select>
+  <select id="searchorderbgroup"  parameterType="com.szjc.OrderManag.bean.SaleorderB" resultMap="BaseResultMap">
+    select
+    sab.supplierid
+    FROM saleorder_b sab
+    left join inventoryinfo ini on sab.drwno= ini.id
+      where sab.HID = '${hid}'
+    group by sab.supplierid
   </select>
 </mapper>

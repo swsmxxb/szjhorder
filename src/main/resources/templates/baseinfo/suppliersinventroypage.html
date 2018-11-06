@@ -28,7 +28,7 @@
 <body class="gray-bg">
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-sm-4">
-        <h2>物料信息</h2>
+        <h2>供应商供货信息</h2>
     </div>
     <div class="col-sm-8">
         <div class="title-action">
@@ -43,7 +43,14 @@
         <div class="col-sm-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-content">
-
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <label for="orderkeyword" class="sr-only">关键字</label>
+                            <input type="text" placeholder="请输入查询关键字" id="orderkeyword" class="form-control">
+                        </div>
+                        <button class="btn btn-sm btn-info" type="submit" onclick="dosearch()">查询</button>
+                        <button class="btn btn-sm btn-info" type="submit" onclick="doreset()">重置</button>
+                    </div>
 
                 </div>
             </div>
